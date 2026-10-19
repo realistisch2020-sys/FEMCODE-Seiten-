@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DupliHer für Networker</title>
+<meta name="description" content="Das komplette Duplikationssystem für Monat Networkerinnen. 17 Module, 35 Skripte, 112 Posts — fertig zum Kopieren.">
+<meta property="og:title" content="DupliHer für Networker">
+<meta property="og:description" content="Das komplette Duplikationssystem für Monat Networkerinnen. 17 Module, 35 Skripte, 112 Posts — fertig zum Kopieren.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://realistisch2020-sys.github.io/FEMCODE-Gehirn/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DupliHer für Networker">
+<meta name="twitter:description" content="Das komplette Duplikationssystem für Monat Networkerinnen. 17 Module, 35 Skripte, 112 Posts — fertig zum Kopieren.">
+<style>
+:root {
+  --bg: #1E0B11;
+  --bg-card: #2C1018;
+  --bg-subtle: #38151E;
+  --text: #F0E6D3;
+  --text-muted: #C9A0A0;
+  --accent: #C9A0A0;
+  --border: #4A2530;
+  --copy-bg: #38151E;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #FAF4F1; --bg-card: #fff; --bg-subtle: #F5ECE8;
+    --text: #2C1018; --text-muted: #7A5558; --accent: #A07070;
+    --border: #E8D5D5; --copy-bg: #F0E6D3;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #FAF4F1; --bg-card: #fff; --bg-subtle: #F5ECE8;
+  --text: #2C1018; --text-muted: #7A5558; --accent: #A07070;
+  --border: #E8D5D5; --copy-bg: #F0E6D3;
+}
+:root[data-theme="dark"] {
+  --bg: #1E0B11; --bg-card: #2C1018; --bg-subtle: #38151E;
+  --text: #F0E6D3; --text-muted: #C9A0A0; --accent: #C9A0A0;
+  --border: #4A2530; --copy-bg: #38151E;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--bg); color: var(--text);
+  font-size: 16px; line-height: 1.6;
+}
+
+/* HERO */
+.hero {
+  background: #2C1018; padding: 44px 20px 36px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -80px; left: 50%;
+  transform: translateX(-50%); width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(201,160,160,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-eye { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #C9A0A0; margin-bottom: 10px; }
+.hero h1 {
+  font-family: "Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  font-size: clamp(30px,8vw,50px); font-weight: 400;
+  color: #F0E6D3; letter-spacing: .05em; line-height: 1.15;
+  margin-bottom: 12px; text-wrap: balance;
+}
+.hero h1 em { font-style: italic; color: #C9A0A0; }
+.hero-sub { font-size: 14px; color: #C9A0A0; max-width: 320px; margin: 0 auto 24px; line-height: 1.55; }
+.badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.badge {
+  background: rgba(201,160,160,.12); border: 1px solid rgba(201,160,160,.28);
+  color: #C9A0A0; font-size: 12px; padding: 4px 12px; border-radius: 20px;
+}
+
+/* MODULE ACCORDION */
+.acc-mod { border-bottom: 1px solid var(--border); }
+.acc-toggle {
+  width: 100%; display: flex; align-items: center; gap: 14px;
+  padding: 18px 16px; background: var(--bg-card); border: none;
+  cursor: pointer; font-family: inherit; text-align: left;
+  color: var(--text); -webkit-tap-highlight-color: transparent;
+  transition: background .12s;
+  border-left: 3px solid transparent;
+}
+.acc-toggle:active { background: var(--bg-subtle); }
+.acc-toggle[aria-expanded="true"] {
+  background: var(--bg-subtle);
+  border-left-color: var(--cat-color, var(--accent));
+}
+.acc-num {
+  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: #fff; font-weight: 700; flex-shrink: 0;
+  background: var(--cat-color, var(--accent)); border-radius: 6px;
+  padding: 4px 8px; text-align: center; min-width: 34px;
+}
+.acc-title {
+  font-family: "Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  font-size: 19px; font-weight: 400; flex: 1; line-height: 1.25;
+  color: var(--text);
+}
+.acc-arrow {
+  font-size: 13px; color: #fff;
+  transition: transform .2s; flex-shrink: 0;
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--cat-color, var(--accent)); flex-shrink: 0;
+}
+.acc-toggle[aria-expanded="true"] .acc-arrow { transform: rotate(180deg); }
+.acc-body { display: none; padding: 8px 16px 36px; max-width: 680px; margin: 0 auto; }
+.acc-body.open { display: block; }
+
+/* INNER MODULE */
+.mod-eye { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.mod-title {
+  font-family: "Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  font-size: clamp(20px,4vw,26px); font-weight: 400; line-height: 1.2;
+  text-wrap: balance; margin-bottom: 8px;
+}
+.mod-desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 24px; }
+
+/* INFO BOX */
+.info {
+  background: var(--bg-subtle); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: 8px;
+  padding: 13px 15px; font-size: 14px; color: var(--text-muted);
+  line-height: 1.6; margin-bottom: 22px;
+}
+
+/* GROUP LABEL */
+.glabel {
+  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent); padding-bottom: 8px;
+  border-bottom: 1px solid var(--border); margin-bottom: 12px; margin-top: 28px;
+}
+.glabel:first-child { margin-top: 0; }
+
+/* CARDS */
+.cards { display: flex; flex-direction: column; gap: 10px; }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 15px;
+}
+.card-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px;
+}
+.script {
+  font-size: 15px; line-height: 1.65; color: var(--text);
+  white-space: pre-wrap; word-break: break-word;
+}
+.copy {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 11px; background: var(--copy-bg); border: none;
+  border-radius: 6px; padding: 6px 13px; font-size: 12px; font-weight: 500;
+  color: var(--text-muted); cursor: pointer; font-family: inherit;
+  letter-spacing: .03em; transition: opacity .15s;
+}
+.copy:hover { opacity: .72; }
+.copy.ok { color: var(--accent); }
+
+/* QUICK REF */
+.qref { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+.qrow {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 11px 13px; font-size: 14px;
+}
+.qsit { color: var(--text-muted); flex: 1; }
+.qmod { color: var(--accent); font-weight: 600; white-space: nowrap; font-size: 13px; }
+
+/* DAYS */
+.days { display: flex; flex-direction: column; gap: 10px; }
+.day { display: grid; grid-template-columns: 46px 1fr; gap: 12px; align-items: start; }
+.dnum {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg-subtle); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Palatino Linotype",Georgia,serif; font-size: 14px; color: var(--accent); flex-shrink: 0;
+}
+.dtxt { padding-top: 9px; }
+.dtitle { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.ddesc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+/* PRICE TABLE */
+.tbl-wrap { overflow-x: auto; margin: 14px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+th { text-align: left; padding: 9px 11px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); font-weight: 600; }
+td { padding: 9px 11px; border-bottom: 1px solid var(--border); color: var(--text); }
+tr:last-child td { border-bottom: none; }
+.pmp { color: var(--accent); font-weight: 700; }
+.pvip { color: var(--text); }
+.pret { color: var(--text-muted); }
+
+/* TIERS */
+.tiers { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+.tier { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.tier-head {
+  padding: 11px 14px; background: var(--bg-subtle);
+  display: flex; align-items: center; gap: 9px;
+}
+.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.dot.k { background: var(--text-muted); }
+.dot.v { background: #C9A0A0; }
+.dot.m { background: var(--accent); }
+.tname { font-weight: 700; font-size: 14px; }
+.tdisc { margin-left: auto; font-size: 12px; color: var(--text-muted); }
+.tier-body { padding: 12px 14px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+.texample { font-size: 13px; margin-top: 7px; padding-top: 7px; border-top: 1px solid var(--border); color: var(--accent); }
+
+/* VIDEO */
+.vcard { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 10px; }
+.veye { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.vtitle { font-size: 15px; font-weight: 600; margin-bottom: 11px; }
+.vlink { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14px; font-weight: 500; text-decoration: none; padding: 8px 14px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 7px; margin-bottom: 10px; }
+.vlink:hover { opacity: .8; }
+.vpw-row { font-size: 13px; color: var(--text-muted); }
+.vpw { font-family: monospace; font-size: 14px; color: var(--text); background: var(--bg-subtle); padding: 2px 7px; border-radius: 4px; }
+
+/* FAQ */
+.faq { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 10px; }
+.fq { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+.fa { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* FOOTER */
+.site-footer {
+  text-align: center; padding: 28px 16px;
+  font-size: 12px; color: var(--text-muted); letter-spacing: .05em;
+}
+.site-footer span { color: var(--accent); }
+
+/* GLITTER CANVAS */
+#glitter {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+/* WEEK ACCORDION */
+.week { margin-bottom: 12px; }
+.wtoggle {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 15px; background: var(--bg-subtle); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600;
+  color: var(--text); font-family: inherit; text-align: left;
+}
+.wtoggle[aria-expanded="true"] { border-radius: 8px 8px 0 0; border-bottom-color: transparent; }
+.wicon { font-size: 11px; color: var(--text-muted); transition: transform .2s; }
+.wtoggle[aria-expanded="true"] .wicon { transform: rotate(180deg); }
+.wposts { display: none; border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; }
+.wposts.open { display: block; }
+.wposts .card { border: none; border-radius: 0; border-bottom: 1px solid var(--border); }
+.wposts .card:last-child { border-bottom: none; }
+
+@media (min-width: 520px) {
+  .tiers { flex-direction: row; }
+  .tier { flex: 1; }
+}
+
+/* KATEGORIE-FARBEN — jede Modulgruppe hat eine eigene Farbe */
+/* Rose — Skripte & Gespräche */
+#m2, #m4, #m8 { --cat-color: #B8888A; }
+/* Sage — Posts & Content */
+#m3, #m9, #m11, #m12, #m16 { --cat-color: #6E9E6E; }
+/* Gold — Onboarding & Team */
+#m1, #m5, #m7, #m10 { --cat-color: #B89050; }
+/* Blaugrau — Wissen & Mindset */
+#m6, #m13, #m14, #m15 { --cat-color: #728AA0; }
+/* Rose — Erfahrungsberichte */
+#m17 { --cat-color: #B8888A; }
+
+/* Leichte linke Linie auf geschlossenem Modul */
+.acc-toggle { border-left-color: rgba(255,255,255,.06); }
+@media (prefers-color-scheme: light) { .acc-toggle { border-left-color: rgba(0,0,0,.06); } }
+:root[data-theme="light"] .acc-toggle { border-left-color: rgba(0,0,0,.06); }
+:root[data-theme="dark"] .acc-toggle { border-left-color: rgba(255,255,255,.06); }
+
+/* SCHNELLNAVIGATION */
+.qnav {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; gap: .45rem; overflow-x: auto; padding: .7rem 1rem;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.qnav::-webkit-scrollbar { display: none; }
+.qnav-pill {
+  flex-shrink: 0; padding: .32rem .85rem; border-radius: 99px;
+  font-size: .72rem; letter-spacing: .04em; font-weight: 600;
+  text-decoration: none; white-space: nowrap;
+  border: 1px solid; transition: opacity .15s;
+}
+.qnav-pill:active { opacity: .7; }
+.qnav-pill.rose { background: rgba(184,136,138,.14); color: #B8888A; border-color: rgba(184,136,138,.32); }
+.qnav-pill.sage { background: rgba(110,158,110,.14); color: #6E9E6E; border-color: rgba(110,158,110,.32); }
+.qnav-pill.gold { background: rgba(184,144,80,.14); color: #B89050; border-color: rgba(184,144,80,.32); }
+.qnav-pill.steel { background: rgba(114,138,160,.14); color: #728AA0; border-color: rgba(114,138,160,.32); }
+
+/* SCHNELLSTART */
+.ss-wrap { border-bottom: 1px solid var(--border); background: var(--bg-card); padding: 26px 16px 30px; }
+.ss-inner { max-width: 680px; margin: 0 auto; }
+.ss-eye { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.ss-title { font-family: "Palatino Linotype","Book Antiqua",Palatino,Georgia,serif; font-size: clamp(18px,5vw,24px); color: var(--text); font-weight: 400; margin-bottom: 18px; line-height: 1.2; }
+.ss-steps { display: flex; flex-direction: column; gap: 13px; margin-bottom: 16px; }
+.ss-step { display: flex; align-items: flex-start; gap: 14px; }
+.ss-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--bg-card); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.ss-step-txt { font-size: 14px; line-height: 1.55; padding-top: 4px; color: var(--text-muted); }
+.ss-step-txt strong { color: var(--text); }
+.ss-note { font-size: 12px; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px; }
+
+/* EINWAND-NAVIGATOR */
+.enav-wrap { border-bottom: 1px solid var(--border); background: var(--bg); padding: 22px 16px 28px; }
+.enav-inner { max-width: 680px; margin: 0 auto; }
+.enav-eye { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #B8888A; margin-bottom: 6px; }
+.enav-title { font-family: "Palatino Linotype","Book Antiqua",Palatino,Georgia,serif; font-size: clamp(17px,4.5vw,22px); color: var(--text); font-weight: 400; margin-bottom: 16px; line-height: 1.2; }
+.enav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.enav-sec { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted); opacity: .6; grid-column: 1/-1; margin-top: 10px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+.enav-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); font-size: 13px; font-family: inherit; padding: 10px 12px; border-radius: 8px; cursor: pointer; text-align: left; line-height: 1.35; transition: border-color .12s, background .12s; -webkit-tap-highlight-color: transparent; }
+.enav-btn.active { background: var(--bg-subtle); border-color: #B8888A; color: var(--text); }
+.enav-result { display: none; background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid #B8888A; border-radius: 8px; padding: 14px 15px; }
+.enav-rlbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #B8888A; margin-bottom: 10px; }
+.enav-rtxt { font-size: 14px; line-height: 1.75; color: var(--text); white-space: pre-wrap; margin-bottom: 14px; }
+
+/* ABSAGEN-FUNNEL */
+.fv-wrap { border-bottom: 1px solid var(--border); background: var(--bg-card); padding: 24px 16px 28px; }
+.fv-inner { max-width: 680px; margin: 0 auto; }
+.fv-eye { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.fv-title { font-family: "Palatino Linotype","Book Antiqua",Palatino,Georgia,serif; font-size: clamp(18px,5vw,24px); color: var(--text); font-weight: 400; margin-bottom: 22px; line-height: 1.2; }
+.fv-stages { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+.fv-stage { display: flex; align-items: center; gap: 14px; }
+.fv-bar-wrap { flex: 1; }
+.fv-bar { height: 38px; border-radius: 6px; background: var(--bg-subtle); display: flex; align-items: center; padding: 0 14px; min-width: 48px; position: relative; overflow: hidden; }
+.fv-bar::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); opacity: .18; border-radius: 6px; }
+.fv-bar.w100::before { width: 100%; }
+.fv-bar.w20::before { width: 20%; }
+.fv-bar.w04::before { width: 4%; }
+.fv-bar-txt { font-size: 13px; color: var(--text-muted); position: relative; z-index: 1; }
+.fv-num { font-family: "Palatino Linotype","Book Antiqua",Palatino,Georgia,serif; font-size: clamp(26px,6vw,34px); color: var(--text); font-weight: 400; flex-shrink: 0; width: 72px; text-align: right; line-height: 1; }
+.fv-arrow { text-align: right; width: 72px; flex-shrink: 0; font-size: 11px; color: var(--text-muted); opacity: .35; padding: 2px 0; }
+.fv-insight { font-size: 14px; line-height: 1.7; color: var(--text-muted); padding: 14px 15px; background: var(--bg-subtle); border-left: 3px solid var(--accent); border-radius: 8px; margin-bottom: 14px; }
+.fv-insight strong { color: var(--text); }
+.fv-rule { display: flex; align-items: center; gap: 14px; padding: 13px 15px; border: 1px solid var(--border); border-radius: 8px; }
+.fv-rule-big { font-family: "Palatino Linotype","Book Antiqua",Palatino,Georgia,serif; font-size: 30px; color: var(--accent); font-weight: 400; flex-shrink: 0; line-height: 1; }
+.fv-rule-txt { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+.legal-note { font-size: 11.5px; color: var(--text-muted); line-height: 1.65; padding: 12px 14px; background: var(--bg-subtle); border-radius: 6px; border-left: 2px solid var(--border); margin-top: 10px; }
+.legal-note strong { color: var(--text-muted); font-weight: 600; }
+/* Fast Path — Vergütungsplan Schnellstart */
+.fp-wrap { margin: 4px 0 24px; }
+.fp-steps { display: flex; flex-direction: column; gap: 0; }
+.fp-step { display: flex; align-items: flex-start; gap: 14px; padding-bottom: 20px; position: relative; }
+.fp-step:last-child { padding-bottom: 0; }
+.fp-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.fp-badge { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--bg-card); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.fp-line { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin-top: 5px; }
+.fp-step:last-child .fp-line { display: none; }
+.fp-right { padding-top: 5px; flex: 1; }
+.fp-when { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+.fp-action { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 5px; line-height: 1.35; }
+.fp-detail { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 8px; }
+.fp-earn { display: inline-flex; align-items: center; background: var(--bg-subtle); border-radius: 20px; padding: 4px 11px; font-size: 12px; font-weight: 600; color: #4A7A4A; letter-spacing: .01em; }
+@media (prefers-color-scheme: dark) { .fp-earn { color: #82C082; } }
+:root[data-theme="dark"] .fp-earn { color: #82C082; }
+:root[data-theme="light"] .fp-earn { color: #4A7A4A; }
+.fp-key { margin-top: 18px; padding: 14px 16px; background: var(--bg-subtle); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; }
+.fp-key strong { font-size: 13px; color: var(--text); display: block; margin-bottom: 5px; }
+.fp-key p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+.fp-sumtable { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+.fp-sumtable th { background: var(--bg-subtle); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+.fp-sumtable td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: top; }
+.fp-sumtable td:last-child { font-weight: 600; color: #4A7A4A; white-space: nowrap; }
+@media (prefers-color-scheme: dark) { .fp-sumtable td:last-child { color: #82C082; } }
+:root[data-theme="dark"] .fp-sumtable td:last-child { color: #82C082; }
+:root[data-theme="light"] .fp-sumtable td:last-child { color: #4A7A4A; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas id="glitter" aria-hidden="true"></canvas>
+  <p class="hero-eye">Monat · Schweiz</p>
+  <h1>DupliHer <em>für Networker</em></h1>
+  <p class="hero-sub">Das System das jede weitergeben kann. Alles fertig. Einfach loslegen.</p>
+  <div class="badges">
+    <span class="badge">17 Module</span>
+    <span class="badge">35 Skripte</span>
+    <span class="badge">112 Posts</span>
+    <span class="badge">30-Tage Challenge</span>
+  </div>
+</div>
+
+<nav class="qnav" aria-label="Schnellnavigation">
+  <a class="qnav-pill rose" href="#enav">Was hat sie gesagt?</a>
+  <a class="qnav-pill steel" href="#funnel">Absagen normal?</a>
+  <a class="qnav-pill rose" href="#m2">Skripte</a>
+  <a class="qnav-pill sage" href="#m3">Posts</a>
+  <a class="qnav-pill rose" href="#m4">Selbsterklärung</a>
+  <a class="qnav-pill gold" href="#m5">Onboarding</a>
+  <a class="qnav-pill steel" href="#m6">Produkte</a>
+  <a class="qnav-pill gold" href="#m7">Business erklären</a>
+  <a class="qnav-pill rose" href="#m8">FAQ</a>
+  <a class="qnav-pill sage" href="#m9">Stories</a>
+  <a class="qnav-pill gold" href="#m10">Team aufbauen</a>
+  <a class="qnav-pill steel" href="#m13">Einkommensplan</a>
+  <a class="qnav-pill steel" href="#m15">Mindset</a>
+  <a class="qnav-pill sage" href="#m16">Canva</a>
+  <a class="qnav-pill rose" href="#m17">Erfahrungsberichte</a>
+</nav>
+
+<!-- SCHNELLSTART -->
+<div class="ss-wrap">
+  <div class="ss-inner">
+    <p class="ss-eye">Neu hier? Dein erster Tag</p>
+    <h2 class="ss-title">In 48 Stunden gestartet</h2>
+    <div class="ss-steps">
+      <div class="ss-step"><span class="ss-num">1</span><div class="ss-step-txt"><strong>Modul 1 lesen</strong> — Versteh wie das System funktioniert. 10 Minuten.</div></div>
+      <div class="ss-step"><span class="ss-num">2</span><div class="ss-step-txt"><strong>3 Namen aufschreiben</strong> — Welche 3 Frauen schreibst du heute an? Nur aufschreiben, noch nicht senden.</div></div>
+      <div class="ss-step"><span class="ss-num">3</span><div class="ss-step-txt"><strong>Skript 1 aus Modul 2 kopieren</strong> — Namen anpassen, an alle drei senden. Das wars.</div></div>
+      <div class="ss-step"><span class="ss-num">4</span><div class="ss-step-txt"><strong>Post 1 aus Modul 3 veröffentlichen</strong> — Bild dazu, abschicken. Ab jetzt täglich einen.</div></div>
+      <div class="ss-step"><span class="ss-num">5</span><div class="ss-step-txt"><strong>Morgen nachschauen</strong> — Wer hat geantwortet? Für alle anderen: Skript 6 schicken.</div></div>
+    </div>
+    <p class="ss-note">Erst senden, dann weiterlesen. Wer wartet bis alles perfekt ist fängt nie an.</p>
+  </div>
+</div>
+
+<!-- ABSAGEN-FUNNEL -->
+<div class="fv-wrap" id="funnel">
+  <div class="fv-inner">
+    <p class="fv-eye">Warum Absagen kein Problem sind</p>
+    <h2 class="fv-title">Die Mathe des Erfolgs</h2>
+    <div class="fv-stages">
+      <div class="fv-stage">
+        <div class="fv-num">50</div>
+        <div class="fv-bar-wrap"><div class="fv-bar w100"><span class="fv-bar-txt">Nachrichten geschrieben</span></div></div>
+      </div>
+      <div class="fv-stage"><div class="fv-arrow">▼</div><div class="fv-bar-wrap"></div></div>
+      <div class="fv-stage">
+        <div class="fv-num">8–12</div>
+        <div class="fv-bar-wrap"><div class="fv-bar w20"><span class="fv-bar-txt">antworten</span></div></div>
+      </div>
+      <div class="fv-stage"><div class="fv-arrow">▼</div><div class="fv-bar-wrap"></div></div>
+      <div class="fv-stage">
+        <div class="fv-num">1–2</div>
+        <div class="fv-bar-wrap"><div class="fv-bar w04"><span class="fv-bar-txt">starten</span></div></div>
+      </div>
+    </div>
+    <div class="fv-insight">
+      <strong>48 von 50 sagen Nein.</strong> Das ist kein Zeichen dass du es falsch machst — das ist die normale Quote jeder erfolgreichen Networkerin weltweit. Wer nach 10 Absagen aufhört, hat die Quote nie erreicht. Wer weitermacht schon.
+    </div>
+    <div class="fv-rule">
+      <div class="fv-rule-big">×10</div>
+      <div class="fv-rule-txt">Mehr Kontakte = mehr Gespräche = mehr Chancen. Wer mehr schreibt, hat tendenziell mehr Ergebnisse. 500 Nachrichten bedeuten in unserer Erfahrung 10–20 Gespräche — individuell verschieden.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 1 -->
+<div class="acc-mod" id="m1">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="true">
+    <span class="acc-num">01</span>
+    <span class="acc-title">Willkommen &amp; Überblick</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body open">
+    <p class="mod-eye">Modul 01</p>
+    <h2 class="mod-title">Willkommen &amp; Überblick</h2>
+    <p class="mod-desc">Lies das zuerst. Es erklärt wie das System funktioniert und was du wann tust.</p>
+    <div class="info">Du musst nichts erklären. Das System erklärt sich selbst. Du gibst neuen Partnerinnen denselben Link — sie starten genauso wie du.</div>
+    <p class="glabel">Was du wann öffnest</p>
+    <div class="qref">
+      <div class="qrow"><span class="qsit">Jemand schreibt zurück</span><span class="qmod">→ Modul 2</span></div>
+      <div class="qrow"><span class="qsit">Jemand fragt nach Produkten</span><span class="qmod">→ Modul 6</span></div>
+      <div class="qrow"><span class="qsit">Jemand fragt nach dem Business</span><span class="qmod">→ Modul 7</span></div>
+      <div class="qrow"><span class="qsit">Jemand ist wirklich interessiert</span><span class="qmod">→ Modul 4</span></div>
+      <div class="qrow"><span class="qsit">Jemand stellt Fragen</span><span class="qmod">→ Modul 8</span></div>
+      <div class="qrow"><span class="qsit">Jemand kauft das System</span><span class="qmod">→ Modul 5</span></div>
+      <div class="qrow"><span class="qsit">Täglich posten</span><span class="qmod">→ Modul 3</span></div>
+      <div class="qrow"><span class="qsit">Stories &amp; Status posten</span><span class="qmod">→ Modul 9</span></div>
+      <div class="qrow"><span class="qsit">Neue Partnerin gestartet</span><span class="qmod">→ Modul 10</span></div>
+      <div class="qrow"><span class="qsit">Saisonale Posts</span><span class="qmod">→ Modul 11</span></div>
+      <div class="qrow"><span class="qsit">30-Tage Challenge starten</span><span class="qmod">→ Modul 12</span></div>
+      <div class="qrow"><span class="qsit">Wie viel kann ich verdienen?</span><span class="qmod">→ Modul 13</span></div>
+      <div class="qrow"><span class="qsit">Jemand fragt nach Fakten zu Monat</span><span class="qmod">→ Modul 14</span></div>
+      <div class="qrow"><span class="qsit">Wenn du fast aufgibst</span><span class="qmod">→ Modul 15</span></div>
+      <div class="qrow"><span class="qsit">Canva-Vorlagen erstellen &amp; teilen</span><span class="qmod">→ Modul 16</span></div>
+    </div>
+    <p class="glabel">Die ersten 4 Tage</p>
+    <div class="days">
+      <div class="day"><div class="dnum">1</div><div class="dtxt"><div class="dtitle">Alle Module lesen</div><div class="ddesc">Nur lesen, noch nichts tun. 30 Minuten.</div></div></div>
+      <div class="day"><div class="dnum">2</div><div class="dtxt"><div class="dtitle">3 Namen aufschreiben</div><div class="ddesc">Frauen die du als erste anschreibst. Nur aufschreiben.</div></div></div>
+      <div class="day"><div class="dnum">3</div><div class="dtxt"><div class="dtitle">Erste Nachricht schicken</div><div class="ddesc">Modul 2 → Skript 1 → Namen anpassen → senden.</div></div></div>
+      <div class="day"><div class="dnum">4</div><div class="dtxt"><div class="dtitle">Ersten Post veröffentlichen</div><div class="ddesc">Modul 3 → Post 1 → Foto hochladen → fertig.</div></div></div>
+    </div>
+    <hr>
+    <div class="info"><strong>Der Rhythmus der wirklich funktioniert:</strong> Ein Post täglich. Und täglich neue Menschen anschreiben — mindestens 10, besser 15 bis 20. Nicht nur Frauen. Auch Männer die Frauen in ihrem Umfeld kennen. Auch Bekannte die du lange nicht gesprochen hast. Auch Menschen die auf deine Stories reagieren. Je mehr du anschreibst desto schneller kommt Bewegung rein. Von 50 Nachrichten antworten vielleicht 3 bis 5 mit echtem Interesse — und genau diese 3 bis 5 bauen dein Business. Das ist keine Niederlage. Das ist die Realität jedes erfolgreichen Network Marketers weltweit. Wer das konsequent 8–12 Wochen durchzieht und nie aufhört neue Menschen anzusprechen sieht echte Ergebnisse.</div>
+  </div>
+</div>
+
+<!-- EINWAND-NAVIGATOR -->
+<div class="enav-wrap" id="enav">
+  <div class="enav-inner">
+    <p class="enav-eye">Sofort das richtige Skript</p>
+    <h2 class="enav-title">Was hat sie gesagt?</h2>
+    <div class="enav-grid">
+
+      <div class="enav-sec">Keine Antwort</div>
+      <button class="enav-btn" onclick="enav('s6','Erstes Follow-up — 2 Tage',this)">Hat nicht geantwortet — 2 Tage</button>
+      <button class="enav-btn" onclick="enav('s7','Zweites Follow-up — 1 Woche',this)">Hat nicht geantwortet — 1 Woche</button>
+      <button class="enav-btn" onclick="enav('s35','Kein Zeichen nach dem Link',this)">Link geschickt, keine Reaktion</button>
+      <button class="enav-btn" onclick="enav('s10','Reaktivierung',this)">Schon lange nichts mehr</button>
+
+      <div class="enav-sec">Erste Reaktion</div>
+      <button class="enav-btn" onclick="enav('s31','Sie zeigt Interesse',this)">Zeigt Interesse</button>
+      <button class="enav-btn" onclick="enav('s18','Was macht man genau?',this)">Fragt was man genau macht</button>
+      <button class="enav-btn" onclick="enav('s17','Wie viel verdient man?',this)">Fragt nach dem Verdienst</button>
+      <button class="enav-btn" onclick="enav('s16','Interesse bestätigt',this)">Möchte mehr wissen</button>
+
+      <div class="enav-sec">Einwände</div>
+      <button class="enav-btn" onclick="enav('s11','Zu teuer',this)">Zu teuer</button>
+      <button class="enav-btn" onclick="enav('s12','Keine Zeit',this)">Keine Zeit</button>
+      <button class="enav-btn" onclick="enav('s13','Ist das MLM?',this)">Ist das MLM?</button>
+      <button class="enav-btn" onclick="enav('s14','Muss noch überlegen',this)">Muss noch überlegen</button>
+      <button class="enav-btn" onclick="enav('s15','Schlechte NM-Erfahrung',this)" style="grid-column:1/-1">Schlechte Erfahrung mit NM</button>
+
+      <div class="enav-sec">Bereit</div>
+      <button class="enav-btn" onclick="enav('s32','Hat den Link gelesen',this)">Hat den Link gelesen</button>
+      <button class="enav-btn" onclick="enav('s33','Zögert noch',this)">Zögert noch</button>
+      <button class="enav-btn" onclick="enav('s34','Bereit zu starten',this)" style="grid-column:1/-1">Bereit zu starten 🌸</button>
+
+    </div>
+    <div class="enav-result" id="enav-result">
+      <div class="enav-rlbl" id="enav-lbl"></div>
+      <div class="enav-rtxt" id="enav-txt"></div>
+      <button class="copy" onclick="enavCopy(this)">Kopieren</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 2 -->
+<div class="acc-mod" id="m2">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">02</span>
+    <span class="acc-title">Skripte</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 02</p>
+    <h2 class="mod-title">Skripte</h2>
+    <p class="mod-desc">35 fertige Nachrichten in 7 Kategorien. Namen anpassen, auf "Kopieren" tippen, in WhatsApp einfügen.</p>
+    <p class="glabel">Erstkontakt</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript 1 — Produkt (kalt)</div><div class="script" id="s1">Hey [Name] 😊 ich schreib dir weil du mir irgendwie in den Sinn gekommen bist. Ich mache gerade was richtig Gutes für mein Haar und dachte dabei sofort an dich. Klingt komisch ich weiss. Aber: benutzt du gerade etwas für dein Haar das du wirklich liebst? 🌿</div><button class="copy" onclick="cp('s1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 2 — Produkt (warm)</div><div class="script" id="s2">Hey [Name] 😊 ich wollte dir schon lange was zeigen. Du weisst ich bin nicht der Typ der jeden Kram weiterempfiehlt. Aber das hier hab ich selbst über ein Jahr getestet und mein Haar hat sich komplett verändert. Darf ich dir kurz schicken was ich mache? 🌿</div><button class="copy" onclick="cp('s2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 3 — Business (kalt)</div><div class="script" id="s3">Hey [Name] 🌸 ich schreib dir weil ich gerade ehrlich gesagt eine Frau suche die einen coolen Nebenverdienst nicht scheut. Ich mach was Tolles nebenbei und dachte dabei an dich. Ist das gerade überhaupt ein Thema für dich oder völlig falsche Zeit?</div><button class="copy" onclick="cp('s3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 4 — Story Reaktion</div><div class="script" id="s4">Hey danke dass du reagiert hast 🌸 das macht mich immer happy wenn ich so eine Reaktion sehe. Darf ich kurz fragen was dich daran angesprochen hat? Ich frag weil ich dann weiss was ich dir schicken soll 🌿</div><button class="copy" onclick="cp('s4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 5 — Weiterempfohlen</div><div class="script" id="s5">Hey [Name] 😊 [Vorname] hat mir gesagt ich soll mich mal bei dir melden. Ich weiss gar nicht ob du weisst worum es geht. Ich erklär kurz: ich mach was Tolles mit Haarpflege nebenbei und sie dachte du könntest interessiert sein. Macht dir so ein Thema gerade überhaupt Sinn?</div><button class="copy" onclick="cp('s5',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Follow-up</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript 6 — Erstes Follow-up (nach 2 Tagen)</div><div class="script" id="s6">Hey [Name] 🌿 ich wollte kurz nachfragen ob du meine Nachricht überhaupt gesehen hast. Geht manchmal unter. Kein Druck von meiner Seite. Ich bin einfach noch da wenn du magst 😊</div><button class="copy" onclick="cp('s6',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 7 — Zweites Follow-up (nach einer Woche)</div><div class="script" id="s7">Hey [Name] 🌸 ich meld mich ein letztes Mal. Das Leben ist manchmal einfach voll und dann bleibt so eine Nachricht liegen. Völlig okay. Falls du irgendwann neugierig bist weisst du wo ich bin 🌿</div><button class="copy" onclick="cp('s7',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 8 — Wiederansprache (nach Wochen)</div><div class="script" id="s8">Hey [Name] 😊 ich hab ehrlich gesagt gerade an dich gedacht. Wie geht es dir? Und nebenbei hab ich etwas das ich dir zeigen wollte. Wärst du kurz offen dafür oder ist das gerade gar kein Thema?</div><button class="copy" onclick="cp('s8',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 9 — Nach dem Selbsterklärungs-System</div><div class="script" id="s9">Hast du alles gelesen? 🌸 Was hat dich am meisten angesprochen? Ich bin wirklich gespannt was bei dir hängen geblieben ist 🌿</div><button class="copy" onclick="cp('s9',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 10 — Reaktivierung</div><div class="script" id="s10">Hey [Name] 😊 wir haben damals kurz geschrieben. Ich wollte dich nicht bombardieren deshalb hab ich etwas gewartet. Bist du immer noch manchmal neugierig auf das Thema oder hat sich das erledigt? Ehrliche Antwort ist völlig okay 🌸</div><button class="copy" onclick="cp('s10',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Einwände</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript 11 — Zu teuer</div><div class="script" id="s11">Das kenn ich so gut. Ich hab auch erst gezögert. Dann hab ich mal ehrlich aufgeschrieben was ich vorher im Monat für Haarpflege ausgegeben hab die nicht mal wirklich geholfen hat. Die Zahl hat mich selbst erschreckt 😄 Soll ich dir zeigen wie ich das damals durchgerechnet hab?</div><button class="copy" onclick="cp('s11',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 12 — Keine Zeit</div><div class="script" id="s12">Das hab ich auch gedacht 😊 ernsthaft. Ich hab das komplett in meinen normalen Alltag eingebaut. Kein extra Block. Kein Büro. Nichts. Wie schaut dein Alltag gerade aus? Vielleicht zeig ich dir wie ich das mache.</div><button class="copy" onclick="cp('s12',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 13 — Ist das MLM?</div><div class="script" id="s13">Ja völlig ehrlich mit dir: es ist Network Marketing. Das hab ich anfangs auch sehr kritisch gesehen. Was mich überzeugt hat waren wirklich die Produkte und nicht das Business-Versprechen. Ich würd dir das einfach zeigen und du schaust selbst was du davon hältst. Keine Verpflichtung 🌸</div><button class="copy" onclick="cp('s13',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 14 — Muss überlegen</div><div class="script" id="s14">Natürlich nimm dir die Zeit 🌸 Darf ich kurz fragen was dich noch beschäftigt? Manchmal ist es eine einzige Sache die ich sofort klären kann. Und wenn nicht ist es auch okay.</div><button class="copy" onclick="cp('s14',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 15 — Schlechte NM-Erfahrung</div><div class="script" id="s15">Das höre ich oft und ich versteh das wirklich. Ich hab das selbst erlebt. Was bei mir anders war: ich hab nie etwas empfohlen das ich nicht selbst wochenlang getestet hatte. Die Produkte haben gehalten was sie versprochen haben. Darf ich dir nur das zeigen? 🌿</div><button class="copy" onclick="cp('s15',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Business-Gespräch</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript 16 — Interesse bestätigt</div><div class="script" id="s16">Schön dass du neugierig bist 🌸 ich schick dir jetzt kurz und ehrlich wie das funktioniert. Einfach lesen und dann sag mir was du denkst. Kein Druck. Keine Erwartung. Ich will nur dass du weisst was du hast 🌿</div><button class="copy" onclick="cp('s16',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 17 — Wie viel verdient man?</div><div class="script" id="s17">Wer von Anfang an wirklich dabei ist sieht das auch im Ergebnis. Provisionsrecht entsteht mit dem ersten Verkauf — wie schnell und wie viel hängt davon ab wie aktiv du bist. Ich kann dir sagen wie es bei mir war. Wie weit du gehst entscheidest nur du 😊</div><button class="copy" onclick="cp('s17',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 18 — Was macht man genau?</div><div class="script" id="s18">Du empfiehlst Produkte die du selbst liebst. Jemand kauft. Du bekommst eine Provision. Das klingt simpel weil es das ist 😊 Plus: wenn jemand monatlich nachbestellt (was die meisten machen weil sie die Produkte lieben) verdienst du jeden Monat wieder. Das ist der echte Vorteil.</div><button class="copy" onclick="cp('s18',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 19 — Wie starte ich?</div><div class="script" id="s19">Du bekommst ein Starter-Paket mit Produkten. Damit startest du. Kein Lager. Alles wird direkt an den Kunden geliefert. Du brauchst nur dein Handy und dieses System. Der Rest ergibt sich 🌿</div><button class="copy" onclick="cp('s19',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 20 — Was ist das System genau?</div><div class="script" id="s20">Das System heisst DupliHer Network. Du bekommst fertige Texte für deine Nachrichten. Fertige Posts für Social Media. Ein Onboarding das neue Partnerinnen selbst durch alles führt. Du musst niemandem etwas erklären. Das System macht das für dich. Das System das jede weitergeben kann 🌸</div><button class="copy" onclick="cp('s20',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Abschluss &amp; Weiterempfehlung</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript 21 — Bereit zum Start</div><div class="script" id="s21">Ich freu mich so dass du dabei bist 🌸 Ich schick dir jetzt den Link. Und dann fangen wir an. Schritt für Schritt. Du wirst sehen wie einfach das ist wenn das System einmal läuft 🌿</div><button class="copy" onclick="cp('s21',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 22 — Kundin wird Partnerin</div><div class="script" id="s22">Hey [Name] 🌸 ich freu mich so dass du die Produkte liebst! Ich wollte dich ehrlich was fragen. Du empfiehlst sie ja eigentlich schon. Weisst du dass du dafür auch belohnt werden könntest und gleichzeitig deine eigenen Produkte günstiger bekommst? Wäre das überhaupt ein Thema für dich oder gar nicht?</div><button class="copy" onclick="cp('s22',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 23 — Weiterempfehlung anfragen</div><div class="script" id="s23">Hey [Name] 😊 ich hab eine kurze Frage. Du hast mir mal gesagt du liebst die Produkte. Kennst du vielleicht eine Frau die auch gerade auf der Suche nach guter Haarpflege ist? Ich frag nicht damit du Werbung machst. Ich frag weil du den besten Geschmack hast 😄</div><button class="copy" onclick="cp('s23',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 24 — Nach dem ersten Monat</div><div class="script" id="s24">Hey [Name] 🌿 ein Monat um — wie läuft es dir? Ich bin wirklich gespannt was dein Fazit ist. Was hat funktioniert? Was war schwieriger als gedacht? Schreib mir alles 🌸</div><button class="copy" onclick="cp('s24',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 25 — Empfehlung belohnen</div><div class="script" id="s25">Hey [Name] 😊 wusstest du dass du für jede Frau die du empfiehlst und die startet auch eine Prämie bekommst? Für eine WhatsApp-Nachricht. Das ist eigentlich das Schönste an diesem System — du wirst auch dann belohnt wenn andere durch dich starten 🌸</div><button class="copy" onclick="cp('s25',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Sondersituationen</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript 26 — Nach dem Praxis Training</div><div class="script" id="s26">Hey [Name] 🌸 schön dass du heute dabei warst. Was hat bei dir am meisten geklickt? Ich frag weil ich dir dann gezielt weiterhelfen kann 🌿</div><button class="copy" onclick="cp('s26',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 27 — Skeptischer Kontakt</div><div class="script" id="s27">Ich mag das wenn jemand ehrlich skeptisch ist 😊 echte Fragen sind besser als höfliches Nicken. Was genau ist dein grösster Zweifel? Sag es mir direkt dann antworte ich dir direkt 🌿</div><button class="copy" onclick="cp('s27',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 28 — Jemand auf Pause</div><div class="script" id="s28">Hey [Name] 🌸 ich weiss du hast eine Pause gemacht. Das ist okay. Manchmal kommt das Leben dazwischen. Wenn du wieder starten willst bin ich hier. Kein Drama. Kein Vorwurf. Einfach weitermachen 🌿</div><button class="copy" onclick="cp('s28',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 29 — Nach negativer Reaktion</div><div class="script" id="s29">Hey [Name] 😊 ich hab das Gefühl meine letzte Nachricht war vielleicht falsch angekommen. Das tut mir leid. Ich wollte wirklich nicht pushy sein. Wenn das Thema gerade nicht passt ist das absolut okay 🌸</div><button class="copy" onclick="cp('s29',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 30 — Auslandskontakt</div><div class="script" id="s30">Hey [Name] 😊 ich weiss du bist in [Land]. Ich wollte kurz sagen: Monat gibt es auch dort. Ich kann dir zeigen wie das genau funktioniert wenn du interessiert bist. Oder ich empfehle dich an jemanden weiter der in deiner Region schon dabei ist 🌿</div><button class="copy" onclick="cp('s30',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Reaktions-Pipeline</p>
+    <div class="info">Jemand hat geantwortet — jetzt kommt die Sequenz. Erst fragen, dann den Link schicken, dann 48 Stunden lassen. Nicht erklären, nicht überreden.</div>
+    <div class="days">
+      <div class="day"><div class="dnum">1</div><div class="dtxt"><div class="dtitle">Erst fragen</div><div class="ddesc">Nicht sofort erklären. "Was interessiert dich mehr — die Produkte oder die Business-Möglichkeit?" Warte auf die Antwort.</div></div></div>
+      <div class="day"><div class="dnum">2</div><div class="dtxt"><div class="dtitle">Passend antworten</div><div class="ddesc">Produkt-Interesse → Modul 6 verwenden. Business-Interesse → Modul 7. Dann: den Link schicken.</div></div></div>
+      <div class="day"><div class="dnum">3</div><div class="dtxt"><div class="dtitle">Link schicken</div><div class="ddesc">"Schau das mal an — es erklärt sich selbst. Sag mir dann was du denkst." Fertig. Jetzt warten.</div></div></div>
+      <div class="day"><div class="dnum">4</div><div class="dtxt"><div class="dtitle">48 Stunden lassen</div><div class="ddesc">Nicht sofort nachhaken. Nach 2 Tagen: Skript 32 schicken. Das ist der natürlichste Moment für ein Ja.</div></div></div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript 31 — Sie hat geantwortet, zeigt Interesse</div><div class="script" id="s31">Schön dass du zurückschreibst 😊 darf ich kurz fragen — interessiert dich mehr das Produkt oder eher die Möglichkeit nebenbei was zu verdienen? Ich frag damit ich dir genau das Richtige schicken kann 🌸</div><button class="copy" onclick="cp('s31',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 32 — Nach dem Link (48h später)</div><div class="script" id="s32">Hey 🌿 du hast jetzt alles gelesen. Was war dein erster Gedanke? Ich will das wirklich wissen — auch wenn es skeptisch ist. Das ist okay 😊</div><button class="copy" onclick="cp('s32',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 33 — Sie ist interessiert aber zögert</div><div class="script" id="s33">Das kenn ich 🌸 ich hab damals auch gezögert. Was ist das eine Ding das dich noch hält? Manchmal ist es eine einzige Frage die alles klärt 🌿</div><button class="copy" onclick="cp('s33',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 34 — Sie will starten</div><div class="script" id="s34">Das freut mich so 🌸 dann machen wir das jetzt. Ich schick dir alles was du brauchst. Du musst wirklich gar nichts erklären können — das System macht das für dich. Bereit? 🌿</div><button class="copy" onclick="cp('s34',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript 35 — Kein Zeichen nach dem Link (3 Tage)</div><div class="script" id="s35">Hey [Name] 😊 ich wollte kurz nachfragen ob du dazu gekommen bist zu lesen. Kein Druck, kein Drama. Ich weiss nur gerne wo du stehst 🌸</div><button class="copy" onclick="cp('s35',this)">Kopieren</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 3 -->
+<div class="acc-mod" id="m3">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">03</span>
+    <span class="acc-title">Social Media Posts</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 03</p>
+    <h2 class="mod-title">Social Media Posts</h2>
+    <p class="mod-desc">112 fertige Posts für 16 Wochen. Text kopieren, eigenes Foto hinzufügen, veröffentlichen.</p>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="true" onclick="toggleW(this)">Woche 1 — Einstieg <span class="wicon">▼</span></button>
+      <div class="wposts open">
+        <div class="card"><div class="card-label">Post 1 · Mo · Produkt</div><div class="script" id="p1">Ich hab so viele Produkte ausprobiert. Wirklich viele.
+
+Und dann kam Monat. Die Renew Linie hat mein Haar so verändert dass ich es selbst kaum glauben konnte. Nicht nach einem Monat. Schon nach den ersten Anwendungen.
+
+Ich frag mich heute noch warum ich so lange gewartet hab.
+
+Wenn du neugierig bist was ich benutze schreib mir einfach 🌿</div><button class="copy" onclick="cp('p1',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 2 · Di · Persönlich</div><div class="script" id="p2">Ich hab nie gedacht dass ich sowas machen würde.
+
+Network Marketing? Nein danke, hab ich gedacht. Bis ich die Produkte selbst ausprobiert hab und gemerkt hab dass ich sie ohnehin jedem weiterempfehle. Dann hab ich gedacht: warum nicht auch dafür belohnt werden?
+
+Heute bin ich froh dass ich den Schritt gemacht hab. 🌸
+
+Wenn dich das neugierig macht schreib mir kurz.</div><button class="copy" onclick="cp('p2',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 3 · Mi · Ergebnis</div><div class="script" id="p3">Weisst du was mich am meisten überrascht hat?
+
+Nicht nur mein Haar hat sich verändert. Mein ganzes Selbstbewusstsein hat sich verändert. Wenn man morgens aufwacht und die eigenen Haare liebt fängt der Tag einfach anders an.
+
+Das klingt vielleicht übertrieben. Ist es aber nicht.
+
+Welches Produkt interessiert dich am meisten? Schreib es mir unten 👇🌿</div><button class="copy" onclick="cp('p3',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 4 · Do · Business</div><div class="script" id="p4">Was wenn dein Business zu deinem Leben passt und nicht umgekehrt?
+
+Keine festen Zeiten. Kein Büro. Kein Chef. Ich mach das zwischen Alltag, Familie und allem anderen.
+
+Und die Produkte die ich empfehle würde ich ohnehin kaufen. Das ist der Unterschied.
+
+Wenn das für dich interessant klingt bin ich hier 🌸</div><button class="copy" onclick="cp('p4',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 5 · Fr · Clinical Set</div><div class="script" id="p5">Meine ehrliche Meinung zum Monat ir Clinical Set.
+
+Ich war skeptisch. Es klingt nach viel und der Preis ist nicht klein. Aber ich hab es ausprobiert und ich kann jetzt nicht mehr ohne.
+
+Meine Kopfhaut hat sich komplett beruhigt. Mein Haar fühlt sich an wie nach dem Friseur. Nur zu Hause.
+
+Willst du mehr wissen? Schreib mir einfach 🌿</div><button class="copy" onclick="cp('p5',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 6 · Sa · Community</div><div class="script" id="p6">Es gibt Frauen die genauso gestartet haben wie du gerade schaust.
+
+Neugierig. Vielleicht ein bisschen skeptisch. Und dann haben sie es einfach ausprobiert.
+
+Heute sind sie Teil von etwas das sich anfühlt wie Gemeinschaft und nicht wie Arbeit.
+
+Das ist DupliHer Network. Wenn du wissen willst was das ist schreib mir. 🌸</div><button class="copy" onclick="cp('p6',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 7 · So · Training</div><div class="script" id="p7">Am [Datum] machen wir unser nächstes DupliHer Network Praxis Training.
+
+Eine Stunde. Zoom. Wir zeigen wie das System funktioniert, beantworten Fragen und gehen durch echte Beispiele.
+
+Du musst gar nichts wissen. Du musst nur neugierig sein.
+
+Den Link bekommst du wenn du mir kurz schreibst. 🌿</div><button class="copy" onclick="cp('p7',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 2 — Produkte <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 8 · Mo</div><div class="script" id="p8">Ich wurde letzte Woche gefragt was ich für mein Haar mache.
+
+Ehrliche Antwort: ich hab lange gesucht. Und dann hab ich aufgehört zu suchen weil ich gefunden hab was funktioniert.
+
+Monat Renew Linie. Jeden Tag. Seit einem Jahr.
+
+Was ist deine grösste Herausforderung mit deinem Haar gerade? Schreib es mir 👇🌿</div><button class="copy" onclick="cp('p8',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 9 · Di</div><div class="script" id="p9">Haare die sich verändern — das Thema das viele beschäftigt aber kaum jemand laut sagt.
+
+Ich hab das ir Clinical Set ausprobiert weil mir jemand davon erzählt hat. Meine persönliche Erfahrung war positiv.
+
+Wenn dich das Thema beschäftigt schreib mir einfach 🌸</div><button class="copy" onclick="cp('p9',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 10 · Mi</div><div class="script" id="p10">Ein Kopfhaut-Scrub klingt komisch.
+
+Ich dachte das auch. Bis ich es ausprobiert hab.
+
+Nach dem ersten Mal hat sich mein Haar angefühlt als hätte ich gerade beim Friseur gesessen. Leichter. Sauberer. Lebendiger.
+
+Der Monat Smoothing Scrub ist jetzt fest in meiner Routine. 🌿</div><button class="copy" onclick="cp('p10',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 11 · Do</div><div class="script" id="p11">Was mich an Monat am meisten überrascht hat:
+
+Keine schädlichen Inhaltsstoffe. Ich hab vorher nie darauf geachtet was in meiner Haarpflege steckt.
+
+Jetzt schon. Und ich gehe nicht mehr zurück.
+
+Willst du wissen was in deinen jetzigen Produkten steckt? Schick mir den Namen 🌸</div><button class="copy" onclick="cp('p11',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 12 · Fr</div><div class="script" id="p12">Monat kommt direkt nach Hause. Kein Laden. Kein Ausverkauft. Kein Suchen.
+
+Das klingt klein aber für mich ist das ein echter Unterschied im Alltag.
+
+Einfach bestellen und bekommen. Das ist mein Tempo. 🌿</div><button class="copy" onclick="cp('p12',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 13 · Sa</div><div class="script" id="p13">Die Frage die ich am meisten bekomme: lohnt es sich wirklich?
+
+Ich sag es so: ich hab aufgehört zu rechnen was ich vorher für Haarpflege ausgegeben hab. Die Antwort wäre peinlich.
+
+Heute weiss ich was funktioniert. Und ich bleibe dabei. 🌸</div><button class="copy" onclick="cp('p13',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 14 · So</div><div class="script" id="p14">Manchmal reicht ein Produkt um alles zu verändern.
+
+Bei mir war es die Renew Linie. Bei einer Freundin das Clinical Set. Bei einer anderen der Scrub.
+
+Jede Frau ist anders. Das ist auch das Schöne.
+
+Was würde bei dir passen? Schreib mir 🌿</div><button class="copy" onclick="cp('p14',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 3 — Business &amp; Einkommen <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 15 · Mo</div><div class="script" id="p15">Ich hab nie gedacht dass ich mal Geld verdiene indem ich Produkte empfehle die ich ohnehin kaufen würde.
+
+Aber genau so fing es an.
+
+Heute ist es ein Teil meines Einkommens. Kein Hauptjob. Aber ein echter Teil.
+
+Wenn dich das neugierig macht schreib mir 🌸</div><button class="copy" onclick="cp('p15',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 16 · Di</div><div class="script" id="p16">Network Marketing hat einen schlechten Ruf. Den versteh ich.
+
+Was mich überzeugt hat war nicht das Business. Es waren die Produkte.
+
+Ich hab als Kundin angefangen. Und irgendwann gemerkt dass ich sie ohnehin weiterempfehle. Also warum nicht auch dafür belohnt werden?
+
+Das ist meine ehrliche Geschichte. 🌿</div><button class="copy" onclick="cp('p16',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 17 · Mi</div><div class="script" id="p17">Ich mache das zwischen allem anderen, zwischen Familie, Alltag und Leben — kein Lager, kein Büro, keine festen Zeiten. Das ist nicht für jede Frau. Aber für manche ist es genau das Richtige.
+
+Für wen das klingt wie sie: meld dich 🌸</div><button class="copy" onclick="cp('p17',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 18 · Do</div><div class="script" id="p18">Was ich gelernt hab in einem Jahr Monat:
+
+Du brauchst keine Erfahrung. Du brauchst kein grosses Netzwerk. Du brauchst nur die Bereitschaft anzufangen.
+
+Der Rest kommt mit der Zeit. Und mit dem richtigen System. 🌿</div><button class="copy" onclick="cp('p18',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 19 · Fr</div><div class="script" id="p19">Die meisten Frauen in meinem Team haben so angefangen wie du gerade schaust.
+
+Neugierig. Ein bisschen skeptisch. Nicht sicher ob es für sie ist.
+
+Und dann haben sie es einfach ausprobiert.
+
+Heute bin ich froh dass sie es getan haben. 🌸</div><button class="copy" onclick="cp('p19',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 20 · Sa</div><div class="script" id="p20">Was wenn du für das bezahlt werden würdest was du ohnehin tust?
+
+Du empfiehlst Restaurants. Serien. Urlaube. Produkte.
+
+Der Unterschied bei Monat: du bekommst eine Provision dafür.
+
+Mehr nicht. Und mehr braucht es oft auch nicht. 🌿</div><button class="copy" onclick="cp('p20',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 21 · So</div><div class="script" id="p21">Nächste Woche machen wir unser DupliHer Network Praxis Training.
+
+Eine Stunde. Zoom. Wir schauen durch echte Beispiele und ich beantworte alle Fragen.
+
+Du musst noch nichts wissen. Du musst nur neugierig sein.
+
+Schreib mir kurz wenn du dabei sein willst 🌸</div><button class="copy" onclick="cp('p21',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 4 — Community &amp; Lifestyle <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 22 · Mo</div><div class="script" id="p22">Weisst du was ich an DupliHer Network am meisten liebe?
+
+Die Frauen die dabei sind.
+
+Frauen die wollen. Die machen. Die füreinander da sind.
+
+Das hätte ich nicht erwartet. Und ich bin jeden Tag dankbar dafür. 🌿</div><button class="copy" onclick="cp('p22',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 23 · Di</div><div class="script" id="p23">Eine Frage die mich heute beschäftigt:
+
+Was wäre wenn du in einem Jahr zurückschaust und sagst: gut dass ich damals angefangen hab?
+
+Was müsstest du heute tun damit das so wird?
+
+Ich frag weil ich mir diese Frage vor einem Jahr gestellt hab. Die Antwort hat mein Leben verändert. 🌸</div><button class="copy" onclick="cp('p23',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 24 · Mi</div><div class="script" id="p24">Morgens aufwachen und wissen was man tut.
+
+Nicht weil man muss. Sondern weil man will.
+
+Das ist das Ziel. Nicht reich werden über Nacht. Sondern Schritt für Schritt etwas aufbauen das zu einem passt.
+
+Das ist DupliHer Network. 🌿</div><button class="copy" onclick="cp('p24',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 25 · Do</div><div class="script" id="p25">Eine Frau in meinem Team hat letzte Woche ihre erste Zahlung bekommen.
+
+Nicht viel. Aber real. Ihr eigenes Geld. Verdient mit ihren eigenen Händen.
+
+Dieser Moment. Den wünsche ich jeder Frau. 🌸</div><button class="copy" onclick="cp('p25',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 26 · Fr</div><div class="script" id="p26">Ich werde manchmal gefragt ob ich Angst hatte anzufangen.
+
+Ja. Ich hatte Angst. Ich dachte ich bin nicht gut genug. Nicht überzeugend genug. Nicht vernetzt genug.
+
+Aber ich hab trotzdem angefangen. Und heute bin ich froh.
+
+Wenn du Angst hast: das ist normal. Tu es trotzdem. 🌿</div><button class="copy" onclick="cp('p26',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 27 · Sa</div><div class="script" id="p27">Was DupliHer Network dir gibt: fertige Texte damit du nicht überlegen musst was du schreiben sollst, fertige Posts damit du nicht stundenlang Content machst, ein System das sich selbst erklärt und Frauen die denselben Weg gehen. Alles an einem Ort. 🌸</div><button class="copy" onclick="cp('p27',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 28 · So</div><div class="script" id="p28">Ein Jahr. Das ist wie lange ich jetzt bei Monat bin.
+
+Was sich verändert hat? Mein Haar, mein Selbstbewusstsein, mein Einkommen, meine Community. Was nicht: ich bin noch genau dieselbe Frau — nur mit besserem Haar und mehr Möglichkeiten.
+
+Das ist meine Geschichte. Was wird deine sein? 🌿</div><button class="copy" onclick="cp('p28',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 5 — Einwände &amp; Wahrheiten <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 29 · Mo</div><div class="script" id="p29">Ich wurde gefragt ob das wirklich funktioniert.
+
+Ehrliche Antwort: ja. Aber nicht von alleine.
+
+Es funktioniert wenn du dran bleibst. Wenn du schreibst. Wenn du zeigst. Wenn du auch an schlechten Tagen weiter machst.
+
+Kein System der Welt funktioniert ohne die Person dahinter. 🌿</div><button class="copy" onclick="cp('p29',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 30 · Di</div><div class="script" id="p30">Was ich dir versprochen hab: nichts.
+
+Was ich dir angeboten hab: eine Möglichkeit.
+
+Was du daraus machst liegt an dir. Das ist die ehrlichste Aussage die ich machen kann.
+
+Wenn dich das neugierig macht schreib mir 🌸</div><button class="copy" onclick="cp('p30',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 31 · Mi</div><div class="script" id="p31">"Ich kenne nicht genug Frauen."
+
+Das höre ich oft. Und ich sage immer dasselbe:
+
+Du kennst mehr Frauen als du denkst. Deine Kontaktliste ist grösser als du glaubst. Und mit der Zeit kommen neue dazu.
+
+Ich hab auch so angefangen. 🌿</div><button class="copy" onclick="cp('p31',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 32 · Do</div><div class="script" id="p32">Ja es ist Network Marketing.
+
+Ich sage das offen und ehrlich. Weil ich es anfangs selbst komisch gefunden habe.
+
+Was mich überzeugt hat: ich hab die Produkte verwendet. Ich hab gesehen was sie machen. Erst dann hab ich überlegt ob das Business zu mir passt.
+
+Produkte zuerst. Business danach. Das war meine Reihenfolge. 🌸</div><button class="copy" onclick="cp('p32',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 33 · Fr</div><div class="script" id="p33">Ich hatte auch Angst.
+
+Angst dass niemand antwortet. Angst dass ich zu aufdringlich bin. Angst was die Leute von mir denken.
+
+Ich hab trotzdem angefangen.
+
+Die meisten Frauen waren freundlicher als ich dachte. 🌿</div><button class="copy" onclick="cp('p33',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 34 · Sa</div><div class="script" id="p34">Was dich aufhalten wird ist nicht das System.
+
+Es ist die Stimme im Kopf die sagt: du bist nicht gut genug. Du kennst niemanden. Das klappt bei anderen aber nicht bei dir.
+
+Diese Stimme lügt. 🌸</div><button class="copy" onclick="cp('p34',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 35 · So · Training</div><div class="script" id="p35">Am [Datum] machen wir unser nächstes DupliHer Network Praxis Training.
+
+Eine Stunde Zoom. Wir schauen uns echte Situationen an und ich beantworte alle Fragen live.
+
+Wer dabei sein will schreib mir kurz 🌿</div><button class="copy" onclick="cp('p35',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 6 — Haarpflege-Tipps <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 36 · Mo</div><div class="script" id="p36">Drei Dinge die dein Haar zerstören ohne dass du es merkst: zu heisses Wasser beim Waschen, zu heisses Styling ohne Hitzeschutz und Produkte mit Sulfaten und Parabenen. Klingt simpel. Aber die meisten machen alle drei. 🌿</div><button class="copy" onclick="cp('p36',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 37 · Di</div><div class="script" id="p37">Wie oft soll ich die Haare waschen?
+
+Seltener als du glaubst.
+
+Zwei bis drei Mal pro Woche ist meistens besser als täglich. Die natürlichen Öle brauchen Zeit.
+
+Was benutzt du gerade? Schreib mir 🌸</div><button class="copy" onclick="cp('p37',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 38 · Mi</div><div class="script" id="p38">SLS steht für Sodium Lauryl Sulfate.
+
+Es sorgt für viel Schaum — ich persönlich bevorzuge Produkte ohne, weil meine Kopfhaut sich damit besser anfühlt.
+
+Monat verzichtet darauf. Das war einer meiner Kaufgründe.
+
+Schau mal auf dein aktuelles Shampoo. Was steht da drin? 🌿</div><button class="copy" onclick="cp('p38',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 39 · Do</div><div class="script" id="p39">Was ich beim Kopfhaut Scrub erlebe: er entfernt Ablagerungen die normales Shampoo nicht schafft, meine Kopfhaut fühlt sich besser durch und mein Haar wirkt seitdem lebendiger. Ich benutze den Monat Smoothing Scrub einmal pro Woche. Mein Haar hat sich komplett verändert. 🌸</div><button class="copy" onclick="cp('p39',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 40 · Fr</div><div class="script" id="p40">Das ir Clinical System ist für Frauen die sich um ihr Haar sorgen — ich hab es selbst nach einer stressigen Phase angefangen, weil mein Haar mehr Pflege brauchte. Der Unterschied nach ein paar Monaten war für mich selbst sichtbar.
+
+Erfahrungen? Schreib mir 🌿</div><button class="copy" onclick="cp('p40',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 41 · Sa</div><div class="script" id="p41">Warum Monat direkt nach Hause? Weil du dann weisst was du bekommst — kein Supermarkt, kein Ausverkauft. Einfach bestellen und bekommen. Das ist mein Alltag. 🌸</div><button class="copy" onclick="cp('p41',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 42 · So</div><div class="script" id="p42">Welches Monat Produkt würde zu dir passen? Wer trockenes Haar hat greift zur Renew Linie, wer das Haar intensiver pflegen möchte schaut sich ir Clinical an und wer die Kopfhaut reinigen will greift zum Smoothing Scrub. Schreib mir wie dein Haar gerade ist — ich sag dir was ich persönlich empfehlen würde 🌿</div><button class="copy" onclick="cp('p42',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 7 — Erfolgsgeschichten <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 43 · Mo</div><div class="script" id="p43">Eine Frau aus meinem Umfeld hat letzte Woche ihre ersten Kunden gewonnen.
+
+Sie hat Monate gezögert. Gedacht sie kann das nicht.
+
+Und dann hat sie es einfach gemacht.
+
+Das macht mich so stolz. 🌸</div><button class="copy" onclick="cp('p43',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 44 · Di</div><div class="script" id="p44">Vor einem Jahr hab ich angefangen — ich wusste nicht was ich tue, ich hatte mehr Fragen als Antworten. Heute sieht es anders aus.
+
+Wenn du gerade am Anfang bist: das vergeht. 🌿</div><button class="copy" onclick="cp('p44',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 45 · Mi</div><div class="script" id="p45">Was meine Kundinnen am meisten überrascht:
+
+Dass die Produkte wirklich halten was sie versprechen.
+
+Ich höre das immer wieder. Und ich freue mich jedes Mal. Weil ich genau das gefühlt habe als ich sie zum ersten Mal benutzt habe.
+
+Was hat dich überrascht? 🌸</div><button class="copy" onclick="cp('p45',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 46 · Do</div><div class="script" id="p46">Eine Kundin hat mir heute geschrieben: mein Haar wächst endlich wieder.
+
+Ich hab diesen Satz drei Mal gelesen.
+
+Das ist der Grund warum ich das mache. Nicht das Geld. Solche Momente. 🌿</div><button class="copy" onclick="cp('p46',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 47 · Fr</div><div class="script" id="p47">Was sich verändert wenn du drei Monate dabei bist: du weisst was du schreiben musst, du kennst deine Produkte in- und auswendig und du hast deine ersten echten Erfolge. Drei Monate konsequent. Das ist der Startpreis für echte Ergebnisse. 🌸</div><button class="copy" onclick="cp('p47',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 48 · Sa</div><div class="script" id="p48">Mein liebstes Feedback:
+
+"Ich hab deine Empfehlung befolgt und bereue es überhaupt nicht."
+
+Das kommt nicht von alleine. Das kommt wenn du ehrlich bist. Wenn du nur empfiehlst was du selbst liebst. Wenn du wirklich helfen willst. 🌿</div><button class="copy" onclick="cp('p48',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 49 · So · Training</div><div class="script" id="p49">Letztes DupliHer Network Training diesen Monat am [Datum].
+
+Wir schauen uns echte Nachrichten an. Ich zeige wie ich antworte wenn jemand zögert.
+
+Meld dich wenn du dabei sein willst 🌸</div><button class="copy" onclick="cp('p49',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 8 — Team &amp; Wachstum <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 50 · Mo</div><div class="script" id="p50">Es gibt Frauen die alleine arbeiten.
+Und es gibt Frauen die zusammen wachsen.
+
+Ich habe mich für das Zweite entschieden.
+
+Nicht weil es leichter ist. Sondern weil es schöner ist. 🌿</div><button class="copy" onclick="cp('p50',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 51 · Di</div><div class="script" id="p51">Was ein gutes Team ausmacht: jede bringt sich ein, jede kann Fehler machen und jede wächst in ihrem Tempo. Das ist DupliHer Network — nicht Druck, nicht Erwartungen, sondern gemeinsam wachsen. 🌸</div><button class="copy" onclick="cp('p51',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 52 · Mi</div><div class="script" id="p52">Die erste Frau die ich in mein Umfeld gebracht habe hat heute mehr Kunden als ich.
+
+Ich sage das mit Stolz.
+
+Das ist Duplikation. Du baust einmal auf. Und dann wächst es. 🌿</div><button class="copy" onclick="cp('p52',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 53 · Do</div><div class="script" id="p53">Was wenn dein Team für dich arbeitet während du Pause machst? Das klingt nach einem Versprechen — aber es ist ein System. Duplikation bedeutet: du baust einmal auf und dann wächst es weiter. 🌸</div><button class="copy" onclick="cp('p53',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 54 · Fr</div><div class="script" id="p54">Drei Frauen die ich gerne in meinem Team hätte: eine die gerne schreibt, eine die gerne Fotos macht und eine die einfach anfangen will. Kennst du jemanden? Schreib mir 🌿</div><button class="copy" onclick="cp('p54',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 55 · Sa</div><div class="script" id="p55">Was ich in einem Jahr DupliHer Network gelernt habe: Consistency schlägt Talent, Ehrlichkeit schlägt Verkäufer-Energie und Geduld schlägt Hektik. Immer. 🌸</div><button class="copy" onclick="cp('p55',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 56 · So</div><div class="script" id="p56">Monatliches DupliHer Network Training — jeden Monat eine Stunde. Neue Partnerinnen kommen dazu, Erfahrene teilen was funktioniert. Dein Ticket: einfach mir schreiben 🌿</div><button class="copy" onclick="cp('p56',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 9 — Kundenbeziehungen <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 57 · Mo</div><div class="script" id="p57">Ein Kunde der zurückkommt ist das grösste Kompliment.
+
+Kein Verkaufsgespräch. Kein Überreden. Einfach ein Produkt das hält was es verspricht.
+
+Das ist meine Arbeit. Und dafür bin ich wirklich dankbar. 🌿</div><button class="copy" onclick="cp('p57',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 58 · Di</div><div class="script" id="p58">Ich hab heute von einer Kundin gehört die seit 8 Monaten jeden Monat nachbestellt.
+
+Keine Erinnerung nötig. Kein Nachfragen. Einfach: sie liebt die Produkte.
+
+Das ist der Unterschied zwischen einmal verkaufen und wirklich etwas aufbauen. 🌸</div><button class="copy" onclick="cp('p58',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 59 · Mi</div><div class="script" id="p59">VIP Kundin werden — was bedeutet das eigentlich? Du bestellst monatlich, bekommst 15% Rabatt auf alles und bist ohne Vertragspflicht dabei. Für Frauen die ohnehin regelmässig Haarpflege kaufen ist das die einfachste Entscheidung.
+
+Bist du neugierig? Schreib mir 🌿</div><button class="copy" onclick="cp('p59',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 60 · Do</div><div class="script" id="p60">Ich schreibe meinen Kundinnen manchmal einfach so.
+
+Nicht um etwas zu verkaufen. Nur um zu fragen wie es ihnen geht und ob sie noch happy sind mit ihrem Haar.
+
+Das klingt simpel. Aber es macht den Unterschied. 🌸</div><button class="copy" onclick="cp('p60',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 61 · Fr</div><div class="script" id="p61">Die meisten meiner Neukunden kommen durch Empfehlungen.
+
+Nicht durch grosse Posts. Nicht durch Werbung. Durch Frauen die ich kenne und die einer anderen Frau sagen: "frag mal Petra."
+
+Das ist das System. 🌿</div><button class="copy" onclick="cp('p61',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 62 · Sa</div><div class="script" id="p62">Was mir eine Kundin letzte Woche gesagt hat:
+
+"Ich werde nie mehr was anderes für mein Haar kaufen."
+
+Weisst du wie sich das anfühlt? Ich arbeite nicht für Klicks. Ich arbeite dafür. 🌸</div><button class="copy" onclick="cp('p62',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 63 · So</div><div class="script" id="p63">Monatlich check ich kurz bei meinen Stammkundinnen ein.
+
+Alles gut? Braucht ihr was? Habt ihr Fragen?
+
+Drei Minuten. Kein grosser Aufwand. Und die Beziehung bleibt warm.
+
+So funktioniert echtes Business. 🌿</div><button class="copy" onclick="cp('p63',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 10 — Persönlichkeit &amp; Authentizität <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 64 · Mo</div><div class="script" id="p64">Du musst kein Verkaufstyp sein.
+
+Ich bin es auch nicht. Ich erkläre nicht. Ich empfehle nicht laut. Ich erzähle einfach was ich selbst erlebe.
+
+Das ist genug. Mehr als genug. 🌸</div><button class="copy" onclick="cp('p64',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 65 · Di</div><div class="script" id="p65">Deine Geschichte ist dein bestes Marketing.
+
+Nicht der perfekte Post. Nicht der beste Preis. Dein echter Weg mit deinen echten Haaren.
+
+Frauen kaufen von Frauen denen sie vertrauen. 🌿</div><button class="copy" onclick="cp('p65',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 66 · Mi</div><div class="script" id="p66">Was mich von anderen unterscheidet?
+
+Ich empfehle nichts das ich nicht selbst getestet hab. Punkt.
+
+Das weiss mein Umfeld. Und deswegen hören sie zu wenn ich etwas sage. 🌸</div><button class="copy" onclick="cp('p66',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 67 · Do</div><div class="script" id="p67">Nicht jede sagt Ja.
+
+Das war für mich lange schwer. Heute versteh ich: wer Nein sagt passt gerade nicht. Kein Problem. Kein Fehler. Kein Drama.
+
+Der richtige Zeitpunkt kommt für manche erst später. 🌿</div><button class="copy" onclick="cp('p67',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 68 · Fr</div><div class="script" id="p68">Was wenn du einfach du selbst bist?
+
+Kein Skript auswendig lernen. Kein perfektes Outfit. Keine Performance.
+
+Einfach: ich benutze das. Ich liebe es. Magst du mehr wissen?
+
+Das ist alles. 🌸</div><button class="copy" onclick="cp('p68',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 69 · Sa</div><div class="script" id="p69">Heute morgen: Monat Renew Shampoo. Heisses Wasser. Fünf Minuten Ruhe.
+
+Das ist mein Ritual. Nicht perfekt aber meins.
+
+Was ist deins? 🌿</div><button class="copy" onclick="cp('p69',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 70 · So</div><div class="script" id="p70">Warum ich das mache?
+
+Nicht wegen des Geldes am Anfang. Sondern weil ich wirklich will dass mehr Frauen Haare haben die sie lieben.
+
+Das klingt einfach. Ist es auch. Und genau deswegen funktioniert es. 🌸</div><button class="copy" onclick="cp('p70',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 11 — Monat &amp; Inhaltsstoffe <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 71 · Mo</div><div class="script" id="p71">Weisst du was in deinem Shampoo steckt?
+
+Die meisten sagen Nein. Ich hab auch lange nicht geschaut.
+
+Dann hab ich angefangen zu lesen. Und hab sehr schnell verstanden warum Monat anders ist. 🌿</div><button class="copy" onclick="cp('p71',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 72 · Di</div><div class="script" id="p72">Was ich in meiner alten Haarpflege gefunden hab als ich anfing die Inhaltsstoffliste zu lesen: SLS, Sulfate und andere Inhaltsstoffe die ich lieber nicht täglich auf der Kopfhaut haben möchte.
+
+Monat verzichtet darauf. Das ist Inhaltsstoffliste — schau selbst. 🌸</div><button class="copy" onclick="cp('p72',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 73 · Mi</div><div class="script" id="p73">Was macht Monat stattdessen? Pflanzliche Wirkstoffe, botanische Öle und Ingredienzen die tatsächlich nähren statt zu streifen. Das war für mich der Wendepunkt — nicht der Preis, sondern die Liste. 🌿</div><button class="copy" onclick="cp('p73',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 74 · Do</div><div class="script" id="p74">Haarverdünnung hat oft eine Ursache die niemand benennt: die fehlende Kopfhautpflege.
+
+Ich hab bei mir selbst erlebt was passiert wenn die Kopfhaut wieder richtig gepflegt wird. Das ir Clinical System hat mir dabei geholfen — das ist meine persönliche Erfahrung. 🌸</div><button class="copy" onclick="cp('p74',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 75 · Fr</div><div class="script" id="p75">Wie liest man eine Shampoo-Flasche?
+
+Was als erstes steht ist am meisten drin.
+
+Wenn Wasser und Sulfate ganz oben stehen ist das weniger überraschend als man denkt.
+
+Monat: Botanisches füllt die Liste. 🌿</div><button class="copy" onclick="cp('p75',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 76 · Sa</div><div class="script" id="p76">Monat kommt direkt von der Produktion zu dir — kein Laden, kein Ausverkauft, keine Mittelstufe. Das ist nicht Bequemlichkeit sondern Frische. Frisch produziert, direkt geliefert. 🌸</div><button class="copy" onclick="cp('p76',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 77 · So</div><div class="script" id="p77">Ein Inhaltsstoff hat bei mir alles verändert.
+
+Drei Anwendungen. Dann hab ich den Unterschied gespürt.
+
+Willst du wissen welches Produkt für dein Haar passt? Schreib mir 🌿</div><button class="copy" onclick="cp('p77',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 12 — Rückblick &amp; Ausblick <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 78 · Mo</div><div class="script" id="p78">Vor einem Jahr hab ich mit DupliHer Network angefangen.
+
+Ich dachte: ich probiers mal. Ohne grosse Erwartungen.
+
+Heute kann ich sagen: es war die richtige Entscheidung. Nicht wegen des Geldes allein. Wegen der Frauen die ich kennengelernt hab. 🌸</div><button class="copy" onclick="cp('p78',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 79 · Di</div><div class="script" id="p79">Was ein Jahr DupliHer Network bedeutet: täglich gepostet, täglich Nachrichten geschrieben, Fehler gemacht und weitergemacht. Nicht jede Woche war perfekt. Aber jede Woche hat mich weitergebracht. 🌿</div><button class="copy" onclick="cp('p79',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 80 · Mi</div><div class="script" id="p80">Das hab ich gelernt:
+
+Wer anfängt ohne das Ergebnis zu kennen lernt am meisten.
+
+Ich wusste nicht wie es laufen würde. Ich hab es trotzdem gemacht.
+
+Und das war richtig. 🌸</div><button class="copy" onclick="cp('p80',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 81 · Do</div><div class="script" id="p81">Was ich meiner jüngeren Version sagen würde: fang früher an, zögere weniger und schreib mehr Frauen an. Und vertrau dem System — es funktioniert wenn du es nutzt. 🌿</div><button class="copy" onclick="cp('p81',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 82 · Fr</div><div class="script" id="p82">Nächstes Jahr will ich mehr Kundinnen die die Produkte wirklich lieben, mehr Partnerinnen die das System nutzen und mehr Frauen die ich begleiten darf. Was ist dein Ziel für die nächsten Monate? Schreib es mir 🌸</div><button class="copy" onclick="cp('p82',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 83 · Sa</div><div class="script" id="p83">Nächsten Monat fange ich neu an.
+
+DupliHer Network. Frisch. Dieselben Grundlagen. Neue Energie.
+
+Wer macht mit? Wer startet im nächsten Monat neu durch?
+
+Schreib mir ✏️🌿</div><button class="copy" onclick="cp('p83',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 84 · So</div><div class="script" id="p84">Danke.
+
+An jede die meine Posts liest. An jede die schreibt. An jede die mitmacht.
+
+Ihr seid der Grund warum das hier Sinn macht.
+
+Nächste Woche geht es wieder von vorne los. Ich bin dabei. Bist du auch dabei? 🌸</div><button class="copy" onclick="cp('p84',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 13 — Reaktivierung &amp; Vertrauen <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 85 · Mo</div><div class="script" id="p85">Es gibt Frauen in meinem Handy die vor Monaten nicht geantwortet haben.
+
+Heute schreibe ich ihnen wieder. Nicht um zu pushen. Nur weil sich das Leben verändert.
+
+Manchmal ist jetzt genau der richtige Zeitpunkt. 🌿</div><button class="copy" onclick="cp('p85',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 86 · Di</div><div class="script" id="p86">Vertrauen baut sich nicht über Nacht auf.
+
+Es baut sich auf indem du zeigst dass du da bist. Immer wieder. Ohne Drama. Ohne Druck.
+
+Die Frauen die mir am meisten vertrauen sind die die mich schon am längsten beobachten. 🌸</div><button class="copy" onclick="cp('p86',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 87 · Mi</div><div class="script" id="p87">Ich bekomme manchmal Nachrichten von Frauen die mich seit einem halben Jahr beobachten.
+
+"Ich hab immer mitgelesen. Jetzt bin ich bereit."
+
+Das ist kein Zufall. Das ist Konsistenz. 🌿</div><button class="copy" onclick="cp('p87',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 88 · Do</div><div class="script" id="p88">Eine Frau die heute Nein sagt ist keine verlorene Kundin.
+
+Sie ist eine Frau die gerade Nein sagt.
+
+Ich bleibe freundlich. Ich bleibe sichtbar. Und manchmal kommt irgendwann: "Ich bin jetzt bereit." 🌸</div><button class="copy" onclick="cp('p88',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 89 · Fr</div><div class="script" id="p89">Authentizität schlägt jeden Werbetext.
+
+Menschen kaufen nicht von Firmen. Sie kaufen von Menschen denen sie vertrauen.
+
+Wann hast du zuletzt etwas wirklich Echtes gepostet? 🌿</div><button class="copy" onclick="cp('p89',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 90 · Sa</div><div class="script" id="p90">Ich zeige mein Haar nicht nur wenn es perfekt ist.
+
+Ich zeige es auch wenn es einen schlechten Tag hat.
+
+Weil echte Frauen echte Haare haben. Und echte Frauen kaufen von echten Frauen. 🌸</div><button class="copy" onclick="cp('p90',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 91 · So</div><div class="script" id="p91">Nächstes Training ist am [Datum].
+
+Hast du eine Frage die du schon lange loswerden wolltest? Schreib sie mir heute — ich nehme sie mit.
+
+Kein Training ist besser als eines mit echten Fragen. 🌿</div><button class="copy" onclick="cp('p91',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 14 — Lifestyle &amp; Freiheit <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 92 · Mo</div><div class="script" id="p92">Ich hab heute morgen gearbeitet bevor mein Kind aufgewacht ist — kein Büro, keine Anfangszeit, kein Chef. Das ist mein Alltag mit DupliHer Network. 🌿</div><button class="copy" onclick="cp('p92',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 93 · Di</div><div class="script" id="p93">Was bedeutet Freiheit für dich?
+
+Für mich bedeutet es: selbst entscheiden wann ich arbeite. Und wann ich nicht arbeite.
+
+Das ist kein Traum mehr. Das ist mein Montag. 🌸</div><button class="copy" onclick="cp('p93',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 94 · Mi</div><div class="script" id="p94">Ich habe meinen ersten Provisions-Check bekommen als mein Handy klingelte und ich im Zug sass. Kein Meeting, kein Büro, kein Chef — einfach mein Konto und meine Partnerinnen die weitermachen. 🌿</div><button class="copy" onclick="cp('p94',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 95 · Do</div><div class="script" id="p95">Kein Produkt verkaufen müssen, keine Präsentation halten, keine Hausmessen. Stattdessen eine Nachricht schreiben, einen Post veröffentlichen, ehrlich sein. Das ist DupliHer Network — das System das jede weitergeben kann. 🌸</div><button class="copy" onclick="cp('p95',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 96 · Fr</div><div class="script" id="p96">Was mich überrascht hat: ich hätte das nie angefangen wenn ich vorher alles gewusst hätte.
+
+Ich hab angefangen weil ich die Produkte liebte. Den Rest hab ich im Gehen gelernt.
+
+Manchmal ist Anfangen die klügste Strategie. 🌿</div><button class="copy" onclick="cp('p96',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 97 · Sa</div><div class="script" id="p97">Mein Wochenende gehört mir.
+
+Aber mein Business läuft trotzdem. Weil das System läuft wenn ich Pause mache.
+
+Das ist der Unterschied zwischen Arbeit und Aufbau. 🌸</div><button class="copy" onclick="cp('p97',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 98 · So</div><div class="script" id="p98">Frag mich alles was du wissen willst.
+
+Nicht was du sagen sollst. Nicht was ich empfehle. Einfach was dich wirklich interessiert.
+
+Ich antworte ehrlich. Versprochen. 🌿</div><button class="copy" onclick="cp('p98',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 15 — Ergebnisse &amp; Beweise <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 99 · Mo</div><div class="script" id="p99">Vorher: trockenes, brüchiges Haar das ich jeden Morgen kaum anschauen konnte.
+
+Nachher: Haare die ich seit einem Jahr endlich liebe.
+
+Das klingt nach Werbung. Ist es aber nicht. Das ist meine Küche. Jeden Morgen. 🌿</div><button class="copy" onclick="cp('p99',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 100 · Di</div><div class="script" id="p100">Manche Frauen fragen mich: hat das wirklich funktioniert?
+
+Ich sage immer: ruf meine Kundinnen an. Ich gebe dir Nummern.
+
+Das ist mein Beweis. 🌸</div><button class="copy" onclick="cp('p100',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 101 · Mi</div><div class="script" id="p101">Was ein Jahr Monat für mein Haar bedeutet: keine Haarbrüche mehr beim Kämmen, die Kopfhaut blieb ruhig und das Volumen kam zurück. Das sind keine Marketingversprechen. Das ist meine Erfahrung. 🌿</div><button class="copy" onclick="cp('p101',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 102 · Do</div><div class="script" id="p102">Eine Kundin hat mir heute geschrieben:
+
+"Ich hab meinen Friseur das erste Mal seit Jahren nicht gebraucht um mein Haar zu retten."
+
+Das ist der Beweis den ich brauche. 🌸</div><button class="copy" onclick="cp('p102',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 103 · Fr</div><div class="script" id="p103">Frauen die anfangen ohne alles zu wissen kommen weiter als Frauen die warten bis sie alles wissen.
+
+Das gilt für Haarpflege. Das gilt für Business.
+
+Wann fängst du an? 🌿</div><button class="copy" onclick="cp('p103',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 104 · Sa</div><div class="script" id="p104">Ergebnis nach 90 Tagen Konsequenz: mehr Gespräche, mehr Kundinnen, mehr Verbindungen. Nicht weil ich perfekt war. Weil ich dageblieben bin. 🌸</div><button class="copy" onclick="cp('p104',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 105 · So</div><div class="script" id="p105">Was wäre wenn du in 6 Monaten zurückschaust und sagst:
+
+"Ich bin so froh dass ich angefangen hab."
+
+Das können viele Frauen sagen. Ich bin eine davon. 🌿</div><button class="copy" onclick="cp('p105',this)">Kopieren</button></div>
+      </div>
+    </div>
+    <div class="week">
+      <button class="wtoggle" aria-expanded="false" onclick="toggleW(this)">Woche 16 — Duplikation &amp; System <span class="wicon">▼</span></button>
+      <div class="wposts">
+        <div class="card"><div class="card-label">Post 106 · Mo</div><div class="script" id="p106">Das Schönste an DupliHer Network: ich muss nichts neu erfinden.
+
+Ich gebe dasselbe System weiter das ich selbst bekommen habe.
+
+Jede neue Partnerin startet genau dort wo ich gestartet hab. Das System erklärt sich selbst. 🌿</div><button class="copy" onclick="cp('p106',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 107 · Di</div><div class="script" id="p107">Ich hab letzte Woche eine Frau begleitet die ihr erstes Gespräch geführt hat.
+
+Ich musste ihr nicht sagen was sie tippen soll. Sie hat Modul 2 geöffnet und einfach gemacht.
+
+Das ist Duplikation. 🌸</div><button class="copy" onclick="cp('p107',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 108 · Mi</div><div class="script" id="p108">Wenn eine Frau fragt "was machst du genau" sage ich:
+
+Ich zeig ihr was ich zeige. Ich gebe ihr dasselbe System. Und dann macht sie es selbst.
+
+Das System das jede weitergeben kann. 🌿</div><button class="copy" onclick="cp('p108',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 109 · Do</div><div class="script" id="p109">Drei Monate in diesem Business:
+
+Ich hab nichts erklärt. Ich hab nur gezeigt und weitergegeben.
+
+Das Ergebnis macht das System. Nicht ich. 🌸</div><button class="copy" onclick="cp('p109',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 110 · Fr</div><div class="script" id="p110">Eine Freundin hat DupliHer Network bekommen.
+
+Drei Wochen später hat sie ihre ersten Partnerinnen.
+
+Ich hab ihr nichts erklärt. Sie hat den Link bekommen. Das System hat den Rest gemacht. 🌿</div><button class="copy" onclick="cp('p110',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 111 · Sa</div><div class="script" id="p111">Was ich an diesem Modell liebe: jede Frau die mitmacht gibt dasselbe weiter was sie bekommen hat. Kein Wissen geht verloren, keine Lücken entstehen und die Qualität bleibt dieselbe. 🌸</div><button class="copy" onclick="cp('p111',this)">Kopieren</button></div>
+        <div class="card"><div class="card-label">Post 112 · So</div><div class="script" id="p112">Nächster Monat. Neuer Start.
+
+Das System läuft weiter. Ob ich schlafe, koche oder im Urlaub bin.
+
+Bereit für Monat 5? Ich bin es. 🌿</div><button class="copy" onclick="cp('p112',this)">Kopieren</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 4 -->
+<div class="acc-mod" id="m4">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">04</span>
+    <span class="acc-title">Selbsterklärungs-System</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 04</p>
+    <h2 class="mod-title">Selbsterklärungs-System</h2>
+    <p class="mod-desc">5 Nachrichten nacheinander schicken wenn jemand wirklich interessiert ist. Danach Skript 9 aus Modul 2.</p>
+    <div class="info">Alle 5 Nachrichten nacheinander — mit etwas Abstand dazwischen. Das System erklärt alles für dich. Du musst nichts erklären.</div>
+    <div class="cards">
+      <div class="card"><div class="card-label">Nachricht 1</div><div class="script" id="se1">Hey 🌿 schön dass du neugierig bist. Ich schick dir jetzt alles Schritt für Schritt. Einfach lesen und dann sag mir was du denkst.</div><button class="copy" onclick="cp('se1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 2</div><div class="script" id="se2">Die meisten Frauen kennen das. Man gibt viel Geld für Haarpflege aus. Probiert ein Produkt nach dem anderen. Manchmal hilft es kurz, dann nicht mehr.
+
+Und nebenbei wünscht man sich etwas das neben dem Alltag funktioniert. Ohne Chef. Ohne feste Zeiten. Ohne grosse Investition.</div><button class="copy" onclick="cp('se2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 3</div><div class="script" id="se3">Genau das ist Monat.
+
+Produkte die wirklich Ergebnisse liefern. Ich benutze sie selbst seit einem Jahr und ich würde sie nie mehr hergeben.
+
+Und wer möchte kann damit auch ein Business aufbauen. Nicht müssen. Können. 🌸</div><button class="copy" onclick="cp('se3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 4</div><div class="script" id="se4">DupliHer Network ist das System dahinter.
+
+Du bekommst fertige Texte für deine Nachrichten. Fertige Posts für Social Media. Ein Onboarding das neue Partnerinnen selbst durch alles führt.
+
+Du musst niemandem etwas erklären. Das System macht das für dich. Das System das jede weitergeben kann. 🌿</div><button class="copy" onclick="cp('se4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 5</div><div class="script" id="se5">Jetzt weisst du alles was du brauchst um zu entscheiden.
+
+Hast du Fragen? Schreib mir einfach.
+Willst du dabei sein? Sag mir Bescheid.
+Noch nicht sicher? Auch okay, ich bin hier wenn du soweit bist 🌸</div><button class="copy" onclick="cp('se5',this)">Kopieren</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 5 -->
+<div class="acc-mod" id="m5">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">05</span>
+    <span class="acc-title">Onboarding</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 05</p>
+    <h2 class="mod-title">Onboarding</h2>
+    <p class="mod-desc">Was du sofort schickst wenn jemand Mitglied wird. Dann 30 Tage begleiten.</p>
+    <p class="glabel">Willkommensnachricht — sofort senden</p>
+    <div class="info">Diese Nachricht schickst du jeder neuen Partnerin als allererste Nachricht — noch bevor Tag 1. Einfach kopieren, Name anpassen, senden.</div>
+    <div class="cards">
+      <div class="card"><div class="card-label">Willkommensnachricht (per WhatsApp / Telegram)</div><div class="script" id="vid1">Hey [Name] — ich bin so froh dass du hier bist. 🌸
+
+Ich bin Petra. Und wenn du das gerade liest dann bist du jetzt Teil von DupliHer Network. Das bedeutet: du hast alles was du brauchst um loszulegen. Wirklich alles.
+
+Bevor du anfängst will ich dir kurz zeigen wie das System aufgebaut ist. Das hier ist kein Kurs und kein Lehrplan. Das ist ein Werkzeugkasten. Du hast 17 Module. Du brauchst nicht alles auf einmal zu lesen. Was du brauchst: fang mit Modul 1 an, lies es durch, dann Modul 2, dann fang an.
+
+Modul 2 sind deine Skripte — 35 fertige Nachrichten. Kopiere eine, passe den Namen an, schick sie. Das ist alles. Modul 3 sind deine Posts — jeden Tag einen. Foto hochladen, Text kopieren, veröffentlichen.
+
+Und wenn jemand antwortet: Modul 2 aufmachen und weiterschreiben. Du musst niemandem etwas erklären. Das System erklärt sich selbst. Wenn jemand mehr wissen will schickst du ihnen denselben Link den du gerade bekommen hast.
+
+Was ich immer wieder sehe: Frauen die zu lange lesen und zu wenig tun. Ich verstehe das — es fühlt sich sicherer an. Aber Lesen baut kein Business. Tun schon.
+
+Mein Wunsch an dich: gib dem System 90 Tage. Wer 90 Tage täglich schreibt und postet sieht oft echte Veränderung. Nicht alle zur selben Zeit, nicht alle gleich schnell — aber viele die wirklich dranbleiben.
+
+Wenn du Fragen hast bin ich da. Schreib mir direkt.
+
+Willkommen bei DupliHer Network 🌿</div><button class="copy" onclick="cp('vid1',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Folgenachrichten</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Tag 1 — Sofort senden</div><div class="script" id="ob1">Hey [Name] 🌸 herzlich willkommen bei DupliHer Network. Ich freu mich so dass du dabei bist.
+
+Heute machst du nur eine Sache: Lies alle Module einmal durch. Nur lesen, noch nichts tun. Damit du weisst was du hast.
+
+Ich bin für dich da wenn du Fragen hast 🌿</div><button class="copy" onclick="cp('ob1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Tag 2</div><div class="script" id="ob2">Guten Morgen [Name] 😊
+
+Heute schreibst du drei Namen auf. Frauen die du kennst und die du als erstes anschreiben möchtest.
+
+Nur aufschreiben. Noch nicht schreiben. Schick mir die Namen wenn du magst 🌿</div><button class="copy" onclick="cp('ob2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Tag 3</div><div class="script" id="ob3">Heute schickst du deine erste Nachricht.
+
+Öffne Modul 2. Nimm Skript 1. Passe nur den Namen an. Der Rest bleibt genau so.
+
+Du musst nichts erklären. Das Skript macht das für dich 🌸</div><button class="copy" onclick="cp('ob3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Tag 4</div><div class="script" id="ob4">Hey [Name] 🌸 heute veröffentlichst du deinen ersten Post.
+
+Öffne Modul 3. Nimm Post 1. Lade ein Foto hoch — von dir, deinen Produkten, oder deinem Alltag. Text kopieren, anpassen, abschicken.
+
+Du wirst sehen wie schnell das geht wenn man den Text nicht selbst schreiben muss 🌿</div><button class="copy" onclick="cp('ob4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Tag 5</div><div class="script" id="ob5">Heute nur eines: schau ob jemand auf deine erste Nachricht oder deinen Post reagiert hat.
+
+Wenn ja → Modul 2 aufmachen, passendes Skript kopieren, antworten.
+Wenn nein → Skript 6 (Follow-up) an alle schicken die noch nicht geantwortet haben 🌸</div><button class="copy" onclick="cp('ob5',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Tag 6</div><div class="script" id="ob6">Hey [Name] 😊 du machst das wirklich gut.
+
+Heute: schreib drei neue Frauen an. Immer Skript 1 — einfach andere Namen. Die Pipeline füllt sich nur wenn du täglich neue Menschen anschreibst.
+
+Je mehr du anschreibst, desto schneller kommt Bewegung rein 🌿</div><button class="copy" onclick="cp('ob6',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Tag 7 — Erste Woche</div><div class="script" id="ob7">Eine Woche DupliHer Network 🌿 wie fühlst du dich?
+
+Du hast angeschrieben, gepostet und angefangen. Das ist mehr als die meisten je tun.
+
+Nächste Woche zeige ich dir wie du mit Antworten umgehst und dein Selbsterklärungs-System einsetzt 🌸</div><button class="copy" onclick="cp('ob7',this)">Kopieren</button></div>
+    </div>
+    <hr>
+    <p class="glabel">30-Tage Meilensteine</p>
+    <div class="days">
+      <div class="day"><div class="dnum">8</div><div class="dtxt"><div class="dtitle">Reaktionen nutzen</div><div class="ddesc">Wenn jemand antwortet → Modul 2, passendes Skript öffnen und antworten.</div></div></div>
+      <div class="day"><div class="dnum">10</div><div class="dtxt"><div class="dtitle">Selbsterklärungs-System einsetzen</div><div class="ddesc">Bei echtem Interesse → Modul 4, alle 5 Nachrichten nacheinander.</div></div></div>
+      <div class="day"><div class="dnum">14</div><div class="dtxt"><div class="dtitle">Erste Auswertung</div><div class="ddesc">Wie viele haben geantwortet? Was hat funktioniert, was nicht?</div></div></div>
+      <div class="day"><div class="dnum">22</div><div class="dtxt"><div class="dtitle">Erstes Training vorbereiten</div><div class="ddesc">Datum + Zoom-Link + Post 7 veröffentlichen.</div></div></div>
+      <div class="day"><div class="dnum">30</div><div class="dtxt"><div class="dtitle">Ein Monat geschafft</div><div class="ddesc">Weitermachen. Ab Monat 2: Rhythmus festigen, Team aufbauen.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 6 -->
+<div class="acc-mod" id="m6">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">06</span>
+    <span class="acc-title">Produkte &amp; Preise</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 06</p>
+    <h2 class="mod-title">Produkte &amp; Preise</h2>
+    <p class="mod-desc">Schau zuerst die Schulung. Dann die Nachrichten wenn jemand fragt was Monat für Produkte hat.</p>
+    <p class="glabel">Produkte Schulung</p>
+    <div class="vcard">
+      <div class="veye">Video</div>
+      <div class="vtitle">Monat Produkte Schulung</div>
+      <a class="vlink" href="https://youtu.be/ENx7znOek9Y" target="_blank" rel="noopener">&#9654; Video öffnen</a>
+    </div>
+    <hr>
+    <div class="cards">
+      <div class="card"><div class="card-label">Nachricht 1</div><div class="script" id="pr1">Schön dass du fragst 🌿 Monat ist eine Haarpflege und Hautpflegemarke die ich selbst seit einem Jahr benutze.
+
+Was mich überzeugt hat: die Produkte sind nicht nur schön verpackt. Sie liefern wirklich Ergebnisse. Mein Haar hat sich komplett verändert.
+
+Ich schick dir die drei Produkte die ich am meisten liebe.</div><button class="copy" onclick="cp('pr1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 2</div><div class="script" id="pr2">Das sind meine drei Lieblingsprodukte:
+
+Renew Linie — für trockenes Haar. Shampoo CHF 58 / Spülung CHF 71. Als VIP Kundin: CHF 50 und CHF 59.
+
+ir Clinical System — für Haar das intensive Kopfhautpflege sucht. Komplettes Set: VIP CHF 181 / normal CHF 215.
+
+Kopfhaut Scrub — Tiefenreinigung für die Kopfhaut. VIP CHF 67 / normal CHF 78.
+
+Alle drei benutze ich selbst. Ich würde nichts empfehlen das ich nicht kenne.</div><button class="copy" onclick="cp('pr2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 3</div><div class="script" id="pr3">Was Monat von anderen Marken unterscheidet:
+
+Keine schädlichen Inhaltsstoffe. Kein SLS, kein Paraben, kein Formaldehyd.
+
+Direkt nach Hause geliefert. Kein Laden nötig.
+
+Als VIP Kundin 15% Rabatt auf alles. Als Marktpartnerin sogar 30%.
+
+Willst du wissen welches Produkt für dich passt? Schreib mir kurz wie dein Haar gerade ist 🌸</div><button class="copy" onclick="cp('pr3',this)">Kopieren</button></div>
+    </div>
+    <hr>
+    <p class="glabel">Schweizer Preise — Mai 2026</p>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Produkt</th><th>MP</th><th>VIP</th><th>Retail</th></tr>
+        <tr><td>Renew Shampoo</td><td class="pmp">42</td><td class="pvip">50</td><td class="pret">58</td></tr>
+        <tr><td>Renew Spülung</td><td class="pmp">50</td><td class="pvip">59</td><td class="pret">71</td></tr>
+        <tr><td>Renew System</td><td class="pmp">114</td><td class="pvip">137</td><td class="pret">162</td></tr>
+        <tr><td>IR Clinical Shampoo</td><td class="pmp">50</td><td class="pvip">59</td><td class="pret">71</td></tr>
+        <tr><td>IR Clinical Spülung</td><td class="pmp">56</td><td class="pvip">68</td><td class="pret">80</td></tr>
+        <tr><td>IR Clinical Serum</td><td class="pmp">82</td><td class="pvip">100</td><td class="pret">118</td></tr>
+        <tr><td>IR Clinical System</td><td class="pmp">150</td><td class="pvip">181</td><td class="pret">215</td></tr>
+        <tr><td>Kopfhaut Scrub</td><td class="pmp">55</td><td class="pvip">67</td><td class="pret">78</td></tr>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:6px">Alle Preise CHF · MP = Marktpartnerin −30% · VIP −15%</p>
+  </div>
+</div>
+
+<!-- MODULE 7 -->
+<div class="acc-mod" id="m7">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">07</span>
+    <span class="acc-title">Business-Erklärung</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 07</p>
+    <h2 class="mod-title">Business-Erklärung</h2>
+    <p class="mod-desc">Schau zuerst die Videos. Dann die Nachrichten wenn jemand fragt wie das Verdienen funktioniert.</p>
+    <p class="glabel">Business-Videos</p>
+    <div class="vcard">
+      <div class="veye">Video 1</div>
+      <div class="vtitle">Business-Erklärung auf Deutsch</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <a class="vlink" href="https://us06web.zoom.us/rec/share/Cvmgn2tHDMP0nXY0k1q5N8HUtuhVRp7n9vcRFjPPKRqOUApohv9KUmlt1F11QlRN.-SF89Ziy1W_14DJa?startTime=1778522791000" target="_blank" rel="noopener">&#9654; Video öffnen</a>
+        <button class="copy" onclick="cp('v1url',this)">Link kopieren</button>
+      </div>
+      <div class="vpw-row" style="display:flex;align-items:center;gap:8px;">Passwort: <span class="vpw" id="v1pw">+zmJm24N</span><button class="copy" onclick="cp('v1pw',this)" style="padding:3px 10px;font-size:12px;">Kopieren</button></div>
+      <span id="v1url" style="display:none">https://us06web.zoom.us/rec/share/Cvmgn2tHDMP0nXY0k1q5N8HUtuhVRp7n9vcRFjPPKRqOUApohv9KUmlt1F11QlRN.-SF89Ziy1W_14DJa?startTime=1778522791000</span>
+    </div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-label">Nachricht weiterleiten — Deutsch</div>
+      <div class="script" id="v1msg">Hey 🌿 hier ist die Business-Erklärung für dich:
+
+https://us06web.zoom.us/rec/share/Cvmgn2tHDMP0nXY0k1q5N8HUtuhVRp7n9vcRFjPPKRqOUApohv9KUmlt1F11QlRN.-SF89Ziy1W_14DJa?startTime=1778522791000
+
+Passwort: +zmJm24N
+
+Schau es dir an und sag mir was du denkst 🌸</div>
+      <button class="copy" onclick="cp('v1msg',this)">Kopieren</button>
+    </div>
+
+    <div class="vcard">
+      <div class="veye">Video 2</div>
+      <div class="vtitle">Business-Erklärung auf Schweizerdeutsch</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <a class="vlink" href="https://us06web.zoom.us/rec/share/paTRDDx-ocnJZCQR72JR8cv47NFou-jmUC9bJZllxe-5G1vcF7SQxJ_f6VoZKkqR.jKrrfiBaY7A1Swqh?from=hub" target="_blank" rel="noopener">&#9654; Video öffnen</a>
+        <button class="copy" onclick="cp('v2url',this)">Link kopieren</button>
+      </div>
+      <div class="vpw-row" style="display:flex;align-items:center;gap:8px;">Passwort: <span class="vpw" id="v2pw">=BD7VrV1</span><button class="copy" onclick="cp('v2pw',this)" style="padding:3px 10px;font-size:12px;">Kopieren</button></div>
+      <span id="v2url" style="display:none">https://us06web.zoom.us/rec/share/paTRDDx-ocnJZCQR72JR8cv47NFou-jmUC9bJZllxe-5G1vcF7SQxJ_f6VoZKkqR.jKrrfiBaY7A1Swqh?from=hub</span>
+    </div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-label">Nachricht weiterleiten — Schweizerdeutsch</div>
+      <div class="script" id="v2msg">Hey 🌿 da isch d'Business-Erklärung für dich:
+
+https://us06web.zoom.us/rec/share/paTRDDx-ocnJZCQR72JR8cv47NFou-jmUC9bJZllxe-5G1vcF7SQxJ_f6VoZKkqR.jKrrfiBaY7A1Swqh?from=hub
+
+Passwort: =BD7VrV1
+
+Lueg's dir a und sag mir was de denksch 🌸</div>
+      <button class="copy" onclick="cp('v2msg',this)">Kopieren</button>
+    </div>
+    <hr>
+    <p class="glabel">Die drei Stufen</p>
+    <div class="tiers">
+      <div class="tier"><div class="tier-head"><span class="dot k"></span><span class="tname">Kundin</span><span class="tdisc">Retail</span></div><div class="tier-body">Einfach bestellen. Kein Abo, keine Verpflichtung.<div class="texample">IR Clinical System: CHF 215</div></div></div>
+      <div class="tier"><div class="tier-head"><span class="dot v"></span><span class="tname">VIP</span><span class="tdisc">&#8722;15%</span></div><div class="tier-body">Kostenlos anmelden, monatlich bestellen. 15% auf alles.<div class="texample">IR Clinical System: CHF 181</div></div></div>
+      <div class="tier"><div class="tier-head"><span class="dot m"></span><span class="tname">Marktpartnerin</span><span class="tdisc">&#8722;30%</span></div><div class="tier-body">Starter-Paket ab CHF 170. 30% Rabatt + Provision verdienen.<div class="texample">IR Clinical System: CHF 150</div></div></div>
+    </div>
+    <hr>
+    <p class="glabel">Nachrichten</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Nachricht 1</div><div class="script" id="biz1">Ich erklär dir kurz wie das bei Monat funktioniert. Einfach und ehrlich. 🌿
+
+Du empfiehlst Produkte die du selbst liebst. Jemand kauft über deinen Link. Du bekommst eine Provision. Das ist der Kern.</div><button class="copy" onclick="cp('biz1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 2</div><div class="script" id="biz2">Was du konkret machst:
+
+Du baust einen Kundenkreis auf. Menschen die regelmässig Monat bestellen. Die meisten bestellen jeden Monat automatisch weil sie die Produkte nicht mehr hergeben wollen.
+
+Das bedeutet: du verdienst nicht einmal. Du verdienst jeden Monat wieder wenn deine Kunden nachbestellen.</div><button class="copy" onclick="cp('biz2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 3 — Starterpakete</div><div class="script" id="biz3">Es gibt drei Pakete je nach dem was du dir vorstellst:
+
+Custom Lite — CHF 170 (Produktwert CHF 307)
+Custom Hair Essentials — CHF 260 (Produktwert CHF 555)
+Dream Big — CHF 700 (Produktwert CHF 1'800)
+
+Kein Lager nötig. Alles direkt an den Kunden geliefert. Du brauchst nur dein Handy.</div><button class="copy" onclick="cp('biz3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 4</div><div class="script" id="biz4">Was die meisten Frauen überrascht:
+
+Du brauchst keine Erfahrung. Du brauchst kein grosses Netzwerk. Ich hab auch mit null angefangen.
+
+Was du brauchst: Lust auf die Produkte und die Bereitschaft einfach anzufangen.
+
+Wenn du mehr wissen willst können wir kurz telefonieren oder ich schick dir mehr Infos. Was passt dir besser? 🌸</div><button class="copy" onclick="cp('biz4',this)">Kopieren</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 8 -->
+<div class="acc-mod" id="m8">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">08</span>
+    <span class="acc-title">FAQ — Häufige Fragen</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 08</p>
+    <h2 class="mod-title">FAQ</h2>
+    <p class="mod-desc">Die 8 häufigsten Fragen mit fertigen Antworten zum Kopieren.</p>
+    <div class="faq"><div class="fq">Ist das MLM?</div><div class="fa" id="faq1">Ja es ist Network Marketing, da bin ich völlig ehrlich. Was mich überzeugt hat waren wirklich die Produkte und nicht irgendwelche Versprechen. Du kannst auch einfach Kundin werden ohne das Business zu machen.</div><button class="copy" onclick="cp('faq1',this)" style="margin-top:10px">Kopieren</button></div>
+    <div class="faq"><div class="fq">Wie viel kann ich verdienen?</div><div class="fa" id="faq2">Das hängt davon ab wie aktiv du bist. Provisionsrecht entsteht mit dem ersten Verkauf — wie schnell und wie viel ist individuell verschieden. Offizielle Einkommensverteilung: Monat Annual Income Disclosure auf monat.com 🌸</div><button class="copy" onclick="cp('faq2',this)" style="margin-top:10px">Kopieren</button></div>
+    <div class="faq"><div class="fq">Wie viel kostet es zum Start?</div><div class="fa" id="faq3">Es gibt drei Pakete: Custom Lite CHF 170 (Wert CHF 307) · Hair Essentials CHF 260 (Wert CHF 555) · Dream Big CHF 700 (Wert CHF 1'800). Das beliebteste für den Einstieg ist das Hair Essentials Paket.</div><button class="copy" onclick="cp('faq3',this)" style="margin-top:10px">Kopieren</button></div>
+    <div class="faq"><div class="fq">Muss ich Produkte auf Lager haben?</div><div class="fa" id="faq4">Nein. Alles wird direkt an den Kunden geliefert. Du hast kein Lager und kein Risiko.</div><button class="copy" onclick="cp('faq4',this)" style="margin-top:10px">Kopieren</button></div>
+    <div class="faq"><div class="fq">Wie viel Zeit brauche ich?</div><div class="fa" id="faq5">Ich mache das neben dem Alltag. Keine festen Zeiten. Du entscheidest selbst wie viel du investierst.</div><button class="copy" onclick="cp('faq5',this)" style="margin-top:10px">Kopieren</button></div>
+    <div class="faq"><div class="fq">Was wenn ich niemanden kenne?</div><div class="fa" id="faq6">Alle fangen so an. Mit den DupliHer Network Skripten weisst du genau was du schreiben musst. Das Netzwerk kommt mit der Zeit.</div><button class="copy" onclick="cp('faq6',this)" style="margin-top:10px">Kopieren</button></div>
+    <div class="faq"><div class="fq">Sind die Produkte wirklich gut?</div><div class="fa" id="faq7">Ich benutze sie selbst seit einem Jahr und würde sie nie mehr hergeben. Das ist meine ehrlichste Antwort.</div><button class="copy" onclick="cp('faq7',this)" style="margin-top:10px">Kopieren</button></div>
+    <div class="faq"><div class="fq">Was ist DupliHer Network genau?</div><div class="fa" id="faq8">DupliHer Network ist das System das ich entwickelt habe um Monat einfacher aufzubauen. Du bekommst fertige Texte, Posts und Anleitungen. Das System erklärt sich selbst. Das System das jede weitergeben kann. 🌿</div><button class="copy" onclick="cp('faq8',this)" style="margin-top:10px">Kopieren</button></div>
+  </div>
+</div>
+
+<!-- MODULE 9 -->
+<div class="acc-mod" id="m9">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">09</span>
+    <span class="acc-title">Stories &amp; Status</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 09</p>
+    <h2 class="mod-title">Stories &amp; WhatsApp Status</h2>
+    <p class="mod-desc">30 kurze Texte für deine Instagram Stories und deinen WhatsApp Status. Direkt posten oder leicht anpassen.</p>
+    <div class="info">Ein bis zwei Status pro Tag reicht. Stories und Status werden gesehen — nutze das. Kein langer Text nötig, kurz und direkt wirkt am besten.</div>
+    <p class="glabel">Produkt &amp; Haar</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Status 1</div><div class="script" id="st1">Schlechtes Haar war gestern. 🌿 #Monat</div><button class="copy" onclick="cp('st1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 2</div><div class="script" id="st2">Mein Haar heute = mein Haar vor Monat × 10 🌸</div><button class="copy" onclick="cp('st2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 3</div><div class="script" id="st3">Kopfhaut Scrub Tag. Wer kennt das Gefühl danach? 🌿</div><button class="copy" onclick="cp('st3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 4</div><div class="script" id="st4">Haare waschen war noch nie so schön. Danke Monat 🌸</div><button class="copy" onclick="cp('st4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 5</div><div class="script" id="st5">Wer braucht heute Haarpflege-Tipps? → Schreibt mir 🌿</div><button class="copy" onclick="cp('st5',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 6</div><div class="script" id="st6">Die beste Entscheidung meines Jahres? Monat. 🌸</div><button class="copy" onclick="cp('st6',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 7</div><div class="script" id="st7">Meine Kunden kommen zurück. Jeden Monat. Das ist der echte Vorteil. 🌿</div><button class="copy" onclick="cp('st7',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 8</div><div class="script" id="st8">Frag mich was du willst über Monat. Ich antworte ehrlich. 🌸</div><button class="copy" onclick="cp('st8',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Business &amp; Leben</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Status 9</div><div class="script" id="st9">Kannst du dir vorstellen von deinem Handy aus Geld zu verdienen? Ich kann. 🌸</div><button class="copy" onclick="cp('st9',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 10</div><div class="script" id="st10">Mein Business-Tool: mein Handy. Mehr brauche ich nicht. 🌿</div><button class="copy" onclick="cp('st10',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 11</div><div class="script" id="st11">Ich habe heute frei. Aber mein Business nicht. 🌸</div><button class="copy" onclick="cp('st11',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 12</div><div class="script" id="st12">Was wäre wenn dein Nebenjob dein Hauptjob wird? 🌿</div><button class="copy" onclick="cp('st12',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 13</div><div class="script" id="st13">Heute war ein guter Tag. Eine neue Kundin. Eine Provision. 🌸</div><button class="copy" onclick="cp('st13',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 14</div><div class="script" id="st14">30 Minuten heute für mein Business. Das reicht manchmal. 🌿</div><button class="copy" onclick="cp('st14',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 15</div><div class="script" id="st15">Neue Woche. Neue Nachrichten. Neue Möglichkeiten. 🌸</div><button class="copy" onclick="cp('st15',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 16</div><div class="script" id="st16">Ich arbeite wann ich will. Von wo ich will. Das ist Freiheit. 🌿</div><button class="copy" onclick="cp('st16',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Motivation &amp; Mindset</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Status 17</div><div class="script" id="st17">Mein Haar wächst. Mein Business wächst. Ich wachse. 🌸</div><button class="copy" onclick="cp('st17',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 18</div><div class="script" id="st18">Ich verkaufe nichts. Ich teile was ich liebe. Das ist der Unterschied. 🌿</div><button class="copy" onclick="cp('st18',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 19</div><div class="script" id="st19">Dran bleiben zählt mehr als Talent. Das hab ich heute wieder gelernt. 🌸</div><button class="copy" onclick="cp('st19',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 20</div><div class="script" id="st20">Du brauchst keine Erfahrung. Du brauchst nur den ersten Schritt. 🌿</div><button class="copy" onclick="cp('st20',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 21</div><div class="script" id="st21">Wer Angst vor Network Marketing hat: ich hatte sie auch. 🌸</div><button class="copy" onclick="cp('st21',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 22</div><div class="script" id="st22">Meine beste Investition: Zeit in echte Verbindungen. 🌿</div><button class="copy" onclick="cp('st22',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 23</div><div class="script" id="st23">Heute schon 15 Frauen angeschrieben. Mal sehen was daraus wird 🌸</div><button class="copy" onclick="cp('st23',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 24</div><div class="script" id="st24">Ein System das sich selbst erklärt. Das ist DupliHer Network. 🌿</div><button class="copy" onclick="cp('st24',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Team &amp; Community</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Status 25</div><div class="script" id="st25">Neue Partnerin heute willkommen geheissen. Das macht mich glücklich 🌸</div><button class="copy" onclick="cp('st25',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 26</div><div class="script" id="st26">Noch ein Platz frei in meinem Team. Wer ist mutig? 🌿</div><button class="copy" onclick="cp('st26',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 27</div><div class="script" id="st27">Heute Zoom Training mit meinem Team. Zusammen ist stärker. 🌸</div><button class="copy" onclick="cp('st27',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 28</div><div class="script" id="st28">3 Frauen haben heute angefragt. Das System arbeitet. 🌿</div><button class="copy" onclick="cp('st28',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 29</div><div class="script" id="st29">Welche Frau braucht heute jemanden der ihr zuhört? Meld dich 🌸</div><button class="copy" onclick="cp('st29',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Status 30</div><div class="script" id="st30">Monatliches DupliHer Network Training. Nächster Termin: [Datum] → Schreib mir wenn du dabei sein willst 🌿</div><button class="copy" onclick="cp('st30',this)">Kopieren</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 10 -->
+<div class="acc-mod" id="m10">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">10</span>
+    <span class="acc-title">Team-Aufbau</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 10</p>
+    <h2 class="mod-title">Team-Aufbau</h2>
+    <p class="mod-desc">Wenn du deine ersten Partnerinnen hast. Nachrichten für Onboarding, Motivation und wöchentliche Begleitung.</p>
+    <div class="info">Wenn jemand startet — gib ihr einfach denselben Link. Das System erklärt sich selbst. Du musst nichts erklären. Dein Job: da sein, motivieren, feiern.</div>
+    <p class="glabel">Erste Tage</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Nachricht 1 — Neue Partnerin begrüssen</div><div class="script" id="t1">Hey [Name] 🌸 ich freue mich so dass du dabei bist. Ich schick dir jetzt deinen Link. Schau dir Modul 1 an — das ist dein erster Schritt. Ich bin für dich da wenn du Fragen hast 🌿</div><button class="copy" onclick="cp('t1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 2 — Tag 3 Check-in</div><div class="script" id="t2">Hey [Name] 😊 wie läuft es so? Hast du schon angefangen zu lesen? Sag mir kurz wo du gerade bist — dann weiss ich wie ich dir am besten helfen kann 🌸</div><button class="copy" onclick="cp('t2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 3 — Erste Woche</div><div class="script" id="t3">Hey [Name] 🌿 eine Woche DupliHer Network. Wie war das für dich? Hast du schon geschrieben? Was war die erste Reaktion? Ich will alles wissen 🌸</div><button class="copy" onclick="cp('t3',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Begleitung &amp; Motivation</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Nachricht 4 — Partnerin motivieren</div><div class="script" id="t4">Hey [Name] 😊 ich wollte dir kurz sagen: ich sehe was du machst und ich bin stolz auf dich. Weiter so. Du machst das wirklich gut 🌸</div><button class="copy" onclick="cp('t4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 5 — Partnerin die zögert</div><div class="script" id="t5">Hey [Name] 🌿 ich merk dass es gerade etwas ruhig ist bei dir. Das ist okay. Darf ich fragen was gerade los ist? Manchmal ist es eine einzige Sache die ich helfen kann zu klären 🌸</div><button class="copy" onclick="cp('t5',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 6 — Ersten Erfolg feiern</div><div class="script" id="t6">Hey [Name] 🌸 ich hab gerade von deinem Erfolg gehört. Das ist so toll. Lass uns das feiern! Du hast das wirklich selbst gemacht. Ich bin so stolz auf dich 🌿</div><button class="copy" onclick="cp('t6',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Team-Kommunikation</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Nachricht 7 — Wöchentliches Team-Update</div><div class="script" id="t7">Hey Team 🌸 kurzes Update diese Woche. [Was neu ist / was gut läuft]. Erinnerung: täglich schreiben, täglich posten. Wer Fragen hat meldet sich. Gemeinsam kommen wir weiter 🌿</div><button class="copy" onclick="cp('t7',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 8 — Training-Einladung</div><div class="script" id="t8">Hey Team 🌿 nächste Woche am [Datum] machen wir unser monatliches DupliHer Network Training. Bringt eure Fragen mit. Ich bring meine Antworten 🌸</div><button class="copy" onclick="cp('t8',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 9 — Neue Partnerin ans System weiterleiten</div><div class="script" id="t9">Hey [Name] 😊 du hast jetzt auch deine ersten Partnerinnen. Hier ist was du tust: schick ihnen genau diesen Link. Das System erklärt alles für dich. Du musst gar nichts erklären. Das System macht das für dich 🌸</div><button class="copy" onclick="cp('t9',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">So wächst dein Team</p>
+    <div class="days">
+      <div class="day"><div class="dnum">1</div><div class="dtxt"><div class="dtitle">Du startest</div><div class="ddesc">Du baust deinen Kundenkreis auf. Täglich schreiben, täglich posten.</div></div></div>
+      <div class="day"><div class="dnum">2</div><div class="dtxt"><div class="dtitle">Erste Partnerinnen</div><div class="ddesc">Wer startet bekommt denselben Link. Das System erklärt sich selbst — du erklärst nichts.</div></div></div>
+      <div class="day"><div class="dnum">3</div><div class="dtxt"><div class="dtitle">Duplikation</div><div class="ddesc">Deine Partnerinnen bringen ihre Partnerinnen. Du begleitest. Du erklärst nicht mehr.</div></div></div>
+      <div class="day"><div class="dnum">4</div><div class="dtxt"><div class="dtitle">Monatliches Training</div><div class="ddesc">Das DupliHer Network Training hält das Team zusammen und bringt neue Impulse jeden Monat.</div></div></div>
+    </div>
+    <p class="glabel">Das System einer neuen Partnerin zeigen</p>
+    <div class="info">Du erklärst nichts — du zeigst. Der Link tut die ganze Erklärung. Dein Job: sie neugierig machen, Link schicken, 48 Stunden lassen, dann fragen was sie denkt.</div>
+    <div class="days">
+      <div class="day"><div class="dnum">1</div><div class="dtxt"><div class="dtitle">Neugier wecken</div><div class="ddesc">Nachricht 10 schicken. Kein langer Pitch, kein erklären — nur sagen dass du ihr etwas zeigen willst.</div></div></div>
+      <div class="day"><div class="dnum">2</div><div class="dtxt"><div class="dtitle">Link schicken</div><div class="ddesc">"Schau das mal an. Es erklärt sich selbst. Sag mir was du denkst." — und warten.</div></div></div>
+      <div class="day"><div class="dnum">3</div><div class="dtxt"><div class="dtitle">48 Stunden geben</div><div class="ddesc">Nicht nachhaken. Sie braucht Zeit. Du meldest dich nach 2 Tagen mit Nachricht 11.</div></div></div>
+      <div class="day"><div class="dnum">4</div><div class="dtxt"><div class="dtitle">Sie startet — Link weiterleiten</div><div class="ddesc">Sie bekommt denselben Link. Sie gibt ihn weiter. Das ist Duplikation. Du erklärst ihr nichts mehr.</div></div></div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="card-label">Nachricht 10 — Das System zeigen</div><div class="script" id="t10">Hey [Name] 🌸 ich wollte dir ehrlich was zeigen. Ich benutze ein System das mein Monat Business komplett strukturiert. Fertige Texte, fertige Posts, fertige Onboarding-Anleitungen — ich muss niemandem mehr etwas erklären. Willst du kurz reinschauen? Ich schick dir den Link 🌿</div><button class="copy" onclick="cp('t10',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 11 — Nach dem Lesen (48h später)</div><div class="script" id="t11">Hey [Name] 😊 hast du Zeit gehabt reinzuschauen? Was war dein erster Gedanke? Ich bin wirklich gespannt — auch wenn du skeptisch bist 🌸</div><button class="copy" onclick="cp('t11',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Nachricht 12 — Was kostet das?</div><div class="script" id="t12">Das ist eine faire Frage 🌿 sag mir kurz ob du eher am Business oder nur an den Produkten interessiert bist — dann sag ich dir genau was drin ist und was es kostet 🌸</div><button class="copy" onclick="cp('t12',this)">Kopieren</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 11 -->
+<div class="acc-mod" id="m11">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">11</span>
+    <span class="acc-title">Saisonale Posts</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 11</p>
+    <h2 class="mod-title">Saisonale Posts</h2>
+    <p class="mod-desc">Fertige Posts für die wichtigsten Feiertage und Jahreszeiten. Einfach den passenden Monat öffnen, Text kopieren, Bild hinzufügen.</p>
+    <p class="glabel">Weihnachten</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Post · Weihnachten 1</div><div class="script" id="sea1">Weihnachten kommt.
+
+Und mit ihm der Wunsch nach Ruhe, Wärme und echten Momenten.
+
+Mein Geschenktipp für alle Frauen die ihr Haar lieben: die Monat Renew Linie. Oder das ir Clinical Set für jemanden der damit kämpft.
+
+Schreib mir wenn du eine Idee für ein persönliches Geschenk suchst 🌿</div><button class="copy" onclick="cp('sea1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post · Weihnachten 2</div><div class="script" id="sea2">Frohe Weihnachten 🌸
+
+Danke dass du dabei bist. Dass du liest. Dass du schreibst. Dass du glaubst.
+
+Das grösste Geschenk ist Vertrauen. Danke für deins.
+
+Ich wünsch euch wunderschöne Feiertage 🌿</div><button class="copy" onclick="cp('sea2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post · Weihnachten 3</div><div class="script" id="sea3">Zwischen den Jahren — die schönste Zeit für eine neue Routine.
+
+Wenn alles etwas ruhiger wird ist das meine Lieblingszeit für Haarpflege-Rituale.
+
+Heisse Dusche. Renew Maske. Nichts denken.
+
+Was ist dein Weihnachts-Ritual? 🌸</div><button class="copy" onclick="cp('sea3',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Neujahr</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Post · Neujahr 1</div><div class="script" id="sea4">Neues Jahr. Neues Haar. Neue Energie.
+
+Wenn du dir für dieses Jahr etwas vornimmst: nimm dir vor deinen Haaren endlich das zu geben was sie verdienen.
+
+Ich zeig dir wie — schreib mir einfach 🌿</div><button class="copy" onclick="cp('sea4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post · Neujahr 2</div><div class="script" id="sea5">Frohes neues Jahr 🌸
+
+Was ich mir dieses Jahr wünsche: mehr Frauen die ihr Haar lieben. Mehr Partnerinnen die loslegen. Mehr echte Verbindungen.
+
+Bin ich mit dir dabei? 🌿</div><button class="copy" onclick="cp('sea5',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post · Neujahr 3</div><div class="script" id="sea6">Jahresvorsatz den ich wirklich durchhalte:
+
+Täglich posten. Täglich schreiben. Täglich meiner Community etwas Echtes geben.
+
+Was ist deiner? Schreib ihn unten 👇🌸</div><button class="copy" onclick="cp('sea6',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Valentinstag</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Post · Valentinstag 1</div><div class="script" id="sea7">Valentinstag — und das schönste Geschenk bist du dir selbst.
+
+Gute Haarpflege ist Selbstliebe. Kein Luxus. Eine Entscheidung.
+
+Wenn du heute in dich investierst schreib mir 🌸</div><button class="copy" onclick="cp('sea7',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post · Valentinstag 2</div><div class="script" id="sea8">Schenkst du heute jemandem etwas?
+
+Das ir Clinical Set oder die Renew Linie kommen direkt nach Hause. Keine Schlange. Kein Stress.
+
+Nur ein Geschenk das wirklich etwas bringt. 🌿</div><button class="copy" onclick="cp('sea8',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Ostern</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Post · Ostern 1</div><div class="script" id="sea9">Ostern. Frühling. Neubeginn.
+
+Die Jahreszeit wo alles wieder wächst — auch dein Haar wenn du ihm hilfst.
+
+Frühling ist die perfekte Zeit für einen neuen Anfang mit der richtigen Haarpflege 🌿</div><button class="copy" onclick="cp('sea9',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post · Ostern 2</div><div class="script" id="sea10">Frohe Ostern 🌸
+
+Danke für jeden Tag den du mit mir mitliest und mitlebst.
+
+Geniess die Feiertage. Komm erholt zurück. Und wenn du wieder startest bin ich da 🌿</div><button class="copy" onclick="cp('sea10',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Sommer</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Post · Sommer 1</div><div class="script" id="sea11">Sommer und Haare — das ist eine Liebesgeschichte mit Komplikationen.
+
+Sonne. Chlor. Salzwasser. Mein Haar hat das früher gehasst.
+
+Heute auch. Aber es erholt sich schneller. Wegen der Renew Linie. 🌿</div><button class="copy" onclick="cp('sea11',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post · Sommer 2</div><div class="script" id="sea12">Sommerpflege-Tipp:
+
+Nach dem Schwimmen sofort spülen. Dann Renew Spülung. Nicht föhnen wenn es nicht muss sein.
+
+Mein Haar im Sommer: viel besser seit ich das konsequent mache. 🌸</div><button class="copy" onclick="cp('sea12',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post · Sommer 3</div><div class="script" id="sea13">Sommerzeit = Urlaubszeit.
+
+Aber auch: mehr Zeit für echte Gespräche. Mehr Stories. Mehr Sonne die man zeigen kann.
+
+Monat-Produkte kommen mit auf Reisen. Klein. Leicht. Effektiv. 🌿</div><button class="copy" onclick="cp('sea13',this)">Kopieren</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 12 -->
+<div class="acc-mod" id="m12">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">12</span>
+    <span class="acc-title">30-Tage Challenge</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 12</p>
+    <h2 class="mod-title">30-Tage Challenge</h2>
+    <p class="mod-desc">Dein Tagesplan für die ersten 30 Tage. Jeden Tag eine konkrete Aufgabe. Wer das durchzieht sieht echte Ergebnisse.</p>
+    <div class="info">Diese Challenge ist für den Start — und für jeden Neustart. Drucke sie aus oder speichere einen Screenshot. Jeden Abend einen Haken setzen.</div>
+    <p class="glabel">Woche 1 — Orientierung</p>
+    <div class="days">
+      <div class="day"><div class="dnum">1</div><div class="dtxt"><div class="dtitle">Alle Module lesen</div><div class="ddesc">Nur lesen. Noch nichts tun. Du brauchst das Gesamtbild bevor du anfängst.</div></div></div>
+      <div class="day"><div class="dnum">2</div><div class="dtxt"><div class="dtitle">10 Namen aufschreiben</div><div class="ddesc">Frauen aus deinem Umfeld die du als erste anschreiben wirst. Nur aufschreiben — noch kein Schreiben.</div></div></div>
+      <div class="day"><div class="dnum">3</div><div class="dtxt"><div class="dtitle">Erste 3 Nachrichten senden</div><div class="ddesc">Modul 2 → Skript 1 oder 2 → Namen einsetzen → senden. Drei Frauen von deiner Liste.</div></div></div>
+      <div class="day"><div class="dnum">4</div><div class="dtxt"><div class="dtitle">Ersten Post veröffentlichen</div><div class="ddesc">Modul 3 → Post 1 → eigenes Foto hinzufügen → auf Instagram und Facebook veröffentlichen.</div></div></div>
+      <div class="day"><div class="dnum">5</div><div class="dtxt"><div class="dtitle">5 weitere Nachrichten senden</div><div class="ddesc">Weitere Namen von deiner Liste. Skript 1, 2 oder 3 verwenden je nach Situation.</div></div></div>
+      <div class="day"><div class="dnum">6</div><div class="dtxt"><div class="dtitle">Zweiten Post veröffentlichen</div><div class="ddesc">Modul 3 → Post 2 → veröffentlichen. Täglich posten ist der Rhythmus.</div></div></div>
+      <div class="day"><div class="dnum">7</div><div class="dtxt"><div class="dtitle">Erste Woche Bilanz</div><div class="ddesc">Wie viele Gespräche laufen? Was hat gut geklappt? Was war schwierig? Kurz notieren.</div></div></div>
+    </div>
+    <p class="glabel">Woche 2 — Aufbau</p>
+    <div class="days">
+      <div class="day"><div class="dnum">8</div><div class="dtxt"><div class="dtitle">Follow-up senden</div><div class="ddesc">Wer noch nicht geantwortet hat bekommt Skript 6 (Erstes Follow-up). Kurz und entspannt.</div></div></div>
+      <div class="day"><div class="dnum">9</div><div class="dtxt"><div class="dtitle">10 neue Namen auf die Liste</div><div class="ddesc">Frauen die auf deine Stories reagiert haben. Bekannte die du lange nicht geschrieben hast. Auch Männer die Frauen kennen.</div></div></div>
+      <div class="day"><div class="dnum">10</div><div class="dtxt"><div class="dtitle">5 neue Nachrichten senden</div><div class="ddesc">Frische Kontakte von der neuen Liste. Jeden Tag neue Menschen anschreiben ist das Wichtigste.</div></div></div>
+      <div class="day"><div class="dnum">11</div><div class="dtxt"><div class="dtitle">Erste Story oder Status</div><div class="ddesc">Modul 9 → eine Story-Idee aussuchen → auf Instagram oder WhatsApp Status posten.</div></div></div>
+      <div class="day"><div class="dnum">12</div><div class="dtxt"><div class="dtitle">Auf Antworten eingehen</div><div class="ddesc">Wer geantwortet hat: Modul 2 → Skripte 9–15 je nach Reaktion. Kein Druck. Einfach weiterschreiben.</div></div></div>
+      <div class="day"><div class="dnum">13</div><div class="dtxt"><div class="dtitle">Selbsterklärungs-System verschicken</div><div class="ddesc">Wer wirklich interessiert ist bekommt Modul 4 — die 5 Nachrichten die alles erklären.</div></div></div>
+      <div class="day"><div class="dnum">14</div><div class="dtxt"><div class="dtitle">Zwei Wochen Bilanz</div><div class="ddesc">Wie viele Gespräche laufen aktiv? Wer hat das Selbsterklärungs-System bekommen? Was als nächstes?</div></div></div>
+    </div>
+    <p class="glabel">Woche 3 — Vertiefung</p>
+    <div class="days">
+      <div class="day"><div class="dnum">15</div><div class="dtxt"><div class="dtitle">Business-Videos anschauen</div><div class="ddesc">Modul 7 → beide Videos schauen. Du musst sie nicht auswendig kennen — du musst wissen was drin ist.</div></div></div>
+      <div class="day"><div class="dnum">16</div><div class="dtxt"><div class="dtitle">Skript 17 und 18 kennenlernen</div><div class="ddesc">Modul 2 → Skript 17 (Verdienst) und 18 (Was man macht) lesen bis du sie gefühlt weisst.</div></div></div>
+      <div class="day"><div class="dnum">17</div><div class="dtxt"><div class="dtitle">5 Business-Nachrichten senden</div><div class="ddesc">Skript 3 (Business kalt) oder Skript 16 (Interesse bestätigt) je nach Stand der Gespräche.</div></div></div>
+      <div class="day"><div class="dnum">18</div><div class="dtxt"><div class="dtitle">Zweites Follow-up</div><div class="ddesc">Alle die auf das erste Follow-up nicht geantwortet haben: Skript 7. Letztes Mal nachfragen.</div></div></div>
+      <div class="day"><div class="dnum">19</div><div class="dtxt"><div class="dtitle">Produktpost + direkte Ansprache</div><div class="ddesc">Post aus Woche 2 veröffentlichen und gleichzeitig 3 Kundinnen direkt anschreiben.</div></div></div>
+      <div class="day"><div class="dnum">20</div><div class="dtxt"><div class="dtitle">Abschluss-Nachrichten senden</div><div class="ddesc">Wer das Selbsterklärungs-System gelesen hat: Skript 21 oder 22 — bereit zum Start?</div></div></div>
+      <div class="day"><div class="dnum">21</div><div class="dtxt"><div class="dtitle">Wen kennst du die auch starten könnte?</div><div class="ddesc">Drei Wochen Erfahrung. Welche Frau aus deinem Umfeld würde das lieben? Skript 3 an sie schicken.</div></div></div>
+    </div>
+    <p class="glabel">Woche 4 — Momentum</p>
+    <div class="days">
+      <div class="day"><div class="dnum">22</div><div class="dtxt"><div class="dtitle">10 frische Kontakte heute</div><div class="ddesc">Neue Liste. Neue Frauen. Jeden Tag neue Menschen — das ist die Grundlage von allem.</div></div></div>
+      <div class="day"><div class="dnum">23</div><div class="dtxt"><div class="dtitle">Story über dein Ergebnis nach 3 Wochen</div><div class="ddesc">Was hast du in 3 Wochen gelernt? Was hat dich überrascht? Echte Stories sind am stärksten.</div></div></div>
+      <div class="day"><div class="dnum">24</div><div class="dtxt"><div class="dtitle">Für das monatliche Training anmelden</div><div class="ddesc">Modul 10 → Training-Einladung oder bei Petra direkt nachfragen. Das Training bringt neuen Schwung.</div></div></div>
+      <div class="day"><div class="dnum">25</div><div class="dtxt"><div class="dtitle">Weiterempfehlungen anfragen</div><div class="ddesc">Skript 23 → an Kundinnen die die Produkte lieben. Kennst du jemanden der auch schönes Haar will?</div></div></div>
+      <div class="day"><div class="dnum">26</div><div class="dtxt"><div class="dtitle">VIP-Status mit einer Kundin besprechen</div><div class="ddesc">Modul 6 → Nachricht 2 → einer Kundin erklären was VIP-Status bedeutet und was sie spart.</div></div></div>
+      <div class="day"><div class="dnum">27</div><div class="dtxt"><div class="dtitle">Letzte Follow-up Runde</div><div class="ddesc">Alle offenen Gespräche durchgehen. Skript 10 (Reaktivierung) für alle die lange nichts gesagt haben.</div></div></div>
+      <div class="day"><div class="dnum">28</div><div class="dtxt"><div class="dtitle">Danke an erste Käuferinnen</div><div class="ddesc">Skript 24 — nach dem ersten Monat. Wie läuft es? Erste ehrliche Rückmeldung holen.</div></div></div>
+      <div class="day"><div class="dnum">29</div><div class="dtxt"><div class="dtitle">Plan für Monat 2 aufschreiben</div><div class="ddesc">Drei Ziele für die nächsten 30 Tage. Konkret und erreichbar. Nicht perfekt — einfach echt.</div></div></div>
+      <div class="day"><div class="dnum">30</div><div class="dtxt"><div class="dtitle">Feiern 🌸</div><div class="ddesc">Du hast 30 Tage durchgehalten. Das macht die wenigsten. Schreib Petra und sag ihr dass du fertig bist.</div></div></div>
+    </div>
+    <hr>
+    <div class="info"><strong>Was jetzt?</strong> Starte die Challenge von vorne — aber diesmal weisst du schon wie es läuft. Monat 2 ist immer besser als Monat 1. Und Monat 3 besser als Monat 2. Viele Frauen die das System konsequent nutzen berichten von positiven Ergebnissen. Individuelle Resultate variieren.</div>
+  </div>
+</div>
+
+<!-- MODULE 13 -->
+<div class="acc-mod" id="m13">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">13</span>
+    <span class="acc-title">Einkommensplan</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 13</p>
+    <h2 class="mod-title">Einkommensplan</h2>
+    <p class="mod-desc">Wie das Verdienen bei Monat funktioniert — ehrlich erklärt. Zum Selbstverstehen und zum Weitergeben.</p>
+    <div class="info"><strong>Rechtlicher Hinweis:</strong> Alle auf dieser Seite gezeigten CHF-Beträge sind ausschliesslich illustrative Beispiele. Sie stellen keine Einkommensgarantie und keine typischen Ergebnisse dar. Die tatsächlichen Einnahmen variieren erheblich je nach individuellem Einsatz, verfügbarer Zeit, Qualifikation und Marktbedingungen. Die offizielle Einkommensverteilung findest du in der jährlichen Monat Annual Income Disclosure auf <strong>monat.com</strong>.</div>
+    <p class="glabel">Schnellst-Pfad: wie du zügig verdienst</p>
+    <div class="fp-wrap">
+      <div class="fp-steps">
+        <div class="fp-step">
+          <div class="fp-left"><div class="fp-badge">1</div><div class="fp-line"></div></div>
+          <div class="fp-right">
+            <div class="fp-when">Sofort &amp; Woche 1</div>
+            <div class="fp-action">Erste Kundinnen gewinnen</div>
+            <div class="fp-detail">Als Marktpartnerin kaufst du mit 30% Rabatt und empfiehlst zum regulären Preis. Jeder Verkauf ist sofort deine Provision — keine Wartezeit, kein Mindestbestand.</div>
+            <span class="fp-earn">CHF 30–80 schon in Woche 1 möglich</span>
+          </div>
+        </div>
+        <div class="fp-step">
+          <div class="fp-left"><div class="fp-badge">2</div><div class="fp-line"></div></div>
+          <div class="fp-right">
+            <div class="fp-when">Erster Monat — entscheidend</div>
+            <div class="fp-action">2 Partnerinnen persönlich einschreiben</div>
+            <div class="fp-detail">Das ist der Schlüssel zu schnellem Einkommen. Wer im ersten Monat 2 aktive Partnerinnen einschreibt, schaltet den Fast Start Bonus frei. Zusätzlich zur normalen Provision — und beide fangen selbst an aufzubauen.</div>
+            <span class="fp-earn">+ CHF 150–300 Fast Start Bonus</span>
+          </div>
+        </div>
+        <div class="fp-step">
+          <div class="fp-left"><div class="fp-badge">3</div><div class="fp-line"></div></div>
+          <div class="fp-right">
+            <div class="fp-when">Monatlich wiederkehrend</div>
+            <div class="fp-action">Stammkunden aufbauen und aktiv bleiben</div>
+            <div class="fp-detail">Kunden die monatlich nachbestellen zahlen dir jeden Monat neu ohne neuen Aufwand. Wer dazu ihr Mindestvolumen hält, bekommt monatliche Aktivitätsboni obendrauf.</div>
+            <span class="fp-earn">CHF 100–500 monatlich bei regelmässiger Aktivität</span>
+          </div>
+        </div>
+        <div class="fp-step">
+          <div class="fp-left"><div class="fp-badge">4</div></div>
+          <div class="fp-right">
+            <div class="fp-when">Ab Monat 3</div>
+            <div class="fp-action">Team-Provision: dein Team verdient, du verdienst mit</div>
+            <div class="fp-detail">Deine eingeschriebenen Partnerinnen verkaufen und bauen selbst Teams auf. Du erhältst einen Prozentsatz auf ihren Umsatz — ohne selbst mehr Zeit zu investieren. Das ist der eigentliche Hebel.</div>
+            <span class="fp-earn">CHF 200–1'000+ monatlich bei aktivem Team</span>
+          </div>
+        </div>
+      </div>
+      <div class="fp-key">
+        <strong>Warum genau 2 Einschreibungen so wichtig sind</strong>
+        <p>Zwei persönlich eingeschriebene und aktive Partnerinnen im ersten Monat schalten den Fast Start Bonus frei — das ist der grösste Einzelsprung beim Einkommen in der Anfangsphase. Gleichzeitig beginnen beide selbst aufzubauen, was ab Monat 3 deine Team-Provision startet. Ein Schritt der doppelt wirkt.</p>
+      </div>
+      <div class="tbl-wrap" style="margin-top:16px">
+        <table class="fp-sumtable">
+          <tr><th>Was du tust</th><th>Was du bekommst</th><th>Beispiel CHF</th></tr>
+          <tr><td>Produkte weiterempfehlen</td><td>30% Provision auf Verkauf</td><td>30–80 / Woche</td></tr>
+          <tr><td>2 Partnerinnen einschreiben</td><td>Fast Start Bonus (einmalig)</td><td>150–300 / Monat 1</td></tr>
+          <tr><td>Aktiv bleiben, Stammkunden halten</td><td>Monatliche Aktivitätsboni</td><td>100–500 / Monat</td></tr>
+          <tr><td>Team verkauft</td><td>Team-Provision (% auf Umsatz)</td><td>200–1'000+ / Monat</td></tr>
+        </table>
+      </div>
+      <div class="legal-note" style="margin-top:12px"><strong>Illustrative Beispielzahlen — keine Einkommensgarantie.</strong> Tatsächliche Beträge variieren je nach individuellem Einsatz, Qualifikation, Rang und Marktbedingungen. Offizielle Einkommensverteilung: Monat Annual Income Disclosure auf monat.com.</div>
+    </div>
+    <p class="glabel">Wie die Provision funktioniert</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Kurz erklärt</div><div class="script" id="inc1">Als Marktpartnerin kaufst du Produkte mit 30% Rabatt.
+Wenn du zum Retailpreis weiterempfiehlst verdienst du diese Differenz.
+
+Zusätzlich gibt es:
+— Monatliche Boni wenn du regelmässig aktiv bist
+— Team-Provisionen wenn deine Partnerinnen verkaufen
+— Rekrutierungsboni wenn jemand als Marktpartnerin startet
+
+Das Modell belohnt Loyalität, Regelmässigkeit und Aufbau.</div><button class="copy" onclick="cp('inc1',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Illustrative Szenarien nach Aktivitätslevel</p>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Was du tust (Beispiel)</th><th>Illustrativer Betrag</th></tr>
+        <tr><td>5–10 Kunden, täglich posten &amp; schreiben</td><td class="pmp">100–350 / Mt.</td></tr>
+        <tr><td>15–25 Kunden, 2–3 Partnerinnen im Team</td><td class="pmp">350–700 / Mt.</td></tr>
+        <tr><td>30+ Kunden, wachsendes Team, Duplikation</td><td class="pmp">700–1'500+ / Mt.</td></tr>
+      </table>
+    </div>
+    <div class="legal-note">Das Tempo ist individuell — es gibt keine fixen Zeitrahmen. Einzelne Marktpartnerinnen erreichen Ränge wie AMM bereits im ersten Monat; das sind Ausnahmeergebnisse. <strong>Diese Tabelle zeigt illustrative Szenarien, keine typischen oder garantierten Ergebnisse.</strong> Tatsächliche Einnahmen variieren erheblich je nach Einsatz, Zeit, Netzwerk und Markt. Offizielle Einkommensverteilung: Monat Annual Income Disclosure auf <strong>monat.com</strong>.</div>
+    <p class="glabel">Was den Unterschied macht</p>
+    <div class="days">
+      <div class="day"><div class="dnum">1</div><div class="dtxt"><div class="dtitle">Täglich schreiben</div><div class="ddesc">Wer täglich 10–15 neue Menschen anschreibt baut schneller auf als wer es sporadisch macht. Das ist die wichtigste Variable.</div></div></div>
+      <div class="day"><div class="dnum">2</div><div class="dtxt"><div class="dtitle">Stammkunden aufbauen</div><div class="ddesc">Kunden die monatlich nachbestellen sind der Kern. Einmal aufgebaut verdienst du jeden Monat wieder ohne neuen Aufwand.</div></div></div>
+      <div class="day"><div class="dnum">3</div><div class="dtxt"><div class="dtitle">Duplikation starten</div><div class="ddesc">Wenn du das System weitergibst verdienst du auch wenn andere in deinem Team verkaufen. Das ist der eigentliche Hebel.</div></div></div>
+    </div>
+    <p class="glabel">Skripte für Einkommens-Gespräche</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript — Wie schnell verdient man?</div><div class="script" id="inc2">Ich sag dir ehrlich wie das läuft: wer von Anfang an täglich aktiv ist, sieht schnell erste Ergebnisse. Es gibt keinen fixen Zeitplan — das Tempo bestimmst du selbst. Ich habe im ersten Monat bereits den Rang AMM erreicht, weil ich konsequent drangeblieben bin. Nicht weil ich besonders talentiert war — sondern weil ich einfach täglich gemacht habe 🌿</div><button class="copy" onclick="cp('inc2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript — Konkrete Zahl nennen</div><div class="script" id="inc3">Ich kenne Frauen die nach 3 Monaten konsequenter Arbeit CHF 200 bis 400 im Monat verdienen. Nach 6 Monaten mit einem kleinen Team sind es oft mehr. Das ist kein Vollzeit-Ersatz am Anfang. Aber es ist echtes Geld für Arbeit die man ohnehin schon macht 🌸</div><button class="copy" onclick="cp('inc3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript — Was wenn man mehr will?</div><div class="script" id="inc4">Wer mehr will macht mehr. So einfach ist das. Wer 5 Menschen pro Woche anschreibt und wer 15 Menschen pro Tag anschreibt — das sind am Ende des Jahres komplett unterschiedliche Ergebnisse. Das System gibt dir die Werkzeuge. Was du daraus machst bestimmst du 🌿</div><button class="copy" onclick="cp('inc4',this)">Kopieren</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 14 -->
+<div class="acc-mod" id="m14">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">14</span>
+    <span class="acc-title">Warum Monat — Die Fakten</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 14</p>
+    <h2 class="mod-title">Warum Monat — Die Fakten</h2>
+    <p class="mod-desc">Was hinter Monat steckt. Für dich zum Wissen und für skeptische Kontakte die Fakten wollen.</p>
+    <p class="glabel">Das Unternehmen</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Monat auf einen Blick</div><div class="script" id="why1">Gegründet 2014 von John und Violet Foley, Florida.
+Inzwischen in über 40 Ländern aktiv.
+
+Monat wächst ohne klassische Werbung. Alles läuft über Empfehlungen — von echten Nutzerinnen zu echten Nutzerinnen.
+
+Keine Filialmieten. Kein Zwischenhändler. Die gesparten Kosten fliessen in die Produktqualität.</div><button class="copy" onclick="cp('why1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Auszeichnungen &amp; Zertifizierungen</div><div class="script" id="why2">USDA Certified Biobased: Die Produkte bestehen zu einem grossen Teil aus botanischen, pflanzlichen Inhaltsstoffen. Das ist keine Marketingaussage — das ist eine unabhängige Zertifizierung.
+
+Dermatologisch getestet. Zahlreiche Beauty Awards.
+
+Das erklärt warum Frauen die Monat einmal probiert haben selten zurückgehen.</div><button class="copy" onclick="cp('why2',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Was NICHT in Monat steckt</p>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Inhaltsstoff</th><th>Was er macht</th><th>Bei Monat</th></tr>
+        <tr><td>SLS / SLES</td><td>Aggressives Tensid, greift Kopfhaut an</td><td class="pmp">Nein ✗</td></tr>
+        <tr><td>Parabene</td><td>Konservierungsmittel, Hormonsystem</td><td class="pmp">Nein ✗</td></tr>
+        <tr><td>Formaldehyd</td><td>Krebsverdächtig, häufig in Glättern</td><td class="pmp">Nein ✗</td></tr>
+        <tr><td>DEA / TEA</td><td>Schäumt künstlich, kann Haut reizen</td><td class="pmp">Nein ✗</td></tr>
+        <tr><td>Mineralöl</td><td>Versiegelt Haar, verhindert echte Pflege</td><td class="pmp">Nein ✗</td></tr>
+        <tr><td>Sulfate</td><td>Wäscht natürliche Öle aus Haar</td><td class="pmp">Nein ✗</td></tr>
+      </table>
+    </div>
+    <p class="glabel">Skripte für skeptische Kontakte</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript — Ist das seriös?</div><div class="script" id="why3">Ich versteh die Frage absolut. Ich hab das auch zuerst gefragt. Was mich überzeugt hat: Monat ist USDA zertifiziert. Das machen keine Firmen die schlechte Produkte verkaufen. Und inzwischen gibt es das Unternehmen seit über 10 Jahren in über 40 Ländern — das ist kein kurzfristiger Trend 🌿</div><button class="copy" onclick="cp('why3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript — Warum so teuer?</div><div class="script" id="why4">Weil keine schädlichen Billig-Inhaltsstoffe drin sind. Weil kein stationärer Handel dahintersteckt — kein Ladenlokal, kein Werbeetat, kein Regal. Das Budget fliesst in die Produktqualität. Und das merkt man. Ich hab vorher Produkte aus dem Drogeriemarkt benutzt — und meine Haare haben sich nie so angefühlt wie jetzt 🌸</div><button class="copy" onclick="cp('why4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript — Gibt es Beweise?</div><div class="script" id="why5">Die besten Beweise sind meine Kundinnen. Ich kann dir Frauen zeigen die seit 6 Monaten dabei sind und nie mehr zurückgehen würden. Keine bezahlten Models. Echte Frauen aus meinem Umfeld. Das ist der ehrlichste Beweis den ich dir geben kann 🌿</div><button class="copy" onclick="cp('why5',this)">Kopieren</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 15 -->
+<div class="acc-mod" id="m15">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">15</span>
+    <span class="acc-title">Mindset &amp; Dranbleiben</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 15</p>
+    <h2 class="mod-title">Mindset &amp; Dranbleiben</h2>
+    <p class="mod-desc">Für die Wochen wo niemand antwortet. Für die Tage wo du fast aufgibst. Lies das wenn es schwierig wird.</p>
+    <div class="info"><strong>Der Dip:</strong> Fast alle spüren ihn in Woche 3 bis 5. Die Anfangs-Energie ist weg. Erste Absagen kommen. Es fühlt sich an als würde nichts funktionieren. Das ist normal. Die Frauen die weitermachen sehen danach echte Ergebnisse. Wer aufhört erfährt nie was möglich gewesen wäre.</div>
+    <p class="glabel">Was tun wenn niemand antwortet</p>
+    <div class="days">
+      <div class="day"><div class="dnum">1</div><div class="dtxt"><div class="dtitle">Mehr schreiben, nicht weniger</div><div class="ddesc">Wenn niemand antwortet ist die Antwort: mehr anschreiben. 10 pro Tag ist gut. 20 ist besser. Der Trichter ist grösser als man denkt.</div></div></div>
+      <div class="day"><div class="dnum">2</div><div class="dtxt"><div class="dtitle">Skript 8 nutzen</div><div class="ddesc">Kontakte die länger nicht mehr reagiert haben bekommen eine neue Nachricht (Modul 2 → Skript 8). Nicht pushy — nur zeigen dass du noch da bist.</div></div></div>
+      <div class="day"><div class="dnum">3</div><div class="dtxt"><div class="dtitle">Stories und Status aktivieren</div><div class="ddesc">Wenn DMs ruhig sind: mehr auf Story setzen. Reaktionen kommen oft von dort. Modul 9 öffnen und eine Story-Idee posten.</div></div></div>
+      <div class="day"><div class="dnum">4</div><div class="dtxt"><div class="dtitle">Petra kontaktieren</div><div class="ddesc">Du bist nicht allein. Schreib Petra wenn eine Woche zäh war. Manchmal braucht es nur eine andere Perspektive um wieder Fahrt aufzunehmen.</div></div></div>
+    </div>
+    <p class="glabel">Wenn du fast aufgibst</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Lies das zuerst</div><div class="script" id="mind1">Jede Frau die heute gut aufgestellt ist hatte eine Phase wo sie fast aufgehört hat.
+
+Nicht aus Faulheit. Aus Erschöpfung. Aus Zweifel. Aus fehlenden Antworten.
+
+Der Unterschied zwischen denen die es geschafft haben und denen die aufgehört haben ist nicht Talent. Es ist die Entscheidung an einem schlechten Tag weiterzumachen.
+
+Du musst heute nicht perfekt sein. Du musst heute nur dranbleiben. 🌿</div><button class="copy" onclick="cp('mind1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Was Erfolg wirklich kostet</div><div class="script" id="mind2">Niemand sieht die 47 Nachrichten die keine Antwort bekommen haben.
+
+Alle sehen den einen Erfolg der danach kommt.
+
+Das ist kein Geheimnis. Das ist das System. Weiterschreiben. Weiterposten. Wer aufhört, hört auf. Wer weitermacht, bleibt im Spiel — und das ist der einzige Weg zu Ergebnissen. 🌸</div><button class="copy" onclick="cp('mind2',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Mindset-Texte für deine Stories</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Story-Text 1</div><div class="script" id="mind3">Nicht jeder Tag ist gut. Aber jeder Tag zählt. 🌿</div><button class="copy" onclick="cp('mind3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Story-Text 2</div><div class="script" id="mind4">Ich mach das nicht weil es immer leicht ist. Ich mach das weil es sich lohnt. 🌸</div><button class="copy" onclick="cp('mind4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Story-Text 3</div><div class="script" id="mind5">Wer anfängt ohne alles zu wissen lernt am meisten. 🌿</div><button class="copy" onclick="cp('mind5',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Story-Text 4</div><div class="script" id="mind6">Drei Monate Konsequenz verändern mehr als drei Jahre Nachdenken. 🌸</div><button class="copy" onclick="cp('mind6',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Story-Text 5</div><div class="script" id="mind7">Das hier ist kein Sprint. Das hier ist ein Aufbau. Und Aufbauten brauchen Zeit. 🌿</div><button class="copy" onclick="cp('mind7',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Story-Text 6</div><div class="script" id="mind8">Ich bin froh dass ich dageblieben bin als es schwierig war. Das war der Wendepunkt. 🌸</div><button class="copy" onclick="cp('mind8',this)">Kopieren</button></div>
+    </div>
+    <p class="glabel">Tagesroutine für Konsistenz</p>
+    <div class="days">
+      <div class="day"><div class="dnum">☀️</div><div class="dtxt"><div class="dtitle">Morgens (10 Minuten)</div><div class="ddesc">5–10 neue Nachrichten schicken bevor der Tag richtig losgeht. Das wird zur Gewohnheit — und Gewohnheiten bauen Business.</div></div></div>
+      <div class="day"><div class="dnum">🌤</div><div class="dtxt"><div class="dtitle">Mittags (5 Minuten)</div><div class="ddesc">Antworten durchlesen. Reagieren. Einen Follow-up schicken. Story oder Status posten.</div></div></div>
+      <div class="day"><div class="dnum">🌙</div><div class="dtxt"><div class="dtitle">Abends (5 Minuten)</div><div class="ddesc">Post für morgen vorbereiten. Wer hat heute geantwortet? Was muss ich morgen nachfragen? Morgen früh ist alles schon erledigt.</div></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Canva Template Preview Styles -->
+<style>
+.cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin:1.5rem 0}
+@media(max-width:480px){.cv-grid{grid-template-columns:1fr}}
+.cv-cw{container-type:inline-size;display:flex;flex-direction:column;gap:.55rem}
+.cv-cw-story{grid-column:1/-1;container-type:inline-size;display:flex;flex-direction:column;align-items:center;gap:.55rem}
+.cv-lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);font-weight:500}
+.cv-cw-story .cv-lbl{text-align:center}
+.cv-tpl{position:relative;width:100%;aspect-ratio:1;overflow:hidden;border-radius:9px;box-shadow:0 4px 20px rgba(0,0,0,.13),0 1px 4px rgba(0,0,0,.07)}
+.cv-tpl.story{aspect-ratio:9/16;max-width:195px}
+.cv-t1{background:#EDE4D8}
+.cv-t2{background:#120A10}
+.cv-t3{background:#2C1018}
+.cv-t4{background:#F0E6D3}
+.cv-t5{background:#0F0810}
+.cv-t5::before{content:'';position:absolute;inset:0;background:linear-gradient(155deg,#200E18 0%,#08040C 65%)}
+.cv-orn{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cv-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8% 9%}
+.cv-c.left{align-items:flex-start;text-align:left;padding:10% 12%}
+.cv-c.space{justify-content:space-between;padding:12% 10%}
+@container(min-width:1px){
+  .cv-eye{font-family:Arial,Helvetica,sans-serif;font-size:3cqw;letter-spacing:.28em;text-transform:uppercase}
+  .cv-eye.lt{color:rgba(44,16,24,.38)}.cv-eye.dk{color:#C9A0A0}
+  .cv-serif{font-family:Georgia,'Times New Roman',serif;font-size:7.5cqw;line-height:1.2;font-style:italic}
+  .cv-serif.lt{color:#2C1018}.cv-serif.dk{color:#EDE4D8}
+  .cv-serif-lg{font-family:Georgia,'Times New Roman',serif;font-size:9cqw;line-height:1.12;font-style:italic}
+  .cv-serif-lg.lt{color:#2C1018}.cv-serif-lg.dk{color:#EDE4D8}
+  .cv-bold{font-family:Arial,Helvetica,sans-serif;font-size:8.5cqw;font-weight:900;letter-spacing:.01em;text-transform:uppercase;line-height:.97}
+  .cv-bold.lt{color:#2C1018}.cv-bold.dk{color:#EDE4D8}
+  .cv-sub{font-family:Arial,Helvetica,sans-serif;font-size:4cqw;letter-spacing:.03em;line-height:1.65}
+  .cv-sub.lt{color:rgba(44,16,24,.5)}.cv-sub.dk{color:rgba(237,228,216,.45)}
+  .cv-tag{font-family:Arial,Helvetica,sans-serif;font-size:2.6cqw;letter-spacing:.3em;text-transform:uppercase}
+  .cv-tag.lt{color:rgba(44,16,24,.28)}.cv-tag.dk{color:rgba(201,160,160,.5)}
+  .cv-rose{font-family:Georgia,'Times New Roman',serif;font-size:8cqw;font-style:italic;color:#C9A0A0;line-height:1.1}
+  .cv-rule{width:100%;height:1px;flex-shrink:0}
+  .cv-rule.lt{background:rgba(44,16,24,.13)}.cv-rule.dk{background:rgba(201,160,160,.2)}
+  .cv-rule-s{width:3.5cqw;height:1px;flex-shrink:0;margin:0 auto}
+  .cv-rule-s.lt{background:rgba(44,16,24,.28)}.cv-rule-s.dk{background:rgba(201,160,160,.48)}
+  .story .cv-serif{font-size:6.5cqw}.story .cv-serif-lg{font-size:8cqw}
+  .story .cv-bold{font-size:7cqw}.story .cv-sub{font-size:3.4cqw}
+  .story .cv-eye{font-size:2.6cqw}.story .cv-tag{font-size:2.2cqw}
+  .story .cv-rose{font-size:7cqw}
+}
+</style>
+
+<!-- MODULE 16 -->
+<div class="acc-mod" id="m16">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">16</span>
+    <span class="acc-title">Canva-Vorlagen</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 16</p>
+    <h2 class="mod-title">Canva-Vorlagen</h2>
+    <p class="mod-desc">Petra erstellt die Vorlagen einmal. Jede Partnerin bekommt denselben Link und passt nur Foto und Name an. Einmal einrichten — für immer weitergeben.</p>
+    <div class="info">So funktioniert das Teilen: In Canva oben rechts auf "Teilen" klicken, dann "Vorlage teilen" wählen und den Link kopieren. Wer diesen Link öffnet bekommt eine eigene Kopie und kann sie anpassen — dein Original bleibt unberührt. Den Link in Modul 5 einfügen.</div>
+
+    <p class="glabel">So sehen die 5 Vorlagen aus</p>
+    <div class="cv-grid">
+
+      <div class="cv-cw">
+        <div class="cv-lbl">Produktpost</div>
+        <div class="cv-tpl cv-t1">
+          <div class="cv-c" style="gap:0">
+            <div class="cv-eye lt" style="margin-bottom:1.6em">Monat Haarpflege</div>
+            <div class="cv-rule lt" style="margin-bottom:1.2em"></div>
+            <div class="cv-serif lt">Mehr Volumen,<br>mehr Fülle</div>
+            <div class="cv-rule lt" style="margin:1.2em 0"></div>
+            <div class="cv-sub lt">ir Clinical Set —<br>ich hätte es nicht geglaubt</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-cw">
+        <div class="cv-lbl">Ergebnis-Post</div>
+        <div class="cv-tpl cv-t2">
+          <div class="cv-c" style="gap:0">
+            <div class="cv-serif-lg dk" style="margin-bottom:1.1em">Drei Monate<br>ir Clinical —<br>mein Haar hat<br>sich verändert</div>
+            <div class="cv-rule-s dk" style="margin-bottom:1.1em"></div>
+            <div class="cv-sub dk">vorher — nachher · kein Filter</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-cw">
+        <div class="cv-lbl">Business-Post</div>
+        <div class="cv-tpl cv-t3">
+          <div class="cv-c left" style="gap:0">
+            <div class="cv-eye dk" style="margin-bottom:2em">Monat Business</div>
+            <div class="cv-serif dk" style="margin-bottom:.2em">Produkte die<br>ich wirklich liebe</div>
+            <div class="cv-bold dk">und<br>verdienen</div>
+            <div class="cv-rule dk" style="margin:1em 0"></div>
+            <div class="cv-sub dk">Kein Büro, kein Chef —<br>nur echte Empfehlungen</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-cw">
+        <div class="cv-lbl">Lifestyle-Quote</div>
+        <div class="cv-tpl cv-t4">
+          <svg class="cv-orn" viewBox="0 0 100 100" fill="none">
+            <path d="M6,20 L6,6 L20,6" stroke="#2C1018" stroke-width=".5" opacity=".14"/>
+            <path d="M80,6 L94,6 L94,20" stroke="#2C1018" stroke-width=".5" opacity=".14"/>
+            <path d="M6,80 L6,94 L20,94" stroke="#2C1018" stroke-width=".5" opacity=".14"/>
+            <path d="M80,94 L94,94 L94,80" stroke="#2C1018" stroke-width=".5" opacity=".14"/>
+          </svg>
+          <div class="cv-c" style="gap:0">
+            <div class="cv-eye lt" style="margin-bottom:2em;letter-spacing:.34em">Monat</div>
+            <div class="cv-serif-lg lt" style="margin-bottom:1em">Schön aussehen<br>war nie Plan B</div>
+            <div class="cv-rule-s lt" style="margin-bottom:1em"></div>
+            <div class="cv-sub lt">Es war der Anfang von etwas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-cw-story">
+        <div class="cv-lbl">Story</div>
+        <div class="cv-tpl story cv-t5">
+          <svg class="cv-orn" viewBox="0 0 56.25 100" fill="none">
+            <path d="M4,13 L4,4 L13,4" stroke="#C9A0A0" stroke-width=".5" opacity=".35"/>
+            <path d="M43.25,4 L52.25,4 L52.25,13" stroke="#C9A0A0" stroke-width=".5" opacity=".35"/>
+            <path d="M4,87 L4,96 L13,96" stroke="#C9A0A0" stroke-width=".5" opacity=".35"/>
+            <path d="M43.25,96 L52.25,96 L52.25,87" stroke="#C9A0A0" stroke-width=".5" opacity=".35"/>
+          </svg>
+          <div class="cv-c space">
+            <div style="text-align:center">
+              <div class="cv-bold dk" style="font-size:6cqw;line-height:1.22">Neugierig<br>auf Monat<br>Haarpflege?</div>
+            </div>
+            <div style="text-align:center">
+              <div class="cv-serif-lg dk" style="margin-bottom:.7em">Schau mal</div>
+              <div class="cv-rule dk" style="background:rgba(201,160,160,.18);margin-bottom:.7em"></div>
+              <div class="cv-sub dk" style="line-height:1.8">Ich zeig dir was ich<br>täglich benutze —<br>ehrlich und ohne Druck</div>
+            </div>
+            <div style="text-align:center">
+              <div class="cv-tag dk" style="margin-bottom:.5em;letter-spacing:.16em">Schreib mir</div>
+              <div class="cv-rose">"Monat"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="glabel">Vorlage 1 — Produktpost</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Aufbau in Canva</div><div class="script" id="cv1">Grösse: 1080 × 1080 Pixel
+
+Hintergrund: Creme #FAF4F1
+
+Oben: dein Name sehr klein, viel Buchstabenabstand, darunter "Monat Haarpflege" in Rosa #C9A0A0
+
+Dünne horizontale Linie
+
+Mitte: dein Produktfoto oder Haar-Selfie, füllt ca. 65 Prozent der Fläche
+
+Darunter, kursiv gross: "Mehr Volumen. Mehr Fülle." oder ein Satz aus Modul 3
+
+Ganz unten: dein Name winzig in Rosa
+
+Schrift: Cormorant Garamond Italic
+
+Hashtags in den ersten Kommentar, nicht ins Bild
+
+Beispieltext: Mehr Volumen. Mehr Fülle. Das ir Clinical Set von Monat hat mein Haar verändert. Schreib mir wenn du neugierig bist.</div><button class="copy" onclick="cp('cv1',this)">Kopieren</button></div>
+    </div>
+
+    <p class="glabel">Vorlage 2 — Ergebnis-Post</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Aufbau in Canva</div><div class="script" id="cv2">Grösse: 1080 × 1080 Pixel
+
+Hintergrund: sehr dunkles Bordeaux #120A10
+
+Mitte, gross kursiv in Creme #EDE4D8: dein echtes Ergebnis-Zitat
+Schrift: Cormorant Garamond Italic
+
+Beispielzitat: Drei Monate ir Clinical. Mein Haar hat sich komplett verändert. Ich hätte es nie erwartet.
+
+Dein Vorher-Nachher Foto darunter, kantig zugeschnitten, ehrlich
+
+Ganz unten: dein Name und "Monat" winzig in Rosa #C9A0A0
+
+Das ehrlichste Bild bekommt die meisten Reaktionen. Kein Filter nötig.</div><button class="copy" onclick="cp('cv2',this)">Kopieren</button></div>
+    </div>
+
+    <p class="glabel">Vorlage 3 — Business-Post</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Aufbau in Canva</div><div class="script" id="cv3">Grösse: 1080 × 1080 Pixel
+
+Hintergrund: Dunkelrosa #2C1018
+
+Oben links: "Monat Business" klein in Rosa #C9A0A0
+
+Linksbündig, zweistufig:
+Zeile 1 — "Produkte die ich wirklich liebe." kursiv in Creme, Cormorant Garamond, gross
+Zeile 2 — "UND VERDIENEN." fett in Creme, Arial Black
+
+Dünne Linie darunter
+
+Klein in Creme: Kein Büro. Kein Chef. Nur echte Empfehlungen.
+
+Ganz unten: dein Vorname und "DupliHer Network" in Rosa</div><button class="copy" onclick="cp('cv3',this)">Kopieren</button></div>
+    </div>
+
+    <p class="glabel">Vorlage 4 — Lifestyle-Quote</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Aufbau in Canva</div><div class="script" id="cv4">Grösse: 1080 × 1080 Pixel
+
+Hintergrund: Creme #F0E6D3
+
+Oben: "Monat" winzig, viel Buchstabenabstand, in Dunkelrosa #2C1018
+
+Mitte, zentriert und gross kursiv: ein Satz der zu Monat und zu dir passt
+Schrift: Cormorant Garamond Italic — ruhig und elegant gesetzt
+
+Dünne kurze Linie darunter
+
+Klein darunter: ein Begleitsatz
+
+Beispiel 1: Schön aussehen war nie Plan B. Es war der Anfang von etwas.
+Beispiel 2: Ich empfehle nur was ich wirklich benutze. Das ist mein Versprechen.
+Beispiel 3: Produkte die wirken. Einkommen das folgt.</div><button class="copy" onclick="cp('cv4',this)">Kopieren</button></div>
+    </div>
+
+    <p class="glabel">Vorlage 5 — Story</p>
+    <div class="cards">
+      <div class="card"><div class="card-label">Aufbau in Canva</div><div class="script" id="cv5">Grösse: 1080 × 1920 Pixel — in Canva "Instagram Story" wählen
+
+Hintergrund: sehr dunkles Plum #0F0810 mit sanftem Verlauf zu #200E18
+
+Drei Zonen von oben nach unten:
+
+Oben: dein Name und "Monat" winzig in Rosa, darunter "Neugierig auf Monat Haarpflege?" fett in Creme
+
+Mitte: grosses kursives "Schau mal." in Creme, dünne Linie, dann: "Ich zeig dir was ich täglich benutze. Ehrlich und ohne Druck."
+
+Unten: "Schreib mir" winzig in Rosa, darunter gross kursiv "Monat" in Rosa — das ist der Call-to-Action
+
+Schrift: Arial Black für Headlines, Cormorant Garamond Italic für Schau mal und Monat</div><button class="copy" onclick="cp('cv5',this)">Kopieren</button></div>
+    </div>
+
+    <p class="glabel">Schritt für Schritt in Canva</p>
+    <div class="days">
+      <div class="day"><div class="dnum">1</div><div class="dtxt"><div class="dtitle">Canva öffnen</div><div class="ddesc">canva.com aufrufen, kostenlos anmelden, "Erstelle ein Design" wählen, "Benutzerdefinierte Grösse" klicken und 1080 × 1080 Pixel eingeben.</div></div></div>
+      <div class="day"><div class="dnum">2</div><div class="dtxt"><div class="dtitle">Vorlage aufbauen</div><div class="ddesc">Hintergrundfarbe einstellen, Foto einsetzen, Textfelder hinzufügen, Farben und Schriften nach den Angaben oben einstellen.</div></div></div>
+      <div class="day"><div class="dnum">3</div><div class="dtxt"><div class="dtitle">Als Vorlage teilen</div><div class="ddesc">Oben rechts "Teilen" klicken, dann "Vorlage teilen" wählen, Link kopieren. Dieser Link gibt anderen eine eigene Kopie — dein Original bleibt unberührt.</div></div></div>
+      <div class="day"><div class="dnum">4</div><div class="dtxt"><div class="dtitle">Link in Modul 5 einfügen</div><div class="ddesc">Den Canva-Link in die Tag-1-Nachricht in Modul 5 einsetzen. Jede neue Partnerin bekommt ihn automatisch und kann sofort loslegen.</div></div></div>
+      <div class="day"><div class="dnum">5</div><div class="dtxt"><div class="dtitle">Alle 5 Vorlagen erstellen</div><div class="ddesc">Je eine Vorlage pro Typ, dauert insgesamt 1 bis 2 Stunden. Einmal gemacht — dein ganzes Team benutzt dieselben Vorlagen für immer.</div></div></div>
+    </div>
+    <div class="info">Farben für DupliHer Network: Dunkelrosa <strong>#2C1018</strong>, Akzent Rosa <strong>#C9A0A0</strong>, Creme <strong>#F0E6D3</strong>, Weiss <strong>#FAF4F1</strong>. In Canva unter "Farbe" dann "Eigene Farbe" eingeben.</div>
+  </div>
+</div>
+
+<!-- MODULE 17 -->
+<div class="acc-mod" id="m17">
+  <button class="acc-toggle" onclick="toggleM(this)" aria-expanded="false">
+    <span class="acc-num">17</span>
+    <span class="acc-title">Erfahrungsberichte &amp; Resultate</span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="acc-body">
+    <p class="mod-eye">Modul 17</p>
+    <h2 class="mod-title">Erfahrungsberichte &amp; Resultate</h2>
+    <p class="mod-desc">Echte Ergebnisse — als Posts, als Captions, als Social Proof. Bild speichern, Caption kopieren, auf Instagram oder Facebook posten.</p>
+
+    <p class="glabel">Vorher-Nachher Fotos</p>
+    <div class="info">Bild speichern → auf Instagram oder Facebook hochladen → Caption kopieren und einfügen. Fertig.</div>
+    <div class="legal-note" style="margin-bottom:14px"><strong>Pflichthinweis bei Vorher-Nachher Posts:</strong> Füge bei jedem Bild im Post oder in der Caption den Hinweis ein: <em>"Individuelle Erfahrung — Ergebnisse können variieren."</em> Das ist in der Schweiz und Deutschland rechtlich erforderlich. Poste nur Fotos mit ausdrücklicher Erlaubnis der abgebildeten Person.</div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-label">Ergebnis 1 — Haarverdichtung · ir Clinical</div>
+        <img src="images/result1.jpg" alt="Vorher-Nachher: Haarverdichtung mit ir Clinical" style="width:100%;border-radius:8px;margin:10px 0;">
+        <div class="script" id="res1">Er hat mich gefragt ob er es auch versuchen kann. Natürlich. Vier Monate später hat er mir dieses Foto geschickt. Das ir Clinical System ist nicht nur für Frauen — und das Ergebnis spricht für sich. Neugierig? Schreib mir 🌿</div>
+        <button class="copy" onclick="cp('res1',this)">Caption kopieren</button>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Ergebnis 2 — Haarpflege · Monat Renew</div>
+        <img src="images/result2.jpg" alt="Vorher-Nachher: Haarpflege mit Monat Renew" style="width:100%;border-radius:8px;margin:10px 0;">
+        <div class="script" id="res2">So. Oder so. Das ist das persönliche Ergebnis von jemandem der auf Pflege gesetzt hat. Links: davor. Rechts: danach. Mit Monat Renew. Individuelle Erfahrung — Ergebnisse können variieren. Auf welcher Seite bist du gerade? 🌸</div>
+        <button class="copy" onclick="cp('res2',this)">Caption kopieren</button>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Ergebnis 3 — Locken-Transformation</div>
+        <img src="images/result3.jpg" alt="Vorher-Nachher: Locken-Transformation mit Monat" style="width:100%;border-radius:8px;margin:10px 0;">
+        <div class="script" id="res3">Locken die sie jahrelang bekämpft hat. Jetzt liebt sie sie. Was sich verändert hat ist die Pflege — ihre persönliche Erfahrung nach Monaten mit Monat. Individuelle Ergebnisse. Wenn dein Haar auch mehr Pflege verdient — schreib mir 🌿</div>
+        <button class="copy" onclick="cp('res3',this)">Caption kopieren</button>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Ergebnis 4 — Haardichte nach 2 Monaten · Kundenfeedback</div>
+        <img src="images/result4.jpg" alt="Kundenfeedback: Haardichte nach 2 Monaten ir Clinical" style="width:100%;border-radius:8px;margin:10px 0;">
+        <div class="script" id="res4">Echtes Kundenfeedback — nach 2 Monaten: "Nur die Produkte seit 9 Wochen und jeden Abend mit dem Serum eine Kopfhautmassage." Kein Salon. Keine Verlängerung. Nur Monat ir Clinical, Öl, Black Shampoo und Kopfhautpeeling. 🌸</div>
+        <button class="copy" onclick="cp('res4',this)">Caption kopieren</button>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Ergebnis 5 — Haarverlust Schläfen · ir Clinical</div>
+        <img src="images/result5.jpg" alt="Vorher-Nachher: Haarverlust an den Schläfen" style="width:100%;border-radius:8px;margin:10px 0;">
+        <div class="script" id="res5">Das traut sich kaum jemand zu zeigen. Sie hat es geteilt weil sie ihre persönliche Erfahrung teilen wollte — nach mehreren Monaten ir Clinical. Individuelle Erfahrung, Ergebnisse können variieren. Wenn dich das interessiert schreib mir direkt 🌿</div>
+        <button class="copy" onclick="cp('res5',this)">Caption kopieren</button>
+      </div>
+
+    </div>
+
+    <p class="glabel">Kundenstimmen als Posts</p>
+    <div class="info">Echte Nachrichten von Kundinnen — als Screenshot posten oder Caption darunter. Immer mit Erlaubnis der Kundin.</div>
+    <div class="cards">
+      <div class="card"><div class="card-label">Post — Kundenstimme Allgemein</div><div class="script" id="eb1">Eine Nachricht die ich heute bekommen hab und die mich wirklich gefreut hat: "[Zitat der Kundin einfügen]" Das ist warum ich das mache. Nicht wegen der Zahlen — wegen solchen Momenten. 🌸</div><button class="copy" onclick="cp('eb1',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post — Ergebnis nach X Wochen</div><div class="script" id="eb2">[Name] benutzt Monat seit [X] Wochen. Das ist ihr Fazit: "[Zitat einfügen]" Ich frag meine Kundinnen immer wie es ihnen geht — nicht weil ich muss, sondern weil ich es wirklich wissen will. 🌿</div><button class="copy" onclick="cp('eb2',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post — Screenshot mit Kommentar</div><div class="script" id="eb3">Das hab ich gerade bekommen. [Screenshot-Nachricht zeigen] Ich freu mich jedes Mal neu wenn jemand das schreibt. Weil ich weiss wie lange sie gesucht hat bis sie etwas gefunden hat das wirklich funktioniert. 🌸</div><button class="copy" onclick="cp('eb3',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post — Ir Clinical Ergebnis</div><div class="script" id="eb4">Drei Monate ir Clinical. Ich hab ihr nicht versprochen dass es funktioniert. Ich hab gesagt: probier es ehrlich aus und sag mir dann was du denkst. Das hier ist ihre Antwort: "[Zitat einfügen]" Mehr braucht es nicht. 🌿</div><button class="copy" onclick="cp('eb4',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Post — Kurze Kundenstimme</div><div class="script" id="eb5">"[Kurzes Zitat der Kundin]" — [Vorname der Kundin], [Alter oder Situation optional] Das sagt mehr als alles was ich erklären könnte. 🌸</div><button class="copy" onclick="cp('eb5',this)">Kopieren</button></div>
+    </div>
+
+    <p class="glabel">Erfahrungsbericht anfragen</p>
+    <div class="info">Den richtigen Moment abwarten — nach 2–4 Wochen wenn die Kundin anfängt Ergebnisse zu sehen. Nie zu früh fragen.</div>
+    <div class="cards">
+      <div class="card"><div class="card-label">Skript — Nach 2 Wochen</div><div class="script" id="eb6">Hey [Name] 🌸 wie läuft es mit den Produkten? Ich frag weil mich das wirklich interessiert — nicht als Verkäuferin, sondern weil ich wissen will ob es bei dir auch so wirkt wie bei mir 🌿</div><button class="copy" onclick="cp('eb6',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript — Nach 4 Wochen</div><div class="script" id="eb7">Hey [Name] 😊 ein Monat um. Was ist dein ehrlichstes Fazit? Ich frag weil ich deine Erfahrung vielleicht anderen Frauen zeigen darf — natürlich nur wenn du okay damit bist 🌸</div><button class="copy" onclick="cp('eb7',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript — Wenn sie selbst etwas Positives schreibt</div><div class="script" id="eb8">Das freut mich so zu lesen 🌸 darf ich dich kurz was fragen? Wärst du okay wenn ich das teile? Ich würde nur deinen Vornamen verwenden — oder anonym wenn du lieber möchtest 🌿</div><button class="copy" onclick="cp('eb8',this)">Kopieren</button></div>
+      <div class="card"><div class="card-label">Skript — Vorher-Nachher Foto anfragen</div><div class="script" id="eb9">Hey [Name] 😊 du hast erwähnt dass sich dein Haar verändert hat. Hättest du Lust ein Vorher-Nachher zu machen? Kein Muss — aber es würde wirklich anderen Frauen helfen die dasselbe Problem haben. Und ich wäre dir sehr dankbar 🌸</div><button class="copy" onclick="cp('eb9',this)">Kopieren</button></div>
+    </div>
+
+  </div>
+</div>
+
+<div id="impressum" style="background:var(--bg-card);border-top:1px solid var(--border);padding:24px 20px 20px;max-width:680px;margin:0 auto">
+  <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Impressum</p>
+  <p style="font-size:14px;color:var(--text);font-weight:600;margin-bottom:4px">Petra Tanner</p>
+  <p style="font-size:13px;color:var(--text-muted);line-height:1.7">Brübach 13 · 9245 Sonnental<br><a href="mailto:realistisch2020@gmail.com" style="color:var(--accent);text-decoration:none">realistisch2020@gmail.com</a><br>Unabhängige Monat Marktpartnerin</p>
+</div>
+<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:14px 20px 6px;line-height:1.7;border-top:1px solid var(--border)">Alle Einkommensangaben sind illustrativ — keine typischen oder garantierten Ergebnisse. Produkterfahrungen sind persönliche Eindrücke. Offizielle Einkommensverteilung: Monat Annual Income Disclosure auf <strong>monat.com</strong>.</div>
+<footer class="site-footer">&#169; 2026 <span>Petra Tanner</span> · DupliHer Network · Alle Rechte vorbehalten</footer>
+
+<script>
+function cp(id, btn) {
+  var el = document.getElementById(id);
+  var txt = el.innerText || el.textContent;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function(){ flash(btn); }).catch(function(){ fallback(txt, btn); });
+  } else { fallback(txt, btn); }
+}
+function fallback(txt, btn) {
+  var ta = document.createElement('textarea');
+  ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try { document.execCommand('copy'); flash(btn); } catch(e) {}
+  document.body.removeChild(ta);
+}
+function flash(btn) {
+  var orig = btn.textContent;
+  btn.textContent = 'Kopiert ✓'; btn.classList.add('ok');
+  setTimeout(function(){ btn.textContent = orig; btn.classList.remove('ok'); }, 2000);
+}
+function toggleW(btn) {
+  var open = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!open));
+  btn.nextElementSibling.classList.toggle('open', !open);
+}
+function toggleM(btn) {
+  var open = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!open));
+  btn.nextElementSibling.classList.toggle('open', !open);
+}
+function enav(sid, label, btn) {
+  var src = document.getElementById(sid);
+  if (!src) return;
+  document.getElementById('enav-lbl').textContent = label;
+  document.getElementById('enav-txt').textContent = src.textContent.trim();
+  var res = document.getElementById('enav-result');
+  res.style.display = 'block';
+  document.querySelectorAll('.enav-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  setTimeout(function(){ res.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+}
+function enavCopy(btn) {
+  var text = document.getElementById('enav-txt').textContent;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function(){ flash(btn); }).catch(function(){ fallback(text, btn); });
+  } else { fallback(text, btn); }
+}
+
+// Golden glitter stars
+(function(){
+  var canvas = document.getElementById('glitter');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var GOLD = ['#D4AF37','#E8D06A','#F0E6D3','#C9A0A0','#F5E08A','#ffffff'];
+  var particles = [];
+  var count = 55;
+
+  function resize() {
+    var hero = canvas.parentElement;
+    canvas.width = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+
+  function init() {
+    particles = [];
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.6 + 0.4,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.018 + 0.008,
+        color: GOLD[Math.floor(Math.random() * GOLD.length)],
+        drift: (Math.random() - 0.5) * 0.12,
+        type: Math.random() < 0.35 ? 'cross' : 'dot'
+      });
+    }
+  }
+
+  function drawCross(x, y, size, alpha, color) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = size * 0.7;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(x - size * 2.2, y); ctx.lineTo(x + size * 2.2, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y - size * 2.2); ctx.lineTo(x, y + size * 2.2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  var t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    t += 0.016;
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      var alpha = (Math.sin(p.phase + t * p.speed * 60) * 0.5 + 0.5) * 0.65 + 0.05;
+      p.x += p.drift;
+      if (p.x < -4) p.x = canvas.width + 4;
+      if (p.x > canvas.width + 4) p.x = -4;
+      if (p.type === 'cross') {
+        drawCross(p.x, p.y, p.r, alpha, p.color);
+      } else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = alpha;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!mq.matches) {
+    resize();
+    init();
+    draw();
+    window.addEventListener('resize', function(){ resize(); init(); });
+  }
+})();
+</script>
+</body>
+</html>
