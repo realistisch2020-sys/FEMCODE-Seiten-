@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONAT Stylist Program – für Salons & Beauty Profis</title>
+<meta name="description" content="Das MONAT Stylist Program für Friseursalons und Beauty-Profis: hochwertige Backbar-Produkte, zusätzliches Einkommen, mehr Kundenbindung.">
+<style>
+  :root{
+    --violet-900:#241049;
+    --violet-700:#4a2a9b;
+    --violet-500:#7c5cff;
+    --violet-300:#b9a6ff;
+    --coral:#ff7a66;
+    --peach:#ffb199;
+    --cream:#fbf7f2;
+    --ink:#211a35;
+    --ink-soft:#5b5470;
+    --wa-green:#25d366;
+    --radius:22px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,247,242,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(124,92,255,.12);
+  }
+  .topbar-inner{
+    max-width:1080px;margin:0 auto;padding:12px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .brand{font-weight:800;font-size:17px;letter-spacing:.2px;color:var(--violet-700);}
+  .brand span{color:var(--coral);}
+  .topbar .mini-cta{
+    background:var(--wa-green);color:#fff;font-weight:700;font-size:13px;
+    padding:9px 16px;border-radius:999px;text-decoration:none;
+    display:flex;align-items:center;gap:6px;white-space:nowrap;
+    box-shadow:0 6px 16px rgba(37,211,102,.35);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    background:radial-gradient(120% 140% at 15% 0%, var(--violet-700) 0%, var(--violet-900) 55%, #180a35 100%);
+    color:#fff;
+    padding:56px 0 70px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:-20% -10% auto auto;width:520px;height:520px;
+    background:radial-gradient(circle, rgba(255,122,102,.35), transparent 65%);
+    filter:blur(10px);
+  }
+  .hero::after{
+    content:"";position:absolute;left:-15%;bottom:-25%;width:460px;height:460px;
+    background:radial-gradient(circle, rgba(124,92,255,.5), transparent 65%);
+  }
+  .hero-grid{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+    padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;
+    letter-spacing:.4px;text-transform:uppercase;margin-bottom:18px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--coral);}
+  .hero h1{
+    font-size:clamp(30px,5vw,46px);line-height:1.12;margin:0 0 16px;font-weight:800;
+  }
+  .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--peach),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p.lead{
+    font-size:17px;line-height:1.6;color:rgba(255,255,255,.85);max-width:520px;margin:0 0 28px;
+  }
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:15px 24px;border-radius:999px;font-weight:700;font-size:15px;
+    text-decoration:none;border:none;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-primary{
+    background:var(--wa-green);color:#fff;box-shadow:0 10px 26px rgba(37,211,102,.4);
+  }
+  .btn-primary:hover{box-shadow:0 14px 32px rgba(37,211,102,.5);}
+  .btn-ghost{
+    background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.4);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.18);}
+  .btn-dark{background:var(--violet-900);color:#fff;box-shadow:0 10px 24px rgba(36,16,73,.35);}
+
+  .hero-card{
+    position:relative;border-radius:28px;overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,.45);
+    transform:rotate(1.5deg);
+    border:6px solid rgba(255,255,255,.12);
+  }
+  .hero-card img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero-badge{
+    position:absolute;left:16px;bottom:16px;right:16px;
+    background:rgba(24,10,53,.72);backdrop-filter:blur(6px);
+    border-radius:14px;padding:12px 14px;color:#fff;font-size:13px;font-weight:600;
+  }
+
+  .trust-strip{
+    position:relative;z-index:2;margin-top:44px;
+    display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
+    color:rgba(255,255,255,.75);font-size:13px;font-weight:600;
+  }
+  .trust-strip span{display:flex;align-items:center;gap:7px;}
+  .trust-strip svg{flex:none;}
+
+  /* ---------- sections ---------- */
+  section{padding:66px 0;}
+  .eyebrow-dark{
+    display:inline-block;color:var(--coral);font-weight:800;letter-spacing:.5px;
+    text-transform:uppercase;font-size:12.5px;margin-bottom:10px;
+  }
+  h2{font-size:clamp(24px,3.6vw,34px);margin:0 0 14px;font-weight:800;color:var(--violet-900);}
+  .section-lead{color:var(--ink-soft);font-size:16px;line-height:1.65;max-width:620px;margin:0 0 36px;}
+
+  /* benefit cards */
+  .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .benefit-card{
+    background:#fff;border-radius:var(--radius);padding:24px 20px;
+    box-shadow:0 10px 30px rgba(74,42,155,.08);
+    border:1px solid rgba(124,92,255,.1);
+  }
+  .benefit-card .icon{
+    width:46px;height:46px;border-radius:14px;
+    background:linear-gradient(135deg,var(--violet-500),var(--violet-700));
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+  }
+  .benefit-card h3{font-size:16px;margin:0 0 8px;color:var(--violet-900);}
+  .benefit-card p{font-size:14px;color:var(--ink-soft);line-height:1.55;margin:0;}
+
+  /* how it works */
+  .steps-wrap{background:linear-gradient(180deg,#fff 0%, #f3eeff 100%);}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:10px;}
+  .step{position:relative;background:#fff;border-radius:var(--radius);padding:28px 22px;box-shadow:0 10px 30px rgba(74,42,155,.08);}
+  .step .num{
+    width:38px;height:38px;border-radius:50%;background:var(--violet-900);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:16px;
+  }
+  .step h3{margin:0 0 8px;font-size:16.5px;color:var(--violet-900);}
+  .step p{margin:0;color:var(--ink-soft);font-size:14px;line-height:1.55;}
+  .step.highlight{background:linear-gradient(145deg,var(--violet-700),var(--violet-900));color:#fff;}
+  .step.highlight .num{background:var(--coral);}
+  .step.highlight h3{color:#fff;}
+  .step.highlight p{color:rgba(255,255,255,.8);}
+  .step.highlight a.mini{
+    display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-weight:700;font-size:13.5px;
+    color:#fff;background:var(--wa-green);padding:9px 14px;border-radius:999px;text-decoration:none;
+  }
+
+  /* results / proof */
+  .proof-hero{border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(74,42,155,.18);margin-bottom:24px;}
+  .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .proof-grid figure{margin:0;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(74,42,155,.12);background:#fff;}
+  .proof-grid figcaption{font-size:12px;padding:9px 10px;color:var(--ink-soft);font-weight:600;}
+
+  /* problem/loesung */
+  .problems{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .problem-card{border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(74,42,155,.08);}
+  .problem-card img{width:100%;aspect-ratio:3/4;object-fit:cover;}
+  .problem-card .label{padding:14px 16px;font-weight:700;font-size:14.5px;color:var(--violet-900);}
+
+  /* quote */
+  .quote-banner{
+    border-radius:28px;overflow:hidden;position:relative;
+    background:linear-gradient(120deg,var(--coral),var(--peach));
+    color:#2b1240;padding:0;
+  }
+  .quote-banner-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+  .quote-banner img{height:100%;width:100%;object-fit:cover;min-height:260px;}
+  .quote-text{padding:34px 32px;}
+  .quote-text p{font-size:19px;font-weight:700;line-height:1.4;margin:0;}
+
+  /* trust badges */
+  .badges-wrap{background:#fff;}
+  .badges-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;}
+  .badges-grid img{border-radius:var(--radius);box-shadow:0 10px 30px rgba(74,42,155,.1);}
+  .badge-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .badge-list li{
+    display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;color:var(--ink);
+    background:#f6f2ff;border-radius:14px;padding:13px 16px;
+  }
+  .badge-list li .tick{
+    width:26px;height:26px;border-radius:50%;background:var(--violet-500);color:#fff;
+    display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;font-weight:800;
+  }
+
+  /* final CTA */
+  .final-cta{
+    background:radial-gradient(120% 160% at 85% 0%, var(--violet-700) 0%, var(--violet-900) 60%, #160830 100%);
+    color:#fff;border-radius:32px;padding:50px 34px;text-align:center;position:relative;overflow:hidden;
+  }
+  .final-cta::before{
+    content:"";position:absolute;right:-10%;bottom:-30%;width:380px;height:380px;
+    background:radial-gradient(circle,rgba(255,122,102,.35),transparent 65%);
+  }
+  .final-cta h2{color:#fff;position:relative;z-index:2;}
+  .final-cta p{color:rgba(255,255,255,.82);max-width:540px;margin:0 auto 28px;position:relative;z-index:2;font-size:15.5px;}
+  .final-cta .cta-row{justify-content:center;position:relative;z-index:2;}
+
+  /* footer */
+  footer{padding:40px 0 60px;}
+  .foot-grid{
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;
+    border-top:1px solid rgba(124,92,255,.15);padding-top:26px;
+  }
+  .foot-contact{font-size:14px;color:var(--ink-soft);line-height:1.8;}
+  .foot-contact a{color:var(--violet-700);text-decoration:none;font-weight:600;}
+  .foot-name{font-weight:800;color:var(--violet-900);font-size:15px;margin-bottom:4px;}
+
+  /* sticky mobile cta */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:#fff;box-shadow:0 -8px 30px rgba(36,16,73,.18);
+    padding:10px 14px;display:none;gap:10px;
+  }
+  .sticky-cta .btn{flex:1;justify-content:center;padding:13px 10px;font-size:13.5px;}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-card{order:-1;transform:none;}
+    .benefits{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:1fr;}
+    .proof-grid{grid-template-columns:repeat(2,1fr);}
+    .problems{grid-template-columns:1fr;}
+    .quote-banner-grid{grid-template-columns:1fr;}
+    .quote-banner img{min-height:200px;}
+    .badges-grid{grid-template-columns:1fr;}
+    .sticky-cta{display:flex;}
+    body{padding-bottom:78px;}
+    .topbar .mini-cta span.full{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner wrap" style="padding-left:0;padding-right:0;">
+    <div class="brand">MONAT <span>Stylist</span> Program</div>
+    <a class="mini-cta" id="waTop" href="#" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.46-4.37-1.26l-.31-.19-3.03.79.81-2.95-.2-.3A7.95 7.95 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.6c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+      <span class="full">Video anfordern</span>
+    </a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal in">
+        <div class="eyebrow"><span class="dot"></span> Für Friseursalons &amp; Beauty Profis</div>
+        <h1>MONAT startet ein Programm, das <em>die Salonbranche verändert.</em></h1>
+        <p class="lead">Erhöhe deine Expertise. Steigere dein Einkommen. Das MONAT Stylist Program bringt professionelle Backbar-Produkte, mehr Kundenbindung und eine zusätzliche Einkommensquelle direkt in deinen Salon.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="waHero" href="#" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.46-4.37-1.26l-.31-.19-3.03.79.81-2.95-.2-.3A7.95 7.95 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.6c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+            Business-Video per WhatsApp anfordern
+          </a>
+          <a class="btn btn-ghost" href="#programm">Mehr erfahren</a>
+        </div>
+        <div class="trust-strip">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 98% natürliche Inhaltsstoffe</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Vegan &amp; dermatologisch getestet</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Leaping Bunny zertifiziert</span>
+        </div>
+      </div>
+      <div class="reveal in">
+        <div class="hero-card">
+          <img src="stylist-images/hero-stylist-program.jpg" alt="MONAT Stylist Program">
+          <div class="hero-badge">„Und wenn du Teil davon wirst, kann es auch deinen eigenen Weg verändern.“</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="programm">
+  <div class="wrap">
+    <div class="eyebrow-dark reveal">Das Programm</div>
+    <h2 class="reveal">Was das MONAT Stylist Program dir bringt</h2>
+    <p class="section-lead reveal">Ein exklusives Programm für lizenzierte Fachkräfte — entwickelt, um deinen Salon-Alltag und dein Einkommen gleichzeitig zu verbessern.</p>
+    <div class="benefits">
+      <div class="benefit-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg></div>
+        <h3>Business erweitern</h3>
+        <p>Baue dir eine zusätzliche Einkommensquelle neben deinem Salon auf — ohne an einen festen Arbeitsplatz gebunden zu sein.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Hochwertige Backbar</h3>
+        <p>Biete deinen Kundinnen und Kunden professionelle MONAT Produkte direkt im Salon an und senke gleichzeitig deine Lagerkosten.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 000-7.8z"/></svg></div>
+        <h3>Mehr Kundenbindung</h3>
+        <p>Sichtbare Ergebnisse direkt am Waschplatz stärken das Vertrauen deiner Kundschaft — und sie kommen gerne wieder.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Flexibles Einkommen</h3>
+        <p>Von einem bewährten Geschäftsmodell profitieren und dir ein Vermächtnis erschaffen, das weit über den Friseurstuhl hinausgeht.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="steps-wrap">
+  <section>
+    <div class="wrap">
+      <div class="eyebrow-dark reveal">So geht's</div>
+      <h2 class="reveal">In 3 Schritten zur MONAT Stylistin</h2>
+      <p class="section-lead reveal">Kein Risiko, keine Verpflichtung zum Start — schau dir einfach an, worum es geht.</p>
+      <div class="steps">
+        <div class="step reveal highlight">
+          <div class="num">1</div>
+          <h3>Business-Video anfordern</h3>
+          <p>Schreib mir kurz auf WhatsApp — ich schicke dir das Video zum MONAT Stylist Program direkt zu.</p>
+          <a class="mini" id="waStep" href="#" target="_blank" rel="noopener">Jetzt auf WhatsApp anfragen →</a>
+        </div>
+        <div class="step reveal">
+          <div class="num">2</div>
+          <h3>Fragen klären</h3>
+          <p>Nach dem Video beantworte ich dir gerne alle offenen Fragen zu Produkten, Konditionen und Ablauf — persönlich und unverbindlich.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">3</div>
+          <h3>Als Stylistin registrieren</h3>
+          <p>Überzeugt? Dann sicherst du dir deinen Platz im MONAT Stylist Program und startest mit deiner eigenen Backbar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow-dark reveal">Echte Ergebnisse</div>
+    <h2 class="reveal">MONAT performt — das sehen auch deine Kund:innen</h2>
+    <p class="section-lead reveal">Keine gestellten Fotos, sondern echte Vorher-Nachher-Bilder von echten MONAT Nutzer:innen.</p>
+    <div class="proof-hero reveal">
+      <img src="stylist-images/monat-performs.jpg" alt="MONAT Performs – echte Ergebnisse">
+    </div>
+    <div class="proof-grid">
+      <figure class="reveal"><img src="stylist-images/result-women-1.jpg" alt="Vorher-Nachher Haarglanz"><figcaption>Mehr Fülle &amp; Glanz</figcaption></figure>
+      <figure class="reveal"><img src="stylist-images/result-women-2.jpg" alt="Vorher-Nachher Haarlänge"><figcaption>„Extensions aus der Flasche“</figcaption></figure>
+      <figure class="reveal"><img src="stylist-images/result-women-3.jpg" alt="Vorher-Nachher glattes Haar"><figcaption>Sichtbar dichterer Ansatz</figcaption></figure>
+      <figure class="reveal"><img src="stylist-images/result-men-1.jpg" alt="Vorher-Nachher Herrenhaar"><figcaption>Auch für Männer</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow-dark reveal">Für jedes Kundenproblem</div>
+    <h2 class="reveal">Lösungen, die deine Kundschaft wirklich braucht</h2>
+    <p class="section-lead reveal">Ob Schuppenbildung, dünner werdendes Haar oder gesplisste Spitzen — die MONAT Backbar deckt die häufigsten Anliegen am Waschplatz ab.</p>
+    <div class="problems">
+      <div class="problem-card reveal">
+        <img src="stylist-images/problem-kopfhaut.jpg" alt="Problem Kopfhaut & Lösung">
+        <div class="label">Schuppen &amp; juckende Kopfhaut</div>
+      </div>
+      <div class="problem-card reveal">
+        <img src="stylist-images/problem-duennes-haar.jpg" alt="Problem dünnes Haar & Lösung">
+        <div class="label">Dünner werdendes Haar, Haarbruch</div>
+      </div>
+      <div class="problem-card reveal">
+        <img src="stylist-images/problem-spitzen.jpg" alt="Problem Spliss & Lösung">
+        <div class="label">Gesplisste Spitzen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="quote-banner reveal">
+      <div class="quote-banner-grid">
+        <img src="stylist-images/lifestyle-quote.jpg" alt="MONAT ist kein Trend, es ist ein Lifestyle">
+        <div class="quote-text">
+          <p>„MONAT ist kein Trend! Es ist ein Lifestyle.“ — so beschreiben es Kund:innen, die die Produkte täglich nutzen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="badges-wrap">
+  <section>
+    <div class="wrap">
+      <div class="badges-grid">
+        <img class="reveal" src="stylist-images/produkte-clinical.jpg" alt="MONAT Produktlinie">
+        <div class="reveal">
+          <div class="eyebrow-dark">Qualität, der du vertrauen kannst</div>
+          <h2>Für deine Kund:innen &amp; dein Gewissen</h2>
+          <ul class="badge-list">
+            <li><span class="tick">✓</span> 98% natürliche &amp; pflanzliche Inhaltsstoffe</li>
+            <li><span class="tick">✓</span> Vegane Produkte</li>
+            <li><span class="tick">✓</span> Dermatologisch getestet</li>
+            <li><span class="tick">✓</span> Glutenfrei</li>
+            <li><span class="tick">✓</span> Leaping Bunny zertifiziert</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <div class="eyebrow-dark" style="color:var(--peach);">Bereit für den nächsten Schritt?</div>
+      <h2>Hol dir das Business-Video &amp; erfahre alles über das MONAT Stylist Program</h2>
+      <p>Schreib mir einfach auf WhatsApp — ich schicke dir das Video persönlich zu und beantworte alle deine Fragen.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" id="waFinal" href="#" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.46-4.37-1.26l-.31-.19-3.03.79.81-2.95-.2-.3A7.95 7.95 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.6c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg>
+          Video jetzt per WhatsApp anfordern
+        </a>
+        <a class="btn btn-dark" id="enrollFinal" href="#" target="_blank" rel="noopener">Direkt als Stylistin registrieren</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-name">Deine Ansprechpartnerin: Petra Tanner</div>
+        <div class="foot-contact">MONAT Market Partner</div>
+      </div>
+      <div class="foot-contact">
+        WhatsApp: <a id="waFoot" href="#" target="_blank" rel="noopener">+41 78 718 91 09</a><br>
+        E-Mail: <a href="mailto:info.safetothrive@gmail.com">info.safetothrive@gmail.com</a><br>
+        Shop: <a id="shopFoot" href="#" target="_blank" rel="noopener">swiss.mymonat.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-primary" id="waSticky" href="#" target="_blank" rel="noopener">Video anfordern</a>
+  <a class="btn btn-dark" id="enrollSticky" href="#" target="_blank" rel="noopener">Registrieren</a>
+</div>
+
+<script>
+(function(){
+  var WA = "41787189109";
+  var SHOP = "http://swiss.mymonat.com";
+  var ENROLL = "https://mymonat.com/enrollments/16024648-1792730189/share?utm_source=website&utm_medium=link&utm_campaign=pre_package_cart_mp";
+  var MSG = "Hallo Petra, ich bin Friseurin/Stylistin und möchte gerne mehr über das MONAT Stylist Program erfahren. Kannst du mir bitte das Business-Video schicken? 💜";
+  function waLink(){ return "https://wa.me/"+WA+"?text="+encodeURIComponent(MSG); }
+
+  ["waTop","waHero","waStep","waFinal","waFoot","waSticky"].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.href = waLink();
+  });
+  document.getElementById("shopFoot").href = SHOP;
+  ["enrollFinal","enrollSticky"].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.href = ENROLL;
+  });
+
+  var items = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, {threshold:.12});
+    items.forEach(function(el){ io.observe(el); });
+  } else {
+    items.forEach(function(el){ el.classList.add("in"); });
+  }
+})();
+</script>
+
+</body>
+</html>
