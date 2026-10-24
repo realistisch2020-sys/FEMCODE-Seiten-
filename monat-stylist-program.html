@@ -172,14 +172,14 @@
   }
   .step h3{margin:0 0 8px;font-size:16.5px;color:var(--text);}
   .step p{margin:0;color:var(--text-soft);font-size:14px;line-height:1.55;}
+  .step a.mini{
+    display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-weight:700;font-size:13.5px;
+    color:#fff;background:linear-gradient(135deg,var(--btn-orange-1),var(--btn-orange-2));padding:9px 14px;border-radius:999px;text-decoration:none;
+  }
   .step.highlight{background:linear-gradient(145deg,var(--indigo-2) 0%,var(--orange-1) 45%,var(--orange-2) 100%);color:var(--bg);border:none;}
   .step.highlight .num{background:var(--bg);color:var(--orange-2);}
   .step.highlight h3{color:var(--bg);}
   .step.highlight p{color:rgba(20,14,27,.78);}
-  .step.highlight a.mini{
-    display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-weight:700;font-size:13.5px;
-    color:#fff;background:linear-gradient(135deg,var(--btn-orange-1),var(--btn-orange-2));padding:9px 14px;border-radius:999px;text-decoration:none;
-  }
 
   /* results / proof */
   .proof-hero{border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.4);margin-bottom:24px;}
@@ -448,6 +448,7 @@
           <div class="num">3</div>
           <h3>Als Stylistin registrieren</h3>
           <p>Überzeugt? Dann sicherst du dir deinen Platz im MONAT Stylist Program und startest mit deiner eigenen Backbar.</p>
+          <a class="mini" href="https://mymonat.com/enrollments/16024648-1792730189/share?utm_source=website&amp;utm_medium=link&amp;utm_campaign=pre_package_cart_mp" target="_blank" rel="noopener">Jetzt registrieren →</a>
         </div>
       </div>
     </div>
@@ -593,7 +594,7 @@
       el.addEventListener("animationend", function(){ el.classList.remove(cls); });
     });
   }
-  bounceOnClick(".btn, .mini-cta, .step.highlight a.mini", "pop");
+  bounceOnClick(".btn, .mini-cta, .step a.mini", "pop");
   bounceOnClick(".benefit-card .icon, .badge-list li .tick, .step .num, .eyebrow", "icon-pop");
 
   var items = document.querySelectorAll(".reveal");
