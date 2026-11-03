@@ -351,31 +351,23 @@ function areaLabel(ratio){
 function breathScreen(){
   return '<section class="glass breathcard rise" style="margin-top:6px" aria-label="Atemübung">' +
     sparkle("top:16px;left:18px") + sparkle("top:34px;right:24px;animation-delay:-1.5s;width:10px;height:10px") + sparkle("bottom:70px;left:34px;animation-delay:-2.5s;width:9px;height:9px") +
-    '<h2 tabindex="-1" id="focus">Atme dreimal tief ein und aus</h2>' +
+    '<h2 tabindex="-1" id="focus">Atme einmal tief ein und aus</h2>' +
     '<p class="small" style="margin-top:8px">Folge dem Kreis. Danach zeigt sich dein Ergebnis.</p>' +
     '<div class="breath" role="img" aria-label="Atemkreis, der sich ruhig weitet und wieder zusammenzieht">' +
       '<div class="halo"></div><div class="orb"></div>' +
       '<span class="lbl lin">Einatmen</span><span class="lbl lout">Ausatmen</span><span class="lbl still">Atme tief durch</span>' +
     '</div>' +
-    '<div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>' +
-    '<p class="small" id="bcount" style="margin-top:10px" aria-live="polite">Atemzug 1 von 3</p></section>';
+    '<p class="small" id="bcount" style="margin-top:10px" aria-live="polite">Ein Atemzug, dann geht es weiter</p></section>';
 }
 
 function renderResult(){
   if(timer){ clearTimeout(timer); }
   app.innerHTML = brand() + breathScreen();
-  var dots = app.querySelectorAll(".dots i"), txt = document.getElementById("bcount"), n = 0, BT = 8000;
-  function step(){
-    dots[n].classList.add("on"); n++;
-    if(n < 3){
-      txt.textContent = "Atemzug " + (n+1) + " von 3";
-      timer = setTimeout(step, BT);
-    } else {
-      txt.textContent = "Geschafft. Dein Ergebnis ist bereit.";
-      timer = setTimeout(showResult, 1600);
-    }
-  }
-  timer = setTimeout(step, BT);
+  var txt = document.getElementById("bcount"), BT = 8000;
+  timer = setTimeout(function(){
+    txt.textContent = "Geschafft. Dein Ergebnis ist bereit.";
+    timer = setTimeout(showResult, 1200);
+  }, BT);
   focusTop();
 }
 
