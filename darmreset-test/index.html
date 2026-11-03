@@ -18,6 +18,7 @@
   --line:rgba(75,18,48,.12);
   --glass:rgba(255,255,255,.74);
   --font:Arial, Helvetica, sans-serif;
+  --bt:8s;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -96,11 +97,11 @@ p{margin:0}
 /* Atmen */
 .breathcard{padding:22px 20px 20px;text-align:center;margin-bottom:26px}
 .breath{position:relative;width:210px;height:210px;margin:14px auto 6px}
-.breath .halo{position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,rgba(224,119,90,.55),rgba(176,58,102,0) 68%);animation:glow 10s ease-in-out infinite}
-.breath .orb{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,var(--rose) 34%,var(--berry) 100%);box-shadow:0 14px 40px rgba(176,58,102,.35),inset 0 -10px 24px rgba(75,18,48,.18);animation:breathe 10s ease-in-out infinite}
+.breath .halo{position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,rgba(224,119,90,.55),rgba(176,58,102,0) 68%);animation:glow var(--bt) ease-in-out infinite}
+.breath .orb{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,var(--rose) 34%,var(--berry) 100%);box-shadow:0 14px 40px rgba(176,58,102,.35),inset 0 -10px 24px rgba(75,18,48,.18);animation:breathe var(--bt) ease-in-out infinite}
 .breath .lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--wine);opacity:0;letter-spacing:.02em}
-.breath .lin{animation:lblin 10s ease-in-out infinite}
-.breath .lout{animation:lblout 10s ease-in-out infinite}
+.breath .lin{animation:lblin var(--bt) ease-in-out infinite}
+.breath .lout{animation:lblout var(--bt) ease-in-out infinite}
 .breath .still{display:none}
 .sparkle{position:absolute;width:14px;height:14px;color:var(--gold);fill:currentColor;animation:twinkle 4s ease-in-out infinite}
 
@@ -157,6 +158,16 @@ p{margin:0}
 .wavebars i{display:block;width:3px;height:100%;border-radius:3px;background:var(--berry);transform:scaleY(.3);transform-origin:center}
 .voice.playing .wavebars i{animation:wave .9s ease-in-out infinite}
 .wavebars i:nth-child(2){animation-delay:-.2s!important}.wavebars i:nth-child(3){animation-delay:-.45s!important}.wavebars i:nth-child(4){animation-delay:-.7s!important}
+
+.dots{display:flex;gap:12px;justify-content:center;margin-top:16px}
+.dots i{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--rose);transition:all .4s}
+.dots i.on{background:var(--berry);border-color:var(--berry);transform:scale(1.15)}
+.promo{display:flex;align-items:center;gap:14px;margin-top:18px;padding:14px 16px;border-radius:18px;background:linear-gradient(120deg,#FFF0F2,#FFE0D2);border:1px solid var(--line)}
+.promo .old{font-size:20px;color:var(--muted);text-decoration:line-through}
+.promo .now{font-size:34px;font-weight:700;color:var(--wine);line-height:1}
+.promo .txt{flex:1;font-size:15px;line-height:1.4}
+.code{display:inline-block;margin-top:6px;font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:linear-gradient(100deg,var(--berry),#E0775A);padding:6px 14px;border-radius:99px}
+.copy{margin-left:8px;font-family:var(--font);font-size:14px;color:var(--berry);background:none;border:0;text-decoration:underline;cursor:pointer;padding:6px 0}
 [hidden]{display:none!important}
 
 @media (prefers-reduced-motion:reduce){
@@ -337,15 +348,35 @@ function areaLabel(ratio){
   return "steht im Fokus";
 }
 
-function breathCard(){
-  return '<section class="glass breathcard rise" aria-label="Atemübung">' +
-    sparkle("top:16px;left:18px") + sparkle("top:34px;right:24px;animation-delay:-1.5s;width:10px;height:10px") + sparkle("bottom:26px;left:34px;animation-delay:-2.5s;width:9px;height:9px") +
-    '<h3>Atme einmal tief durch</h3>' +
-    '<p class="small" style="margin-top:6px">Folge dem Kreis. Dein Ergebnis wartet unten auf dich.</p>' +
+function breathScreen(){
+  return '<section class="glass breathcard rise" style="margin-top:6px" aria-label="Atemübung">' +
+    sparkle("top:16px;left:18px") + sparkle("top:34px;right:24px;animation-delay:-1.5s;width:10px;height:10px") + sparkle("bottom:70px;left:34px;animation-delay:-2.5s;width:9px;height:9px") +
+    '<h2 tabindex="-1" id="focus">Atme dreimal tief ein und aus</h2>' +
+    '<p class="small" style="margin-top:8px">Folge dem Kreis. Danach zeigt sich dein Ergebnis.</p>' +
     '<div class="breath" role="img" aria-label="Atemkreis, der sich ruhig weitet und wieder zusammenzieht">' +
       '<div class="halo"></div><div class="orb"></div>' +
       '<span class="lbl lin">Einatmen</span><span class="lbl lout">Ausatmen</span><span class="lbl still">Atme tief durch</span>' +
-    '</div></section>';
+    '</div>' +
+    '<div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>' +
+    '<p class="small" id="bcount" style="margin-top:10px" aria-live="polite">Atemzug 1 von 3</p></section>';
+}
+
+function renderResult(){
+  if(timer){ clearTimeout(timer); }
+  app.innerHTML = brand() + breathScreen();
+  var dots = app.querySelectorAll(".dots i"), txt = document.getElementById("bcount"), n = 0, BT = 8000;
+  function step(){
+    dots[n].classList.add("on"); n++;
+    if(n < 3){
+      txt.textContent = "Atemzug " + (n+1) + " von 3";
+      timer = setTimeout(step, BT);
+    } else {
+      txt.textContent = "Geschafft. Dein Ergebnis ist bereit.";
+      timer = setTimeout(showResult, 1600);
+    }
+  }
+  timer = setTimeout(step, BT);
+  focusTop();
 }
 
 function contactBlock(intro){
@@ -355,9 +386,9 @@ function contactBlock(intro){
     '<p>Telefon: <a href="tel:'+PHONE_TEL+'">'+PHONE_SHOW+'</a><br>E-Mail: <a href="mailto:'+EMAIL+'">'+EMAIL+'</a></p></div>';
 }
 
-function renderResult(){
+function showResult(){
   var r = compute();
-  var html = brand() + breathCard();
+  var html = brand();
 
   if(r.flagged){
     html += '<span class="badge rise" style="--d:.1s">Dein Ergebnis</span>' +
@@ -405,8 +436,10 @@ function renderResult(){
     '<li>'+CHK+'<span><b>Einzelmassnahmen reichen oft nicht.</b> Der Darm ist ein System und reagiert am besten auf Regelmässigkeit, sinnvolle Kombination und Begleitung. Genau das bekommst du hier.</span></li>' +
     '<li>'+CHK+'<span><b>Du bist gut begleitet.</b> Fachliche Begleitung, hygienische Standards und eine persönliche Einschätzung, ob es für dich passt.</span></li>' +
     '</ul>' +
-    '<div class="price"><span>1 Sitzung: 80.–</span><span class="rec">4 Sitzungen empfohlen: 320.–</span></div>' +
-    '<p class="small" style="margin-top:12px">Ob die Colonhydrotherapie für dich passt, klären wir vorab persönlich. Sie ist keine anerkannte Therapie zur Behandlung von Infektionen und ersetzt keine medizinische Behandlung.</p>' +
+    '<div class="promo"><span class="old">120.–</span><span class="now">80.–</span><div class="txt"><b>pro Sitzung mit dem Gutscheincode</b><br><span class="code">Aktion</span><button class="copy" id="copyCode" type="button">Code kopieren</button></div></div>' +
+    '<div class="price"><span class="rec">4 Sitzungen empfohlen: 320.–</span></div>' +
+    '<p class="small" style="margin-top:12px">Gib bei der Buchung den Gutscheincode «Aktion» ein. Ohne Code kostet eine Einzelsitzung 120.–.</p>' +
+    '<p class="small" style="margin-top:8px">Ob die Colonhydrotherapie für dich passt, klären wir vorab persönlich. Sie ist keine anerkannte Therapie zur Behandlung von Infektionen und ersetzt keine medizinische Behandlung.</p>' +
     ext(BOOKING_LINK, "Jetzt Termine buchen", "btn") + '</div>';
   html += '<div class="glass step rise" style="--d:.3s"><span class="ribbon">Wichtig für deinen Start</span>' +
     '<div class="top">'+icon("kapsel","lg")+'<div><span class="num">Schritt 3</span><h3>Deine Produkte für den Reset</h3></div></div>' +
@@ -425,6 +458,8 @@ function renderResult(){
 
   app.innerHTML = html;
   document.getElementById("again").onclick = renderStart;
+  var cc = document.getElementById("copyCode");
+  if(cc){ cc.onclick = function(){ try{ navigator.clipboard.writeText("Aktion").then(function(){ cc.textContent = "Kopiert"; }, function(){}); }catch(e){} }; }
   focusTop();
 }
 
