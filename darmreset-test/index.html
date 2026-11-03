@@ -244,6 +244,11 @@ var AREAS = {
 };
 
 var answers = [];
+var view = "start";
+var KEY = "darmreset_test_stand_v1";
+function saveState(scroll){
+  try{ localStorage.setItem(KEY, JSON.stringify({answers:answers, view:view, scroll:scroll||0})); }catch(e){}
+}
 var app = document.getElementById("app");
 var timer = null;
 
@@ -270,6 +275,7 @@ function sparkle(style){
 }
 
 function renderStart(){
+  answers = []; view = "start"; saveState();
   app.innerHTML = brand() +
     '<div class="hero rise">'+mandala()+'</div>' +
     '<h1 class="grad rise" style="--d:.1s" tabindex="-1" id="focus">Darmreset-Test</h1>' +
@@ -287,6 +293,7 @@ function renderStart(){
 }
 
 function renderQuestion(i){
+  view = "q" + i; saveState();
   var Q = QUESTIONS[i];
   var pct = Math.round(((i+1)/QUESTIONS.length)*100);
   var html = brand() +
@@ -303,7 +310,7 @@ function renderQuestion(i){
   Array.prototype.forEach.call(opts, function(b){
     b.onclick = function(){
       if(timer){ clearTimeout(timer); }
-      answers[i] = parseInt(b.getAttribute("data-k"),10);
+      answers[i] = parseInt(b.getAttribute("data-k"),10); saveState();
       Array.prototype.forEach.call(opts, function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
       timer = setTimeout(function(){
         i+1 < QUESTIONS.length ? renderQuestion(i+1) : renderResult();
@@ -379,6 +386,7 @@ function contactBlock(intro){
 }
 
 function showResult(){
+  view = "result"; saveState();
   var r = compute();
   var html = brand();
 
@@ -481,7 +489,26 @@ function focusTop(){
   if(f){ try{ f.focus({preventScroll:true}); }catch(e){} }
 }
 
-renderStart();
+/* Beim Zurückkommen (zum Beispiel von Telegram oder TISSO) an der alten Stelle weitermachen */
+document.addEventListener("click", function(e){
+  var a = e.target.closest ? e.target.closest("a[href]") : null;
+  if(a && view === "result"){ saveState(window.pageYOffset || document.documentElement.scrollTop || 0); }
+});
+(function init(){
+  var st = null;
+  try{ st = JSON.parse(localStorage.getItem(KEY) || "null"); }catch(e){}
+  if(st && st.answers && st.view){
+    answers = st.answers;
+    if(st.view === "result" && answers.length >= QUESTIONS.length){
+      showResult();
+      if(st.scroll){ window.scrollTo(0, st.scroll); }
+      return;
+    }
+    var m = /^q(\d+)$/.exec(st.view);
+    if(m){ renderQuestion(Math.min(parseInt(m[1],10), QUESTIONS.length-1)); return; }
+  }
+  renderStart();
+})();
 </script>
 </body>
 </html>
